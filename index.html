@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#2a0a2e">
+<title>Halloween Rosa — Lelinha Bruxa Encantada</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='52' font-size='52'%3E🎀%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+<script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
+</head>
+<body>
+<main id="game" aria-label="Halloween Rosa — Lelinha Bruxa Encantada"></main>
+<div class="vignette"></div>
+
+<header>
+  <div class="brand">
+    <span class="sigil">✦</span>
+    <div>HALLOWEEN ROSA<small>ESTRELANDO LELINHA</small></div>
+  </div>
+  <div class="top-actions">
+    <button id="fullscreen" aria-label="Alternar tela cheia">⛶</button>
+    <button id="sound" aria-label="Ativar som">Som: off</button>
+    <button id="pause" aria-label="Pausar jogo">Ⅱ</button>
+  </div>
+</header>
+
+<div id="hud" class="hidden">
+  <section class="mission">
+    <span class="eyebrow">RITUAL ROSA • VOO ENCANTADO</span>
+    <h2 id="objective">Explore as 3 regiões · anéis em alturas diferentes</h2>
+    <div class="stats">
+      <span><b id="rings">00</b> / 18 anéis</span>
+      <span><b id="essence">0</b> essência</span>
+      <span id="timer">1:30</span>
+    </div>
+    <div class="progress"><i id="route-progress"></i></div>
+  </section>
+  <div class="compass">
+    <span id="bearing">N</span>
+    <span class="target">◇ <span id="distance">30</span> m</span>
+  </div>
+  <div class="bottom-left">
+    <canvas id="map" width="160" height="160" aria-label="Mapa do reino e próximo anel"></canvas>
+    <div class="map-label">FLORESTA ENCANTADA <span id="quality-label">AUTO</span></div>
+  </div>
+  <div class="flight-info">
+    <div><b id="speed">0</b><span>km/h</span><em id="altitude">6 m</em></div>
+    <label>ENERGIA MÁGICA <span id="boost-label">TURBO</span></label>
+    <div class="energy" id="energy-wrap"><i id="energy"></i></div>
+  </div>
+  <div id="toast" role="status"></div>
+  <div class="keyboard-hint">W/S acelerar · A/D virar · ↑/↓ subir/descer · Shift turbo · Espaço magia · F tela cheia · M som · Esc pausa</div>
+</div>
+
+<div id="menu" class="overlay">
+  <div class="intro">
+    <span class="eyebrow">ESTRELANDO LELINHA BRUXA ENCANTADA</span>
+    <h1>Halloween<br><i>Rosa</i><span>✦</span></h1>
+    <p>O castelo acendeu as luzes.<br>
+    Voe entre névoa rosa, magia doce<br>
+    e os sussurros do luar de outubro.</p>
+    <div id="phase-select" class="phase-select" role="listbox" aria-label="Escolher fase">
+      <button type="button" class="phase-card active" data-phase="floresta" role="option" aria-selected="true">
+        <span class="phase-num">01</span>
+        <span class="phase-name">Floresta Encantada</span>
+        <span class="phase-desc">Runas · riacho · anéis</span>
+      </button>
+      <button type="button" class="phase-card" data-phase="vila" role="option" aria-selected="false">
+        <span class="phase-num">02</span>
+        <span class="phase-name">Vila de Halloween</span>
+        <span class="phase-desc">Abóboras · telhados · lua</span>
+      </button>
+      <button type="button" class="phase-card" data-phase="castelo" role="option" aria-selected="false">
+        <span class="phase-num">03</span>
+        <span class="phase-name">Castelo da Lua</span>
+        <span class="phase-desc">Torres · lago · penhascos</span>
+      </button>
+    </div>
+    <button id="start" class="primary" disabled>Preparando o reino…</button>
+    <div id="loading" role="status">Carregando modelos 3D</div>
+    <div id="best-score"></div>
+    <div class="intro-footer">VOO LIVRE 3D <span>✧</span> RITUAL DE 90 SEGUNDOS</div>
+  </div>
+  <div class="menu-note" id="menu-phase-note">01 / FLORESTA ENCANTADA<br><span>Escolha a fase e voe</span></div>
+</div>
+
+<div id="pause-menu" class="overlay hidden">
+  <div class="panel">
+    <span class="eyebrow">O REINO ESPERA POR VOCÊ</span>
+    <h2>Uma pausa no voo</h2>
+    <p>W/S: acelerar e frear · A/D: virar<br>
+    ↑/↓ ou E/Q: subir e descer<br>
+    Shift: turbo · Espaço: pulso mágico<br>
+    R: voltar à clareira inicial</p>
+    <label>Qualidade
+      <select id="quality">
+        <option value="auto">Automática</option>
+        <option value="high">Alta</option>
+        <option value="low">Leve</option>
+      </select>
+    </label>
+    <button type="button" id="tilt-toggle" class="tilt-btn">Inclinar celular: off</button>
+    <button id="resume" class="primary">Continuar voo</button>
+    <button id="restart">Recomeçar ritual</button>
+    <button id="to-menu">Menu principal</button>
+  </div>
+</div>
+
+<div id="result" class="overlay hidden">
+  <div class="panel">
+    <span class="eyebrow">RITUAL CONCLUÍDO</span>
+    <h2 id="result-title">A lua rosa ouviu você.</h2>
+    <p id="result-text"></p>
+    <div id="result-stats" class="result-stats"></div>
+    <button id="explore" class="primary">Continuar explorando</button>
+    <button id="retry">Tentar outra vez</button>
+    <button id="to-menu-result">Menu principal</button>
+  </div>
+</div>
+
+<div id="touch" class="hidden">
+  <div id="stick" aria-label="Direcional: virar e acelerar"><div id="stick-thumb"></div></div>
+  <div class="touch-right">
+    <button data-action="up" aria-label="Subir">↑</button>
+    <button data-action="down" aria-label="Descer">↓</button>
+    <button data-action="boost" aria-label="Turbo">TURBO</button>
+    <button data-action="magic" aria-label="Magia">✦</button>
+  </div>
+</div>
+
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
