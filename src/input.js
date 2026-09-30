@@ -144,14 +144,18 @@ export class Input {
       (+k.has('KeyW') - k.has('KeyS')) -
       this.axis.y * this.sensitivity +
       (this.tiltEnabled ? -this.tilt.y * 0.7 : 0);
+    // On touch devices the same 2D stick controls altitude as well as steering.
+    // Keyboard keeps the original dedicated vertical controls.
+    const stickLift = this.touch ? (-this.axis.y * this.sensitivity) : 0;
     const lift =
       Number(!!(k.has('ArrowUp') || k.has('KeyE') || a.up)) -
-      Number(!!(k.has('ArrowDown') || k.has('KeyQ') || a.down));
+      Number(!!(k.has('ArrowDown') || k.has('KeyQ') || a.down)) +
+      stickLift;
     const boost = k.has('ShiftLeft') || k.has('ShiftRight') || !!a.boost;
     return {
       turn: Math.max(-1.4, Math.min(1.4, turn)),
       throttle: Math.max(-1.2, Math.min(1.2, throttle)),
-      lift,
+      lift: Math.max(-1.2, Math.min(1.2, lift)),
       boost,
     };
   }

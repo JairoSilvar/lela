@@ -138,8 +138,12 @@ export class Flight{
     this.model.position.y+=Math.sin(performance.now()*.002)*.06;
 
     // Camera
-    const camDist=this.boosting?13.5:10.5;
-    const offset=new T.Vector3(0,3.6+Math.max(0,-this.velocity.y)*.08,camDist).applyAxisAngle(new T.Vector3(0,1,0),this.yaw);
+    const mobile=matchMedia('(pointer:coarse)').matches||navigator.maxTouchPoints>0||innerWidth<760;
+    // Mobile camera: a slightly higher/longer chase view keeps the witch near the
+    // useful middle of the screen while preserving a clear view of rings ahead.
+    const camDist=this.boosting?(mobile?15:13.5):(mobile?12.4:10.5);
+    const camHeight=mobile?5.2:3.6;
+    const offset=new T.Vector3(0,camHeight+Math.max(0,-this.velocity.y)*(mobile?.04:.08),camDist).applyAxisAngle(new T.Vector3(0,1,0),this.yaw);
     const desiredCamera=this.position.clone().add(offset);
     desiredCamera.y=Math.max(desiredCamera.y,ground(desiredCamera.x,desiredCamera.z)+2);
     // Pull camera in near obstacles
@@ -147,8 +151,12 @@ export class Flight{
       const pull=T.MathUtils.clamp(1-closestDist/3.2,0,.35);
       desiredCamera.lerp(this.position,pull*.25);
     }
-    this.camera.position.lerp(desiredCamera,1-Math.exp(-4*dt));
-    this.look.lerp(this.position.clone().add(this.forward.clone().multiplyScalar(8).setY(this.position.y+this.velocity.y*.3)),1-Math.exp(-5*dt));
+    this.camera.position.lerp(desiredCamera,1-Math.exp(-(mobile?5.2:4)*dt));
+    const lookDistance=mobile?10:8;
+    const lookY=this.position.y+(mobile?0.75:0)+this.velocity.y*(mobile?.16:.3);
+    const lookTarget=this.position.clone().add(this.forward.clone().multiplyScalar(lookDistance));
+    lookTarget.y=lookY;
+    this.look.lerp(lookTarget,1-Math.exp(-(mobile?6:5)*dt));
     this.camera.lookAt(this.look);
     // FOV punch on boost / dive
     const baseFov=62+(this.boosting?8:0)+Math.max(0,-climbFactor)*6;
