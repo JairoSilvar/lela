@@ -20,7 +20,8 @@
   </div>
   <div class="top-actions">
     <button id="fullscreen" aria-label="Alternar tela cheia">⛶</button>
-    <button id="sound" aria-label="Ativar som">Som: off</button>
+    <button id="sound" aria-label="Ativar efeitos sonoros">Som: off</button>
+    <button id="music" aria-label="Ativar ou desativar música">Música: on</button>
     <button id="pause" aria-label="Pausar jogo">Ⅱ</button>
   </div>
 </header>
@@ -101,6 +102,7 @@
       </select>
     </label>
     <button type="button" id="tilt-toggle" class="tilt-btn">Inclinar celular: off</button>
+    <label>Música <input id="music-volume" type="range" min="0" max="100" value="42" aria-label="Volume da música"></label>
     <button id="resume" class="primary">Continuar voo</button>
     <button id="restart">Recomeçar ritual</button>
     <button id="to-menu">Menu principal</button>

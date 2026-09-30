@@ -1,10 +1,15 @@
-# Trilha sonora / playlist
+# Músicas — Mobile v3
 
-Esta versão deixa o projeto preparado para receber faixas autorizadas posteriormente.
+A trilha está em `assets/audio/music/` e o mapeamento em `src/music.js`.
 
-## Recomendação
-- Coloque arquivos próprios/licenciados em `assets/music/`.
-- Prefira `.mp3` ou `.m4a` para ampla compatibilidade mobile.
-- Não foram incorporadas gravações comerciais de terceiros nesta distribuição.
+- `menu.mp3` — menu principal
+- `fase-1.mp3` — Floresta Encantada
+- `fase-2.mp3` — Vila de Halloween
+- `fase-3.mp3` — Castelo da Lua
 
-A integração do seletor/playlist pode ser feita quando os arquivos autorizados forem fornecidos.
+Cada faixa toca em loop enquanto o jogador permanece no respectivo contexto. Ao trocar de fase ou voltar ao menu, a faixa anterior é interrompida antes da próxima começar.
+
+Em navegadores móveis, a música começa após a primeira interação do usuário, conforme as regras de autoplay. O botão **Música** liga/desliga a trilha, e o controle de volume fica no menu de pausa.
+
+## Adicionar outras músicas
+Copie o novo arquivo para `assets/audio/music/` usando nome simples (sem espaços/acentos) e registre o caminho em `MUSIC_TRACKS`, no arquivo `src/music.js`.
