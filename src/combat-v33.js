@@ -1,1 +1,0 @@
-export class CombatV33{constructor(v,a){this.v=v;this.a=a;this.cool=0;this.combo=0;this.ct=0}update(dt){this.cool=Math.max(0,this.cool-dt);this.ct=Math.max(0,this.ct-dt);if(!this.ct)this.combo=0}cast(cost=12){if(this.cool||!this.v?.spendMagic(cost))return false;this.cool=.32;this.combo=this.ct?Math.min(4,this.combo+1):1;this.ct=1.15;this.a?.impact();return true}}

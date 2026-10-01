@@ -1,5 +1,0 @@
-export class HUDV34{
- constructor(){const d=document.createElement('div');d.id='gamer-hud-v34';d.innerHTML='<div class="v34bar hp"><i></i><b>VIDA</b></div><div class="v34bar mp"><i></i><b>MAGIA</b></div><div class="v34stats">Nv. <strong>1</strong></div>';d.innerHTML+='<div class="boss35" hidden><span>CYCLOPS</span><i></i></div>';document.body.appendChild(d);this.el=d}
- update(v,p){if(!v)return;const bars=this.el.querySelectorAll('.v34bar i');bars[0].style.width=`${Math.max(0,v.health/v.maxHealth*100)}%`;bars[1].style.width=`${Math.max(0,v.magic/v.maxMagic*100)}%`;const s=this.el.querySelector('strong');if(s&&p)s.textContent=p.level||1}
- boss(entity){const b=this.el.querySelector('.boss35');if(!b)return;if(!entity||entity.dead){b.hidden=true;return}b.hidden=false;b.querySelector('i').style.width=`${entity.hp/entity.maxHp*100}%`}
-}
