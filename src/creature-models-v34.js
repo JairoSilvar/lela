@@ -1,10 +1,10 @@
 import * as T from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 export class CreatureModelsV34{
- constructor(scene,ai,combat=null,boss=null,animState=null){this.scene=scene;this.ai=ai;this.combat=combat;this.boss=boss;this.animState=animState;this.loader=new GLTFLoader();this.root=new T.Group();this.root.name='RealCreatures-v34';scene.add(this.root);this.mixers=[];this.loaded=[]}
+ constructor(scene,ai,combat=null,boss=null){this.scene=scene;this.ai=ai;this.combat=combat;this.boss=boss;this.loader=new GLTFLoader();this.root=new T.Group();this.root.name='RealCreatures-v34';scene.add(this.root);this.mixers=[];this.loaded=[]}
  async one(file,pos,scale,kind){
   try{const g=await this.loader.loadAsync(file),o=g.scene;o.position.set(...pos);o.scale.setScalar(scale);o.traverse(x=>{if(x.isMesh){x.castShadow=true;x.receiveShadow=true}});this.root.add(o);this.loaded.push(o);
-   if(g.animations?.length){const mx=new T.AnimationMixer(o);this.animState?.bind(o,mx,g.animations);this.animState?.play(o,'idle');if(!this.animState){mx.clipAction(g.animations[0]).play()}this.mixers.push(mx)}
+   if(g.animations?.length){const mx=new T.AnimationMixer(o);mx.clipAction(g.animations[0]).play();this.mixers.push(mx)}
    this.ai?.register(o,{kind,speed:kind==='hostile'?1.25:.8,range:kind==='hostile'?8:5});
    const fileName=file.split('/').pop();const isBoss=fileName==='Cyclops.gltf';
    const ce=this.combat?.bind(o,{name:isBoss?'Cyclops':fileName.replace('.gltf',''),hp:isBoss?180:kind==='hostile'?55:35,damage:isBoss?18:8,xp:isBoss?120:kind==='hostile'?25:10,boss:isBoss});

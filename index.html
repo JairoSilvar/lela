@@ -7,8 +7,7 @@
 <title>Halloween Rosa — Lelinha Bruxa Encantada</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='52' font-size='52'%3E🎀%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="style.css">
-<script type="importmap">{"imports":{"three":"./vendor/three.module.js",
-      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
 
 <style>
 .gamer-panel{margin:12px 0;padding:12px;border:1px solid #ffffff24;border-radius:14px;background:#160d24aa}.gamer-panel h3{margin:0 0 8px}.broom-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.broom-card{display:flex;flex-direction:column;gap:4px;padding:9px;text-align:left}.broom-card small,.broom-card span{font-size:10px;opacity:.8}.broom-card.selected{outline:2px solid #f0c96a}.broom-card:disabled{opacity:.38}.challenge-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.challenge-row select{padding:8px;border-radius:10px}@media(max-width:650px){.broom-grid{grid-template-columns:1fr}.gamer-panel{font-size:12px}}
@@ -37,8 +36,8 @@
   <button id="magic-label" class="magic-label" type="button" aria-label="Trocar feitiço">Lumen · revelar</button>
   <div class="final-tools"><button id="photo-btn" type="button">📷</button><button id="zen-btn" type="button">ZEN</button></div>
   <section class="mission">
-    <span class="eyebrow">🎃 FASE 1 — ESTRADA ENCANTADA</span>
-    <h2 id="objective">Ajude Lelinha a seguir as estrelas até o portal encantado</h2>
+    <span class="eyebrow">RITUAL ROSA • VOO ENCANTADO</span>
+    <h2 id="objective">Explore as 3 regiões · anéis em alturas diferentes</h2>
     <div class="stats">
       <span><b id="rings">00</b> / 18 anéis</span>
       <span><b id="essence">0</b> essência</span>
@@ -161,37 +160,14 @@
 <div id="touch" class="hidden">
   <div id="stick" aria-label="Direcional 2D: esquerda, direita, subir e descer"><div id="stick-thumb"></div></div>
   <div class="touch-right">
-    <button data-action="boost" aria-label="Pular / impulso">PULAR</button>
-    <button id="flight-mode" data-action="mode" aria-label="Voar de vassoura">VOO</button>
-    <button id="vision-action" data-action="vision" aria-label="Câmera / visão mágica">CÂMERA</button>
-    <button id="context-action" data-action="interact" aria-label="Ação contextual">AÇÃO</button>
+    <button data-action="boost" aria-label="Turbo">TURBO</button>
+    <button id="flight-mode" data-action="mode" aria-label="Alternar modo de voo">PRECISÃO</button>
+    <button id="vision-action" data-action="vision" aria-label="Visão Mágica">VISÃO</button>
+    <button id="context-action" data-action="interact" aria-label="Ação contextual">POUSAR</button>
     <button data-action="magic" aria-label="Magia">✦</button>
   </div>
 </div>
 
 <script type="module" src="src/main.js"></script>
-
-<div id="settings-v39" hidden>
-  <div class="settings-card">
-    <h2>Configurações</h2>
-    <label>Sensibilidade da câmera <input id="v39-sens" type="range" min=".5" max="2" step=".1" value="1"></label>
-    <label>Partículas <input id="v39-particles" type="range" min=".3" max="1" step=".1" value="1"></label>
-    <label>Tamanho do HUD <input id="v39-hud" type="range" min=".8" max="1.35" step=".05" value="1"></label>
-    <label><input id="v39-vibration" type="checkbox" checked> Vibração</label>
-    <button id="v39-close">Fechar</button>
-  </div>
-</div>
-
-<div id="v41-access" hidden>
- <div class="settings-card">
-  <h2>Acessibilidade</h2>
-  <label><input id="v41-contrast" type="checkbox"> Alto contraste</label>
-  <label><input id="v41-flashes" type="checkbox"> Reduzir flashes</label>
-  <label><input id="v41-large" type="checkbox"> Texto maior</label>
-  <label><input id="v41-subtitles" type="checkbox" checked> Legendas</label>
-  <label>Movimento de câmera <input id="v41-shake" type="range" min="0" max="1" step=".1" value="1"></label>
-  <button id="v41-close">Fechar</button>
- </div>
-</div>
 </body>
 </html>

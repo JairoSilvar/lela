@@ -130,20 +130,6 @@ export function createWitch(assets){
   body.rotation.x=-.12;
   root.add(body);
 
-  // v44: Lelinha's glasses are anchored to the character's head/bone, never to world coordinates.
-  if(assets.lelinha){
-    const head=body.getObjectByName('Head')||body.getObjectByName('head')||body.getObjectByName('mixamorigHead')||body;
-    const glasses=new T.Group(); glasses.name='LelinhaGlasses';
-    const gm=new T.MeshStandardMaterial({color:0x17101d,roughness:.32,metalness:.18});
-    const rg=new T.TorusGeometry(.085,.014,8,24);
-    const l=new T.Mesh(rg,gm),r=new T.Mesh(rg,gm);l.position.x=-.098;r.position.x=.098;
-    const bridge=new T.Mesh(new T.BoxGeometry(.045,.014,.014),gm);
-    glasses.add(l,r,bridge); glasses.scale.setScalar(.9);
-    // Female_Ranger head local space. Kept conservative; if named head bone is unavailable, hide rather than float.
-    if(head!==body){glasses.position.set(0,.035,.125);glasses.rotation.x=-.04;head.add(glasses)}
-    else glasses.visible=false;
-  }
-
   const broom=assets.broom.clone(true);
   broom.traverse(o=>{
     if(o.isMesh){

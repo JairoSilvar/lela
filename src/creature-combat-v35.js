@@ -20,5 +20,5 @@ export class CreatureCombatV35{
   const mesh=new T.Mesh(new T.SphereGeometry(.13,10,8),new T.MeshBasicMaterial({color:0xff8cda}));
   mesh.position.copy(origin);this.scene.add(mesh);this.projectiles.push({mesh,dir:dir.clone().normalize(),damage,speed:13,life:2.2});
  }
- hit(e,damage){if(!e||e.dead||e.invuln)return null;e.hp=Math.max(0,e.hp-damage);e.invuln=.18;this.audio?.impact();if(e.hp<=0){e.dead=true;e.deathPosition=e.object.position.clone();e.object.visible=false;return{type:'death',entity:e,xp:e.xp}}return{type:'hit',entity:e}}
+ hit(e,damage){if(!e||e.dead||e.invuln)return null;e.hp=Math.max(0,e.hp-damage);e.invuln=.18;this.audio?.impact();if(e.hp<=0){e.dead=true;e.object.visible=false;return{type:'death',entity:e,xp:e.xp}}return{type:'hit',entity:e}}
 }
