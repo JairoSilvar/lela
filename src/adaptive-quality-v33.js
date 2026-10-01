@@ -1,0 +1,1 @@
+export class AdaptiveQualityV33{constructor(){this.mode='balanced';this.a=0;this.n=0;this.fps=60}update(dt){this.a+=dt;this.n++;if(this.a>=2){this.fps=this.n/this.a;this.n=0;this.a=0;this.mode=this.fps<36?'lite':this.fps>53?'high':'balanced'}return this.mode}}

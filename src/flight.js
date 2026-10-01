@@ -13,6 +13,9 @@ export class Flight{
     this.perfectTimer=0;
     this.perfectStreak=0;
     this.nearObstacle=false;
+    this.mode="precision";
+    this.grounded=false;
+    this.profile={speed:1,accel:1,control:1,stability:1,turbo:1};
     this.reset();
   }
 
@@ -28,21 +31,70 @@ export class Flight{
     this.perfectTimer=0;
     this.perfectStreak=0;
     this.nearObstacle=false;
+    this.grounded=false;
     this.model.position.copy(this.position);
     this.camera.position.copy(this.position).add(new T.Vector3(0,4.5,11));
     this.look.copy(this.position);
   }
 
+  setProfile(stats){ this.profile={...this.profile,...stats}; }
+
+  toggleMode(){ this.mode=this.mode==="precision"?"cruise":"precision"; return this.mode; }
+
+  canLand(){
+    const floor=ground(this.position.x,this.position.z);
+    return !this.grounded && this.position.y-floor<5.5 && this.speed<10;
+  }
+
+  land(){
+    if(!this.canLand()) return false;
+    this.grounded=true; this.boosting=false; this.speed=0; this.velocity.set(0,0,0);
+    this.position.y=ground(this.position.x,this.position.z)+1.05;
+    return true;
+  }
+
+  mount(){
+    if(!this.grounded) return false;
+    this.grounded=false; this.position.y=ground(this.position.x,this.position.z)+2.2; this.speed=3;
+    return true;
+  }
+
+  updateGround(dt,input){
+    const floor=ground(this.position.x,this.position.z)+1.05;
+    this.yaw-=input.turn*2.1*dt;
+    const forward=new T.Vector3(-Math.sin(this.yaw),0,-Math.cos(this.yaw));
+    const right=new T.Vector3(Math.cos(this.yaw),0,-Math.sin(this.yaw));
+    const f=T.MathUtils.clamp(input.throttle,-1,1), side=T.MathUtils.clamp(input.turn,-1,1);
+    const running=!!input.boost;
+    const move=forward.multiplyScalar(Math.max(0,f)).add(right.multiplyScalar(side*.72));
+    if(move.lengthSq()>1) move.normalize();
+    const walk=running?7.2:4.1;
+    this.velocity.lerp(move.multiplyScalar(walk),1-Math.exp(-8*dt)); this.velocity.y=0;
+    this.position.addScaledVector(this.velocity,dt); this.position.y=floor; this.speed=this.velocity.length();
+    this.model.position.copy(this.position); this.model.rotation.set(0,this.yaw,0);
+    const back=new T.Vector3(0,2.7,7.2).applyAxisAngle(new T.Vector3(0,1,0),this.yaw);
+    const desired=this.position.clone().add(back); desired.y=Math.max(desired.y,floor+2.4);
+    this.camera.position.lerp(desired,1-Math.exp(-7*dt));
+    const target=this.position.clone().add(new T.Vector3(0,1.25,0)).add(new T.Vector3(-Math.sin(this.yaw),0,-Math.cos(this.yaw)).multiplyScalar(3));
+    this.look.lerp(target,1-Math.exp(-8*dt)); this.camera.lookAt(this.look);
+    this.camera.fov=T.MathUtils.damp(this.camera.fov,58,5,dt); this.camera.updateProjectionMatrix();
+    // Jog bridges the large visual speed gap between walking and sprinting.
+    const groundAnim=this.speed<.45?'Idle_Loop':running?'Sprint_Loop':this.speed>3.15?'Jog_Fwd_Loop':'Walk_Loop';
+    this.model.userData.animation?.update(dt,groundAnim);
+  }
+
   update(dt,input){
+    if(this.grounded){ this.updateGround(dt,input); return; }
     this.bump=Math.max(0,this.bump-dt);
-    this.yaw-=input.turn*1.25*dt;
+    const precision=this.mode==="precision";
+    this.yaw-=input.turn*(precision?1.5:1.05)*this.profile.control*dt;
 
     // Base target speeds
     this.boosting=!!input.boost&&this.energy>1;
-    let cruise=9;
-    let maxThrottle=15;
+    let cruise=(precision?7.5:11)*this.profile.speed;
+    let maxThrottle=(precision?13.5:18)*this.profile.speed;
     if(this.boosting){
-      maxThrottle=27;
+      maxThrottle=(precision?22:31)*this.profile.turbo;
       this.energy=Math.max(0,this.energy-dt*24);
     }else{
       this.energy=Math.min(100,this.energy+dt*12);
@@ -58,7 +110,7 @@ export class Flight{
       diveBonus=-climbFactor*5; // lose speed climbing
     }
     // Tight turns bleed speed
-    const turnBleed=Math.abs(input.turn)*.35*this.speed;
+    const turnBleed=Math.abs(input.turn)*(precision?.18:.28)*this.speed;
 
     let target;
     if(input.throttle<-.15) target=0;
@@ -66,14 +118,14 @@ export class Flight{
     else target=cruise+diveBonus*.5;
     target=Math.max(0,target-turnBleed);
 
-    this.speed=T.MathUtils.damp(this.speed,target,1.6,dt);
+    this.speed=T.MathUtils.damp(this.speed,target,1.6*this.profile.accel,dt);
 
     this.forward.set(-Math.sin(this.yaw),0,-Math.cos(this.yaw));
     const desired=this.forward.clone().multiplyScalar(this.speed);
-    desired.y=input.lift*(this.boosting?11:7);
+    desired.y=input.lift*(precision?(this.boosting?12:8.5):(this.boosting?10:6.5));
     // Extra gravity feel when not lifting
     if(input.lift<.1) desired.y-=1.8;
-    this.velocity.lerp(desired,1-Math.exp(-2.8*dt));
+    this.velocity.lerp(desired,1-Math.exp(-(precision?4.2:2.15)*this.profile.stability*dt));
     this.position.addScaledVector(this.velocity,dt);
 
     // Ground
@@ -128,8 +180,11 @@ export class Flight{
       this.speed*=Math.exp(-dt);
     }
 
-    this.bank=T.MathUtils.damp(this.bank,input.turn*.4,4,dt);
+    this.bank=T.MathUtils.damp(this.bank,input.turn*(precision?.32:.52),precision?5:3.5,dt);
     this.model.position.copy(this.position);
+    // Broom pose: driving is a much better seated flight silhouette than standing idle.
+    // Boost swaps to spell casting to keep the magical feedback from v17.
+    this.model.userData.animation?.update(dt,this.boosting?'Spell_Simple_Idle_Loop':'Driving_Loop');
     this.model.rotation.set(
       T.MathUtils.damp(this.model.rotation.x,this.velocity.y*.03-input.lift*.08,3,dt),
       this.yaw,
@@ -159,7 +214,7 @@ export class Flight{
     this.look.lerp(lookTarget,1-Math.exp(-(mobile?6:5)*dt));
     this.camera.lookAt(this.look);
     // FOV punch on boost / dive
-    const baseFov=62+(this.boosting?8:0)+Math.max(0,-climbFactor)*6;
+    const baseFov=(precision?60:64)+(this.boosting?(precision?7:10):0)+Math.max(0,-climbFactor)*(precision?4:7);
     this.camera.fov=T.MathUtils.damp(this.camera.fov,baseFov,3,dt);
     this.camera.updateProjectionMatrix();
   }

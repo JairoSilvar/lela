@@ -106,7 +106,7 @@ export class World {
     scene.add(hemi); this.lights.push(hemi);
     const moonlight = new T.DirectionalLight(ph.moon, 3.4);
     moonlight.position.set(-70, 150, -100);
-    scene.add(moonlight); this.lights.push(moonlight);
+    moonlight.castShadow=document.body.dataset.graphics!=='low';if(moonlight.castShadow){moonlight.shadow.mapSize.set(1024,1024);moonlight.shadow.camera.left=-85;moonlight.shadow.camera.right=85;moonlight.shadow.camera.top=85;moonlight.shadow.camera.bottom=-85;moonlight.shadow.bias=-.0008;}scene.add(moonlight); this.lights.push(moonlight);
     const fill = new T.DirectionalLight(ph.fill, 1.4);
     fill.position.set(90, 40, 90);
     scene.add(fill); this.lights.push(fill);
