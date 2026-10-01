@@ -13,8 +13,10 @@ export class Flight{
     this.perfectTimer=0;
     this.perfectStreak=0;
     this.nearObstacle=false;
-    this.mode="precision";
+    this.mode="precision";this.lookYaw=0;this.lookPitch=0;
     this.grounded=false;
+    this.broomBlend=1;
+    this.broomTarget=1;
     this.profile={speed:1,accel:1,control:1,stability:1,turbo:1};
     this.reset();
   }
@@ -22,7 +24,7 @@ export class Flight{
   reset(){
     this.position.set(0,7,90);
     this.velocity.set(0,0,0);
-    this.yaw=-.16;
+    this.yaw=-.16;this.lookYaw=0;this.lookPitch=0;
     this.speed=0;
     this.energy=100;
     this.boosting=false;
@@ -32,6 +34,8 @@ export class Flight{
     this.perfectStreak=0;
     this.nearObstacle=false;
     this.grounded=false;
+    this.broomTarget=1; this.broomBlend=1;
+    this.syncBroom(0,true);
     this.model.position.copy(this.position);
     this.camera.position.copy(this.position).add(new T.Vector3(0,4.5,11));
     this.look.copy(this.position);
@@ -49,6 +53,7 @@ export class Flight{
   land(){
     if(!this.canLand()) return false;
     this.grounded=true; this.boosting=false; this.speed=0; this.velocity.set(0,0,0);
+    this.broomTarget=0;
     this.position.y=ground(this.position.x,this.position.z)+1.05;
     return true;
   }
@@ -56,10 +61,25 @@ export class Flight{
   mount(){
     if(!this.grounded) return false;
     this.grounded=false; this.position.y=ground(this.position.x,this.position.z)+2.2; this.speed=3;
+    this.broomTarget=1;
     return true;
   }
 
+  syncBroom(dt=0,instant=false){
+    const holder=this.model?.userData?.broomHolder;
+    if(!holder) return;
+    if(instant) this.broomBlend=this.broomTarget;
+    else this.broomBlend=T.MathUtils.damp(this.broomBlend,this.broomTarget,this.broomTarget?10:13,dt);
+    const k=T.MathUtils.smoothstep(this.broomBlend,0,1);
+    const base=holder.userData.baseScale||new T.Vector3(1,1,1);
+    holder.scale.copy(base).multiplyScalar(Math.max(.001,k));
+    holder.visible=k>.025;
+    // A tiny magical lift/drop avoids a hard pop when mounting or dismounting.
+    holder.position.y=.05+(1-k)*.28;
+  }
+
   updateGround(dt,input){
+    this.syncBroom(dt);
     const floor=ground(this.position.x,this.position.z)+1.05;
     this.yaw-=input.turn*2.1*dt;
     const forward=new T.Vector3(-Math.sin(this.yaw),0,-Math.cos(this.yaw));
@@ -84,6 +104,7 @@ export class Flight{
   }
 
   update(dt,input){
+    this.syncBroom(dt);
     if(this.grounded){ this.updateGround(dt,input); return; }
     this.bump=Math.max(0,this.bump-dt);
     const precision=this.mode==="precision";
@@ -114,7 +135,7 @@ export class Flight{
 
     let target;
     if(input.throttle<-.15) target=0;
-    else if(input.throttle>.15) target=maxThrottle+diveBonus;
+    else if(input.throttle>.15||this.boosting) target=maxThrottle+diveBonus;
     else target=cruise+diveBonus*.5;
     target=Math.max(0,target-turnBleed);
 
@@ -193,13 +214,14 @@ export class Flight{
     this.model.position.y+=Math.sin(performance.now()*.002)*.06;
 
     // Camera
+    this.lookYaw=T.MathUtils.clamp(this.lookYaw+(input.lookX||0)*dt*2,-1.2,1.2);this.lookPitch=T.MathUtils.clamp(this.lookPitch+(input.lookY||0)*dt*2,-.5,.5);
     const mobile=matchMedia('(pointer:coarse)').matches||navigator.maxTouchPoints>0||innerWidth<760;
     // Mobile camera: a slightly higher/longer chase view keeps the witch near the
     // useful middle of the screen while preserving a clear view of rings ahead.
     const camDist=this.boosting?(mobile?15:13.5):(mobile?12.4:10.5);
     const camHeight=mobile?5.2:3.6;
     const offset=new T.Vector3(0,camHeight+Math.max(0,-this.velocity.y)*(mobile?.04:.08),camDist).applyAxisAngle(new T.Vector3(0,1,0),this.yaw);
-    const desiredCamera=this.position.clone().add(offset);
+    offset.applyAxisAngle(new T.Vector3(0,1,0),this.lookYaw);offset.y+=this.lookPitch*5;const desiredCamera=this.position.clone().add(offset);
     desiredCamera.y=Math.max(desiredCamera.y,ground(desiredCamera.x,desiredCamera.z)+2);
     // Pull camera in near obstacles
     if(this.nearObstacle){
@@ -214,7 +236,7 @@ export class Flight{
     this.look.lerp(lookTarget,1-Math.exp(-(mobile?6:5)*dt));
     this.camera.lookAt(this.look);
     // FOV punch on boost / dive
-    const baseFov=(precision?60:64)+(this.boosting?(precision?7:10):0)+Math.max(0,-climbFactor)*(precision?4:7);
+    const baseFov=(precision?60:64)+((this.boosting?(precision?7:10):0)+Math.max(0,-climbFactor)*(precision?4:7))*(input.motion??1);
     this.camera.fov=T.MathUtils.damp(this.camera.fov,baseFov,3,dt);
     this.camera.updateProjectionMatrix();
   }

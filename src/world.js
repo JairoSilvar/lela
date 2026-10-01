@@ -8,10 +8,10 @@ export const PHASES = {
     short: '01 · FLORESTA',
     blurb: 'Runas, riacho luminoso e anéis entre as árvores.',
     duration: 90,
-    bg: '#12082a', fog: '#2a1858', fogDensity: .0075,
+    bg: '#2a103b', fog: '#6b2b72', fogDensity: .0075,
     hemi: ['#c8b0ff', '#1a0a30'], moon: '#e8d0ff', fill: '#80c0ff', rim: '#ff80d0',
-    groundH: .88, treeTints: ['#4a2a6e', '#6a3a7a', '#8a3a6a', '#5a4a8a'],
-    water: {color: '#3060a0', emissive: '#40c0ff', intensity: .45},
+    groundH: .91, treeTints: ['#c75aa8', '#e07fbd', '#9f4d96', '#713c83'],
+    water: {color: '#278fb3', emissive: '#65e4ff', intensity: .48},
     firefly: '#a0e8ff', orb: '#ffc0e8', orbGlow: '#ff6ec7',
     ring: '#ff9ec8', ringOuter: '#c070b0', rune: '#f0c96a',
     star: '#d0e8ff', grass: '#3a2a58', rock: '#5a3a58',
@@ -23,9 +23,9 @@ export const PHASES = {
     short: '02 · VILA',
     blurb: 'Telhados, abóboras e vielas sob a lua laranja.',
     duration: 90,
-    bg: '#0c1018', fog: '#1a1520', fogDensity: .008,
+    bg: '#241027', fog: '#54213f', fogDensity: .008,
     hemi: ['#ffd0a0', '#1a1010'], moon: '#ffe8c0', fill: '#ff8040', rim: '#c060ff',
-    groundH: .08, treeTints: ['#c06020', '#a04010', '#804020', '#603010'],
+    groundH: .94, treeTints: ['#b94f8f', '#d96aa6', '#7c3b73', '#5b315f'],
     water: {color: '#2a3040', emissive: '#ff9020', intensity: .2},
     firefly: '#ffb040', orb: '#ffcc66', orbGlow: '#ff8020',
     ring: '#ffb040', ringOuter: '#c07020', rune: '#ffe080',
@@ -321,14 +321,10 @@ export class World {
       g.position.copy(pos);
       const tangent = new T.Vector3(90 * Math.sin(t), 0, -95 * Math.cos(t)).normalize();
       g.quaternion.setFromUnitVectors(new T.Vector3(0, 0, 1), tangent);
-      g.add(new T.Mesh(new T.TorusGeometry(3.05, .065, 8, 64), new T.MeshBasicMaterial({color: ph.ring})));
-      g.add(new T.Mesh(new T.TorusGeometry(3.34, .018, 4, 64), new T.MeshBasicMaterial({color: ph.ringOuter})));
-      for (let j = 0; j < 8; j++) {
-        const a = j / 8 * 6.28;
-        const rune = new T.Mesh(new T.OctahedronGeometry(.12), new T.MeshBasicMaterial({color: ph.rune}));
-        rune.position.set(Math.cos(a) * 3.35, Math.sin(a) * 3.35, 0);
-        g.add(rune);
-      }
+      g.add(new T.Mesh(new T.TorusGeometry(2.8, .045, 6, 48), new T.MeshBasicMaterial({color: ph.ring})));
+      g.add(new T.Mesh(new T.TorusGeometry(3.05, .012, 4, 48), new T.MeshBasicMaterial({color: ph.ringOuter})));
+      const runes=new T.InstancedMesh(new T.OctahedronGeometry(.09),new T.MeshBasicMaterial({color:ph.rune}),8),matrix=new T.Matrix4();
+      for(let j=0;j<8;j++){const a=j/8*Math.PI*2;matrix.makeTranslation(Math.cos(a)*3.05,Math.sin(a)*3.05,0);runes.setMatrixAt(j,matrix)}g.add(runes);
       scene.add(g);
       this.rings.push({mesh: g, pos, collected: false});
       for (let j = 1; j <= 3; j++) this.addOrb(routePoint(t - j * .065));
@@ -350,22 +346,22 @@ export class World {
     }
     const geo = new T.BufferGeometry();
     geo.setAttribute('position', new T.Float32BufferAttribute(positions, 3));
-    this.fireflies = new T.Points(geo, new T.PointsMaterial({size: .6, map: this.glow, color: ph.firefly, transparent: true, blending: T.AdditiveBlending, depthWrite: false}));
+    this.fireflies = new T.Points(geo, new T.PointsMaterial({size: .28, map: this.glow, color: ph.firefly, transparent: true, blending: T.AdditiveBlending, depthWrite: false}));
     scene.add(this.fireflies); this.decor.push(this.fireflies);
   }
 
   dispose() {
     for (const o of this.decor) {
       this.scene.remove(o);
-      if (o.geometry) o.geometry.dispose?.();
+      if(o.geometry&&!o.geometry.userData.assetOwned)o.geometry.dispose?.();
       if (o.material) {
         if (Array.isArray(o.material)) o.material.forEach(m => m.dispose?.());
         else o.material.dispose?.();
       }
     }
-    for (const r of this.rings) this.scene.remove(r.mesh);
-    for (const o of this.orbs) { this.scene.remove(o.mesh); this.scene.remove(o.glow); }
-    for (const n of this.npcs) this.scene.remove(n.model);
+    for(const r of this.rings){this.scene.remove(r.mesh);r.mesh.traverse(o=>{o.geometry?.dispose();o.material?.dispose()})}
+    for (const o of this.orbs) { this.scene.remove(o.mesh);this.scene.remove(o.glow);o.mesh.geometry.dispose();o.mesh.material.dispose();o.glow.material.dispose(); }
+    for(const n of this.npcs){this.scene.remove(n.model);n.model.userData.animation?.mixer.stopAllAction();n.model.traverse(o=>{o.skeleton?.dispose();if(o.material&&!Array.isArray(o.material))o.material.dispose()})}
     for (const l of this.lights) this.scene.remove(l);
     this.decor = []; this.rings = []; this.orbs = []; this.npcs = []; this.colliders = []; this.lights = [];
   }

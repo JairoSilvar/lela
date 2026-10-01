@@ -1,7 +1,8 @@
+import {storage} from './storage.js';
 export class MagicSystem{
- constructor(){this.spells=['lumen','ventus','aegis','blink'];this.index=Number(localStorage.getItem('wf-spell')||0);this.inventory=this.load()}
- load(){try{return JSON.parse(localStorage.getItem('wf-inventory')||'{"flor":0,"cogumelo":0,"cristal":0,"pocoes":0}')}catch{return{flor:0,cogumelo:0,cristal:0,pocoes:0}}}
- save(){localStorage.setItem('wf-spell',String(this.index));localStorage.setItem('wf-inventory',JSON.stringify(this.inventory))}
+ constructor(){this.spells=['lumen','ventus','aegis','blink'];this.index=Number(storage.getItem('wf-spell')||0);this.inventory=this.load()}
+ load(){try{return JSON.parse(storage.getItem('wf-inventory')||'{"flor":0,"cogumelo":0,"cristal":0,"pocoes":0}')}catch{return{flor:0,cogumelo:0,cristal:0,pocoes:0}}}
+ save(){storage.setItem('wf-spell',String(this.index));storage.setItem('wf-inventory',JSON.stringify(this.inventory))}
  current(){return this.spells[this.index]}
  next(){this.index=(this.index+1)%this.spells.length;this.save();return this.current()}
  label(s=this.current()){return({lumen:'Lumen · revelar',ventus:'Ventus · impulso',aegis:'Aegis · escudo',blink:'Blink · avanço'})[s]}

@@ -1,9 +1,10 @@
+import {storage} from './storage.js';
 import * as T from 'three';
 
 export class LivingWorld {
   constructor(scene, world, phase='floresta'){
     this.scene=scene; this.world=world; this.phase=phase;
-    this.time=Number(localStorage.getItem('wf-world-time')||.28); // 0..1
+    this.time=Number(storage.getItem('wf-world-time')||.28); // 0..1
     this.weather='clear'; this.weatherTimer=28; this.eventTimer=16;
     this.fireflies=[]; this.fauna=[]; this.clouds=[]; this.eventText='';
     this._makeAmbient();
@@ -40,7 +41,7 @@ export class LivingWorld {
     if(this.scene.fog){const target=this.weather==='mist'?0.028:this.weather==='drizzle'?0.018:0.009;this.scene.fog.density+=(target-this.scene.fog.density)*Math.min(1,dt*1.2);}
     const bgDay=new T.Color(this.phase==='vila'?0x6b6a8c:this.phase==='castelo'?0x4d527b:0x58796f),bgNight=new T.Color(0x111426);
     if(this.scene.background?.isColor)this.scene.background.copy(bgNight).lerp(bgDay,night?.12:.82);
-    if(Math.random()<dt*.08)try{localStorage.setItem('wf-world-time',String(this.time))}catch{}
+    if(Math.random()<dt*.08)try{storage.setItem('wf-world-time',String(this.time))}catch{}
   }
   consumeEvent(){const e=this.eventText;this.eventText='';return e}
   dispose(){[...this.fireflies,...this.fauna].forEach(x=>{this.scene.remove(x.m);x.m.geometry?.dispose();x.m.material?.dispose()});this.fireflies=[];this.fauna=[];}

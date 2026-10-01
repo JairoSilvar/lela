@@ -1,0 +1,12 @@
+{
+  "version": 42,
+  "stage": "release-candidate-integration",
+  "js_modules": 82,
+  "main_relative_imports": 80,
+  "syntax_errors": 0,
+  "missing_imports": 0,
+  "duplicate_import_targets": 0,
+  "critical_assets": 9,
+  "creature_gltf_json_valid": 4,
+  "release_note": "Static/structural QA passed. Real-device/browser gameplay QA remains required before production."
+}

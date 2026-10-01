@@ -1,0 +1,9 @@
+{
+  "version": 45,
+  "base": "v44 Consolidada",
+  "policy": "preservar recursos existentes; adicionar Mundo Rosa e mount-state da vassoura",
+  "checks": [
+    "all-js-syntax",
+    "local-relative-references"
+  ]
+}

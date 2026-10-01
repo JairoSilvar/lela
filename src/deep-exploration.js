@@ -1,4 +1,6 @@
+import {storage} from './storage.js';
 import * as T from 'three';
+import {ground} from './world.js';
 
 const DATA={
  floresta:[
@@ -16,14 +18,14 @@ const DATA={
 };
 export class DeepExploration{
  constructor(scene,phase='floresta'){this.scene=scene;this.phase=phase;this.sites=[];this.active=null;this.progress=this.load();this.build()}
- load(){try{return JSON.parse(localStorage.getItem('wf-deep-explore')||'{}')}catch{return{}}}
- save(){try{localStorage.setItem('wf-deep-explore',JSON.stringify(this.progress))}catch{}}
+ load(){try{return JSON.parse(storage.getItem('wf-deep-explore')||'{}')}catch{return{}}}
+ save(){try{storage.setItem('wf-deep-explore',JSON.stringify(this.progress))}catch{}}
  build(){
   const ring=new T.TorusGeometry(2.2,.11,7,24), pillar=new T.CylinderGeometry(.35,.55,2.8,6);
   for(const d of DATA[this.phase]||[]){const g=new T.Group(),mat=new T.MeshStandardMaterial({color:d.kind==='puzzle'?0xa98bd4:0x79b9a5,roughness:.72,metalness:.08,emissive:d.kind==='puzzle'?0x25143b:0x102d29,emissiveIntensity:.45});
    const r=new T.Mesh(ring,mat);r.rotation.x=Math.PI/2;r.position.y=.15;g.add(r);
    for(let i=0;i<3;i++){const m=new T.Mesh(pillar,mat.clone());m.position.set(Math.cos(i*2.094)*2.6,1.35,Math.sin(i*2.094)*2.6);g.add(m)}
-   g.position.set(...d.p);this.scene.add(g);this.sites.push({...d,g,stage:this.progress[this.phase+'-'+d.id]||0});}
+   g.position.set(...d.p);g.position.y=ground(d.p[0],d.p[2])+d.p[1];this.scene.add(g);this.sites.push({...d,g,stage:this.progress[this.phase+'-'+d.id]||0});}
  }
  nearest(pos,max=6.5){let best=null,dist=max;for(const s of this.sites){const d=s.g.position.distanceTo(pos);if(d<dist){best=s;dist=d}}return best}
  interact(pos,vision=false){

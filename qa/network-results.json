@@ -1,0 +1,890 @@
+[
+  {
+    "path": "/",
+    "status": 200
+  },
+  {
+    "path": "/style.css",
+    "status": 200
+  },
+  {
+    "path": "/src/main.js",
+    "status": 200
+  },
+  {
+    "path": "/src/storage.js",
+    "status": 200
+  },
+  {
+    "path": "/src/release-lifecycle-v42.js",
+    "status": 200
+  },
+  {
+    "path": "/src/settings-ui-v42.js",
+    "status": 200
+  },
+  {
+    "path": "/src/recovery-v42.js",
+    "status": 200
+  },
+  {
+    "path": "/src/fair-play-v42.js",
+    "status": 200
+  },
+  {
+    "path": "/src/accessibility-v41.js",
+    "status": 200
+  },
+  {
+    "path": "/src/balance-v41.js",
+    "status": 200
+  },
+  {
+    "path": "/src/input-router-v41.js",
+    "status": 200
+  },
+  {
+    "path": "/src/session-qa-v41.js",
+    "status": 200
+  },
+  {
+    "path": "/src/release-gate-v41.js",
+    "status": 200
+  },
+  {
+    "path": "/src/entity-culling-v40.js",
+    "status": 200
+  },
+  {
+    "path": "/src/collision-registry-v40.js",
+    "status": 200
+  },
+  {
+    "path": "/src/save-validation-v40.js",
+    "status": 200
+  },
+  {
+    "path": "/src/runtime-health-v40.js",
+    "status": 200
+  },
+  {
+    "path": "/src/settings-v39.js",
+    "status": 200
+  },
+  {
+    "path": "/src/production-guard-v39.js",
+    "status": 200
+  },
+  {
+    "path": "/src/autosave-v39.js",
+    "status": 200
+  },
+  {
+    "path": "/src/lod-v39.js",
+    "status": 200
+  },
+  {
+    "path": "/src/qa-monitor-v39.js",
+    "status": 200
+  },
+  {
+    "path": "/src/cyclops-encounter-v38.js",
+    "status": 200
+  },
+  {
+    "path": "/src/world-population-v38.js",
+    "status": 200
+  },
+  {
+    "path": "/src/checkpoint-v38.js",
+    "status": 200
+  },
+  {
+    "path": "/src/mobile-combat-v38.js",
+    "status": 200
+  },
+  {
+    "path": "/src/perception-v37.js",
+    "status": 200
+  },
+  {
+    "path": "/src/physics-polish-v37.js",
+    "status": 200
+  },
+  {
+    "path": "/src/combat-feedback-v37.js",
+    "status": 200
+  },
+  {
+    "path": "/src/world-scheduler-v37.js",
+    "status": 200
+  },
+  {
+    "path": "/src/combat-loop-v36.js",
+    "status": 200
+  },
+  {
+    "path": "/src/loot-v36.js",
+    "status": 200
+  },
+  {
+    "path": "/src/respawn-v36.js",
+    "status": 200
+  },
+  {
+    "path": "/src/animation-state-v36.js",
+    "status": 200
+  },
+  {
+    "path": "/src/creature-combat-v35.js",
+    "status": 200
+  },
+  {
+    "path": "/src/boss-cyclops-v35.js",
+    "status": 200
+  },
+  {
+    "path": "/src/save-v35.js",
+    "status": 200
+  },
+  {
+    "path": "/src/simulation-budget-v35.js",
+    "status": 200
+  },
+  {
+    "path": "/src/creature-models-v34.js",
+    "status": 200
+  },
+  {
+    "path": "/src/hud-v34.js",
+    "status": 200
+  },
+  {
+    "path": "/src/combat-v33.js",
+    "status": 200
+  },
+  {
+    "path": "/src/save-v33.js",
+    "status": 200
+  },
+  {
+    "path": "/src/comfort-v33.js",
+    "status": 200
+  },
+  {
+    "path": "/src/adaptive-quality-v33.js",
+    "status": 200
+  },
+  {
+    "path": "/src/character-controller.js",
+    "status": 200
+  },
+  {
+    "path": "/src/world-colliders.js",
+    "status": 200
+  },
+  {
+    "path": "/src/creature-ai.js",
+    "status": 200
+  },
+  {
+    "path": "/src/player-vitals.js",
+    "status": 200
+  },
+  {
+    "path": "/src/game-audio-bus.js",
+    "status": 200
+  },
+  {
+    "path": "/src/gameplay-state-guard.js",
+    "status": 200
+  },
+  {
+    "path": "/src/performance-governor.js",
+    "status": 200
+  },
+  {
+    "path": "/src/exploration-poi.js",
+    "status": 200
+  },
+  {
+    "path": "/src/npc-behavior.js",
+    "status": 200
+  },
+  {
+    "path": "/src/ground-feedback.js",
+    "status": 200
+  },
+  {
+    "path": "/src/dialogue-system.js",
+    "status": 200
+  },
+  {
+    "path": "/src/mobile-flight-control.js",
+    "status": 200
+  },
+  {
+    "path": "/vendor/three.module.js",
+    "status": 200
+  },
+  {
+    "path": "/src/assets.js",
+    "status": 200
+  },
+  {
+    "path": "/src/world.js",
+    "status": 200
+  },
+  {
+    "path": "/src/flight.js",
+    "status": 200
+  },
+  {
+    "path": "/src/input.js",
+    "status": 200
+  },
+  {
+    "path": "/src/effects.js",
+    "status": 200
+  },
+  {
+    "path": "/src/music.js",
+    "status": 200
+  },
+  {
+    "path": "/src/exploration.js",
+    "status": 200
+  },
+  {
+    "path": "/src/missions.js",
+    "status": 200
+  },
+  {
+    "path": "/src/progression.js",
+    "status": 200
+  },
+  {
+    "path": "/src/equipment.js",
+    "status": 200
+  },
+  {
+    "path": "/src/challenges.js",
+    "status": 200
+  },
+  {
+    "path": "/src/living-world.js",
+    "status": 200
+  },
+  {
+    "path": "/src/deep-exploration.js",
+    "status": 200
+  },
+  {
+    "path": "/src/magic.js",
+    "status": 200
+  },
+  {
+    "path": "/src/adventure.js",
+    "status": 200
+  },
+  {
+    "path": "/src/gamer-polish.js",
+    "status": 200
+  },
+  {
+    "path": "/src/visual-art-pass.js",
+    "status": 200
+  },
+  {
+    "path": "/src/external-art.js",
+    "status": 200
+  },
+  {
+    "path": "/src/graphics-profile.js",
+    "status": 200
+  },
+  {
+    "path": "/src/soundscape.js",
+    "status": 200
+  },
+  {
+    "path": "/src/atmosphere-vfx.js",
+    "status": 200
+  },
+  {
+    "path": "/src/kenney-world.js",
+    "status": 200
+  },
+  {
+    "path": "/src/kenney-vfx.js",
+    "status": 200
+  },
+  {
+    "path": "/src/dungeon-adventure.js",
+    "status": 200
+  },
+  {
+    "path": "/src/lelinha-identity.js",
+    "status": 200
+  },
+  {
+    "path": "/src/character-camera-polish.js",
+    "status": 200
+  },
+  {
+    "path": "/src/living-encounters.js",
+    "status": 200
+  },
+  {
+    "path": "/src/region-quests.js",
+    "status": 200
+  },
+  {
+    "path": "/vendor/GLTFLoader.js",
+    "status": 200
+  },
+  {
+    "path": "/vendor/SkeletonUtils.js",
+    "status": 200
+  },
+  {
+    "path": "/src/static-batch.js",
+    "status": 200
+  },
+  {
+    "path": "/vendor/BufferGeometryUtils.js",
+    "status": 200
+  },
+  {
+    "path": "/assets/witch.glb",
+    "status": 200
+  },
+  {
+    "path": "/assets/broom.glb",
+    "status": 200
+  },
+  {
+    "path": "/assets/tree_dead_large.gltf",
+    "status": 200
+  },
+  {
+    "path": "/assets/tree_dead_medium.gltf",
+    "status": 200
+  },
+  {
+    "path": "/assets/tree_pine_orange_large.gltf",
+    "status": 200
+  },
+  {
+    "path": "/assets/tree_pine_yellow_large.gltf",
+    "status": 200
+  },
+  {
+    "path": "/assets/pumpkin_orange_jackolantern.gltf",
+    "status": 200
+  },
+  {
+    "path": "/assets/pumpkin_orange_small.gltf",
+    "status": 200
+  },
+  {
+    "path": "/assets/lantern_standing.gltf",
+    "status": 200
+  },
+  {
+    "path": "/assets/crypt.gltf",
+    "status": 200
+  },
+  {
+    "path": "/assets/gravestone.gltf",
+    "status": 200
+  },
+  {
+    "path": "/assets/arch.gltf",
+    "status": 200
+  },
+  {
+    "path": "/assets/candle_triple.gltf",
+    "status": 200
+  },
+  {
+    "path": "/assets/shrine.gltf",
+    "status": 200
+  },
+  {
+    "path": "/assets/tree_dead_large.bin",
+    "status": 200
+  },
+  {
+    "path": "/assets/halloweenbits_texture.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/tree_dead_medium.bin",
+    "status": 200
+  },
+  {
+    "path": "/assets/tree_pine_orange_large.bin",
+    "status": 200
+  },
+  {
+    "path": "/assets/tree_pine_yellow_large.bin",
+    "status": 200
+  },
+  {
+    "path": "/assets/halloweenbits_texture.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/pumpkin_orange_jackolantern.bin",
+    "status": 200
+  },
+  {
+    "path": "/assets/halloweenbits_texture.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/pumpkin_orange_small.bin",
+    "status": 200
+  },
+  {
+    "path": "/assets/lantern_standing.bin",
+    "status": 200
+  },
+  {
+    "path": "/assets/crypt.bin",
+    "status": 200
+  },
+  {
+    "path": "/assets/halloweenbits_texture.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/gravestone.bin",
+    "status": 200
+  },
+  {
+    "path": "/assets/arch.bin",
+    "status": 200
+  },
+  {
+    "path": "/assets/halloweenbits_texture.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/candle_triple.bin",
+    "status": 200
+  },
+  {
+    "path": "/assets/shrine.bin",
+    "status": 200
+  },
+  {
+    "path": "/assets/halloweenbits_texture.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/halloweenbits_texture.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/halloweenbits_texture.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/halloweenbits_texture.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/halloweenbits_texture.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/halloweenbits_texture.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/halloweenbits_texture.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/characters/lelinha/Female_Ranger.gltf",
+    "status": 200
+  },
+  {
+    "path": "/assets/characters/lelinha/Female_Ranger.bin",
+    "status": 200
+  },
+  {
+    "path": "/assets/characters/lelinha/T_Ranger_BaseColor.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/characters/lelinha/T_Ranger_ORM.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/characters/lelinha/T_Ranger_Normal.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/characters/lelinha/T_Regular_Female_Dark_BaseColor.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/characters/lelinha/T_Regular_Female_Roughness.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/characters/lelinha/T_Regular_Female_Normal.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/animations/UAL1_Standard.glb",
+    "status": 200
+  },
+  {
+    "path": "/assets/animations/UAL2_Standard.glb",
+    "status": 200
+  },
+  {
+    "path": "/assets/environment/TownCenter_FirstAge_Level1.gltf",
+    "status": 200
+  },
+  {
+    "path": "/assets/environment/Houses_FirstAge_1_Level1.gltf",
+    "status": 200
+  },
+  {
+    "path": "/assets/environment/WatchTower_FirstAge_Level1.gltf",
+    "status": 200
+  },
+  {
+    "path": "/assets/environment/Windmill_FirstAge.gltf",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/nature/tree_oak.glb",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/nature/tree_pineDefaultA.glb",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/nature/rock_largeA.glb",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/nature/mushroom_redGroup.glb",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/nature/log.glb",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/nature/bridge_wood.glb",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/nature/grass_large.glb",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/town/fountain-round.glb",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/town/stall-red.glb",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/town/stall-green.glb",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/town/lantern.glb",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/town/cart.glb",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/town/road.glb",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/town/windmill.glb",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/town/wall.glb",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/town/wall-door.glb",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/town/pillar-stone.glb",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/town/banner-red.glb",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/dungeon/corridor.glb",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/dungeon/corridor-corner.glb",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/dungeon/gate-door.glb",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/dungeon/room-small.glb",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/dungeon/stairs.glb",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/town/Textures/colormap.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/town/Textures/colormap.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/town/Textures/colormap.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/town/Textures/colormap.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/town/Textures/colormap.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/town/Textures/colormap.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/dungeon/Textures/colormap.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/town/Textures/colormap.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/dungeon/Textures/colormap.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/town/Textures/colormap.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/dungeon/Textures/colormap.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/town/Textures/colormap.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/dungeon/Textures/colormap.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/town/Textures/colormap.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/dungeon/Textures/colormap.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/town/Textures/colormap.png",
+    "status": 200
+  },
+  {
+    "path": "/tests/integration-v44.js",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/particles/fire_01.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/particles/circle_01.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/particles/magic_01.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/particles/smoke_01.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/particles/star_01.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/particles/flare_01.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/particles/spark_01.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/kenney/particles/flame_03.png",
+    "status": 200
+  },
+  {
+    "path": "/assets/audio/music/menu.mp3",
+    "status": 200
+  },
+  {
+    "path": "/assets/creatures/Deer.gltf",
+    "status": 200
+  },
+  {
+    "path": "/assets/audio/sfx/ambient_fantasy.ogg",
+    "status": 200
+  },
+  {
+    "path": "/assets/audio/music/fase-1.mp3",
+    "status": 200
+  },
+  {
+    "path": "/assets/audio/sfx/ui_click.ogg",
+    "status": 200
+  },
+  {
+    "path": "/assets/audio/sfx/ui_click.ogg",
+    "status": 200
+  },
+  {
+    "path": "/assets/audio/sfx/ui_click.ogg",
+    "status": 200
+  },
+  {
+    "path": "/assets/audio/sfx/ui_click.ogg",
+    "status": 200
+  },
+  {
+    "path": "/assets/creatures/Bat.gltf",
+    "status": 200
+  },
+  {
+    "path": "/assets/audio/kenney/impact/sfx_02.ogg",
+    "status": 200
+  },
+  {
+    "path": "/assets/audio/sfx/spell_lumen.ogg",
+    "status": 200
+  },
+  {
+    "path": "/assets/audio/sfx/orb.ogg",
+    "status": 200
+  },
+  {
+    "path": "/assets/audio/sfx/spell_lumen.ogg",
+    "status": 200
+  },
+  {
+    "path": "/assets/audio/sfx/orb.ogg",
+    "status": 200
+  },
+  {
+    "path": "/assets/audio/sfx/spell_lumen.ogg",
+    "status": 200
+  },
+  {
+    "path": "/assets/audio/sfx/orb.ogg",
+    "status": 200
+  },
+  {
+    "path": "/assets/audio/sfx/spell_lumen.ogg",
+    "status": 200
+  },
+  {
+    "path": "/assets/audio/sfx/orb.ogg",
+    "status": 200
+  },
+  {
+    "path": "/assets/audio/kenney/impact/sfx_05.ogg",
+    "status": 200
+  },
+  {
+    "path": "/assets/audio/kenney/impact/sfx_01.ogg",
+    "status": 200
+  },
+  {
+    "path": "/assets/audio/kenney/impact/sfx_03.ogg",
+    "status": 200
+  },
+  {
+    "path": "/assets/audio/kenney/ui/sfx_05.ogg",
+    "status": 200
+  },
+  {
+    "path": "/assets/creatures/Deer.gltf",
+    "status": 200
+  },
+  {
+    "path": "/assets/audio/music/fase-1.mp3",
+    "status": 200
+  },
+  {
+    "path": "/assets/creatures/Bat.gltf",
+    "status": 200
+  },
+  {
+    "path": "/assets/creatures/Deer.gltf",
+    "status": 200
+  },
+  {
+    "path": "/assets/audio/music/fase-2.mp3",
+    "status": 200
+  },
+  {
+    "path": "/assets/creatures/Ghost.gltf",
+    "status": 200
+  },
+  {
+    "path": "/assets/audio/music/fase-3.mp3",
+    "status": 200
+  },
+  {
+    "path": "/assets/creatures/Bat.gltf",
+    "status": 200
+  },
+  {
+    "path": "/assets/creatures/Cyclops.gltf",
+    "status": 200
+  },
+  {
+    "path": "/assets/audio/kenney/impact/sfx_01.ogg",
+    "status": 200
+  },
+  {
+    "path": "/assets/audio/kenney/ui/sfx_05.ogg",
+    "status": 200
+  }
+]

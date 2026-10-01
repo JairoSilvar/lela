@@ -7,8 +7,8 @@ import {Effects} from '../src/effects.js';
 let failures=0,total=0;
 function check(name,condition){total++;const li=document.createElement('li');li.textContent=(condition?'PASSOU — ':'FALHOU — ')+name;li.style.color=condition?'#a9f4d4':'#ff8a88';document.querySelector('#results').appendChild(li);if(!condition)failures++;}
 try{
- const assets=await loadAssets(()=>{});check('14 modelos locais carregados',Object.keys(assets).length===14);
- const input=new Input();input.enabled=true;check('Controles neutros produzem números finitos',Object.values(input.state).every(v=>typeof v==='boolean'||Number.isFinite(v)||v===undefined)&&input.state.lift===0);
+ const assets=await loadAssets(()=>{});check('Modelos base, Lelinha, animações, cenário e Kenney carregados',['witch','broom','lelinha','heroAnimations','environment','kenney'].every(k=>assets[k]));
+ const input=new Input();input.enabled=true;check('Controles neutros produzem números finitos',['turn','throttle','lift','lookX','lookY','motion'].every(k=>Number.isFinite(input.state[k]))&&input.state.lift===0);
  window.dispatchEvent(new KeyboardEvent('keydown',{code:'KeyD'}));window.dispatchEvent(new KeyboardEvent('keydown',{code:'ArrowUp'}));check('Teclado: virar e subir simultaneamente',input.state.turn===1&&input.state.lift===1);input.clear();
  window.dispatchEvent(new KeyboardEvent('keydown',{code:'Space'}));check('Magia dispara uma vez por pressionamento',input.consumeMagic()&&!input.consumeMagic());
  window.dispatchEvent(new KeyboardEvent('keydown',{code:'KeyW'}));window.dispatchEvent(new Event('blur'));check('Perda de foco libera teclas',input.state.throttle===0);

@@ -20,3 +20,10 @@ CC0 permite copiar, modificar e redistribuir, inclusive comercialmente. As duas 
 - Texto legal CC0: https://creativecommons.org/publicdomain/zero/1.0/legalcode
 
 O código específico deste protótipo pode ser usado e modificado pelo solicitante. As licenças de terceiros acima acompanham os respectivos recursos.
+
+## Texturas recuperadas na v44
+
+- Fantasy Town Kit — Kenney, CC0: https://kenney.nl/assets/fantasy-town-kit
+- Modular Dungeon Kit — Kenney, CC0: https://kenney.nl/assets/modular-dungeon-kit
+
+As texturas `Models/GLB format/Textures/colormap.png` dos pacotes oficiais foram incluídas nos caminhos esperados pelos GLBs originais. As licenças dos pacotes estão nas respectivas pastas de assets. Nenhum modelo da v43 foi substituído.

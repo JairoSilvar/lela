@@ -22,10 +22,11 @@ const DATA={
 export class Exploration{
   constructor(scene,world){this.scene=scene;this.world=world;this.points=[];this.active=false;this.range=26;this.build();}
   build(){const list=DATA[this.world.phaseId]||DATA.floresta;for(const d of list){const y=ground(d.x,d.z)+1.15;const group=new T.Group();group.position.set(d.x,y,d.z);const gem=new T.Mesh(new T.OctahedronGeometry(.45),new T.MeshStandardMaterial({color:0xff9ec8,emissive:0xe85aad,emissiveIntensity:1.5,roughness:.25}));const ring=new T.Mesh(new T.TorusGeometry(.85,.035,8,32),new T.MeshBasicMaterial({color:0xffd98a,transparent:true,opacity:.75}));ring.rotation.x=Math.PI/2;group.add(gem,ring);this.scene.add(group);this.points.push({...d,group,gem,ring,found:false});}}
-  dispose(){this.points.forEach(p=>this.scene.remove(p.group));this.points=[];}
-  nearest(pos,max=4.2){let best=null,dist=max;for(const p of this.points){if(p.found)continue;const d=p.group.position.distanceTo(pos);if(d<dist){dist=d;best=p}}return best;}
-  interact(pos){const p=this.nearest(pos);if(!p)return null;p.found=true;p.group.visible=false;return p;}
+  dispose(){this.points.forEach(p=>{this.scene.remove(p.group);p.group.traverse(o=>{o.geometry?.dispose();o.material?.dispose()})});this.points=[];}
+  nearest(pos,max=4.2,includeFound=false){let best=null,dist=max;for(const p of this.points){if(p.found&&!includeFound)continue;const d=p.group.position.distanceTo(pos);if(d<dist){dist=d;best=p}}return best;}
+  interact(pos){const p=this.nearest(pos,4.2,true);if(!p)return null;const replay=p.found;p.found=true;p.group.visible=false;return {...p,replay};}
   toggleVision(){this.active=!this.active;return this.active;}
   update(t,pos){for(const p of this.points){if(p.found)continue;p.gem.rotation.y+=.015;p.ring.rotation.z=t*.35;const d=p.group.position.distanceTo(pos);const visible=this.active&&d<this.range;p.group.visible=visible||d<7;const s=visible?1.15:1;p.group.scale.lerp(new T.Vector3(s,s,s),.12);}}
+  get vision(){return this.active}
   get found(){return this.points.filter(p=>p.found).length}
 }

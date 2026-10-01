@@ -1,0 +1,4 @@
+PASS Estrelas das três regiões desbloqueiam e persistem vassouras
+PASS Cada missão regional completa descoberta, anéis e retorno
+PASS Time Trial grava, recupera fantasma e protege melhor tempo
+{"passed":3,"total":3}

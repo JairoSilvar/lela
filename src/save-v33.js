@@ -1,1 +1,2 @@
-export class SaveV33{constructor(k='lelinha-v33'){this.k=k}save(d){try{localStorage.setItem(this.k,JSON.stringify({...d,savedAt:Date.now()}));return true}catch{return false}}load(){try{return JSON.parse(localStorage.getItem(this.k)||'null')}catch{return null}}}
+import {storage} from './storage.js';
+export class SaveV33{constructor(k='lelinha-v33'){this.k=k}save(d){try{storage.setItem(this.k,JSON.stringify({...d,savedAt:Date.now()}));return true}catch{return false}}load(){try{return JSON.parse(storage.getItem(this.k)||'null')}catch{return null}}}

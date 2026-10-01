@@ -7,7 +7,8 @@
 <title>Halloween Rosa — Lelinha Bruxa Encantada</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='52' font-size='52'%3E🎀%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="style.css">
-<script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
+<script type="importmap">{"imports":{"three":"./vendor/three.module.js",
+      "three/addons/": "./vendor/"}}</script>
 
 <style>
 .gamer-panel{margin:12px 0;padding:12px;border:1px solid #ffffff24;border-radius:14px;background:#160d24aa}.gamer-panel h3{margin:0 0 8px}.broom-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.broom-card{display:flex;flex-direction:column;gap:4px;padding:9px;text-align:left}.broom-card small,.broom-card span{font-size:10px;opacity:.8}.broom-card.selected{outline:2px solid #f0c96a}.broom-card:disabled{opacity:.38}.challenge-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.challenge-row select{padding:8px;border-radius:10px}@media(max-width:650px){.broom-grid{grid-template-columns:1fr}.gamer-panel{font-size:12px}}
@@ -26,6 +27,7 @@
     <button id="fullscreen" aria-label="Alternar tela cheia">⛶</button>
     <button id="sound" aria-label="Ativar efeitos sonoros">Som: off</button>
     <button id="music" aria-label="Ativar ou desativar música">Música: on</button>
+    <button id="settings-open" aria-label="Configurações">⚙</button><button id="access-open" aria-label="Acessibilidade">Aa</button>
     <button id="grimoire-open" aria-label="Abrir Grimório">📖</button>
     <button id="pause" aria-label="Pausar jogo">Ⅱ</button>
   </div>
@@ -52,7 +54,7 @@
   </div>
   <div class="bottom-left">
     <canvas id="map" width="160" height="160" aria-label="Mapa do reino e próximo anel"></canvas>
-    <div class="map-label">FLORESTA ENCANTADA <span id="quality-label">AUTO</span></div>
+    <div class="map-label" id="map-label">FLORESTA ENCANTADA <span id="quality-label">AUTO</span></div>
   </div>
   <div class="flight-info">
     <div><b id="speed">0</b><span>km/h</span><em id="altitude">6 m</em></div>
@@ -90,7 +92,8 @@
     </div>
     <section class="gamer-panel"><h3>🎮 Equipamento & Desafio</h3><div id="broom-list" class="broom-grid"></div><div class="challenge-row"><label>Modo <select id="challenge-mode"><option value="adventure">Aventura</option><option value="time">Time Trial</option></select></label><small id="challenge-best"></small></div></section>
     <button id="start" class="primary" disabled>Preparando o reino…</button>
-    <div id="loading" role="status">Carregando modelos 3D</div>
+    <button id="continue-save" hidden>Continuar aventura salva</button>
+<div id="loading" role="status">Carregando modelos 3D</div>
     <div id="best-score"></div>
     <div class="intro-footer">VOO LIVRE 3D <span>✧</span> RITUAL DE 90 SEGUNDOS</div>
   </div>
@@ -102,7 +105,7 @@
     <span class="eyebrow">O REINO ESPERA POR VOCÊ</span>
     <h2>Uma pausa no voo</h2>
     <p>W/S: acelerar e frear · A/D: virar<br>
-    ↑/↓ ou E/Q: subir e descer<br>
+    ↑/↓: subir e descer · E: interagir/pousar/montar<br>
     Shift: turbo · Espaço: pulso mágico · C: modo de voo · V: Visão Mágica<br>
     R: voltar à clareira inicial</p>
     <label>Qualidade
@@ -169,5 +172,28 @@
 </div>
 
 <script type="module" src="src/main.js"></script>
+
+<div id="settings-v39" hidden>
+  <div class="settings-card">
+    <h2>Configurações</h2>
+    <label>Sensibilidade da câmera <input id="v39-sens" type="range" min=".5" max="2" step=".1" value="1"></label>
+    <label>Partículas <input id="v39-particles" type="range" min=".3" max="1" step=".1" value="1"></label>
+    <label>Tamanho do HUD <input id="v39-hud" type="range" min=".8" max="1.35" step=".05" value="1"></label>
+    <label><input id="v39-vibration" type="checkbox" checked> Vibração</label>
+    <button id="v39-close">Fechar</button>
+  </div>
+</div>
+
+<div id="v41-access" hidden>
+ <div class="settings-card">
+  <h2>Acessibilidade</h2>
+  <label><input id="v41-contrast" type="checkbox"> Alto contraste</label>
+  <label><input id="v41-flashes" type="checkbox"> Reduzir flashes</label>
+  <label><input id="v41-large" type="checkbox"> Texto maior</label>
+  <label><input id="v41-subtitles" type="checkbox" checked> Legendas</label>
+  <label>Movimento de câmera <input id="v41-shake" type="range" min="0" max="1" step=".1" value="1"></label>
+  <button id="v41-close">Fechar</button>
+ </div>
+</div>
 </body>
 </html>

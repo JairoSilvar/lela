@@ -1,3 +1,4 @@
+import {storage} from './storage.js';
 // Trilha por contexto. Para adicionar novas faixas, copie o arquivo para
 // assets/audio/music/ e altere/expanda MUSIC_TRACKS abaixo.
 export const MUSIC_TRACKS = {
@@ -17,9 +18,9 @@ export class MusicPlayer {
     this.unlocked=false;
     this.context=null;
     try{
-      const saved=localStorage.getItem('wf-music-enabled');
+      const saved=storage.getItem('wf-music-enabled');
       if(saved!==null)this.enabled=saved==='1';
-      const vol=parseFloat(localStorage.getItem('wf-music-volume'));
+      const vol=parseFloat(storage.getItem('wf-music-volume'));
       if(Number.isFinite(vol))this.el.volume=Math.max(0,Math.min(1,vol));
     }catch{}
     const unlock=()=>{this.unlocked=true;this.playCurrent();};
@@ -44,14 +45,14 @@ export class MusicPlayer {
   }
   setEnabled(on){
     this.enabled=!!on;
-    try{localStorage.setItem('wf-music-enabled',this.enabled?'1':'0');}catch{}
+    try{storage.setItem('wf-music-enabled',this.enabled?'1':'0');}catch{}
     if(this.enabled)this.playCurrent(); else this.el.pause();
     return this.enabled;
   }
   toggle(){return this.setEnabled(!this.enabled);}
   setVolume(v){
     this.el.volume=Math.max(0,Math.min(1,Number(v)||0));
-    try{localStorage.setItem('wf-music-volume',String(this.el.volume));}catch{}
+    try{storage.setItem('wf-music-volume',String(this.el.volume));}catch{}
     return this.el.volume;
   }
 }

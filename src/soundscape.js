@@ -1,9 +1,10 @@
+import {storage} from './storage.js';
 const ROOT='./assets/audio/sfx/';
 const F={click:'ui_click.ogg',orb:'orb.ogg',ring:'ring.ogg',reward:'reward.ogg',book:'book_open.ogg',page:'book_page.ogg',door:'door_open.ogg',
 lumen:'spell_lumen.ogg',ventus:'spell_ventus.ogg',aegis:'spell_aegis.ogg',blink:'spell_blink.ogg',special:'magic_special.ogg',
 roar:'creature_roar.ogg',stone:'stone.ogg',wood:'wood.ogg',steps:['footstep_1.ogg','footstep_2.ogg','footstep_3.ogg']};
 export class Soundscape{
- constructor(){this.enabled=localStorage.getItem('wf-sfx')!=='0';this.vol={sfx:+localStorage.getItem('wf-sfx-vol')||.72,ambient:+localStorage.getItem('wf-amb-vol')||.28,ui:+localStorage.getItem('wf-ui-vol')||.55};
+ constructor(){this.enabled=storage.getItem('wf-sfx')!=='0';this.vol={sfx:Number(storage.getItem('wf-sfx-vol')??.72),ambient:Number(storage.getItem('wf-amb-vol')??.28),ui:Number(storage.getItem('wf-ui-vol')??.55)};
  this.pools={};this.stepT=0;this.stepI=0;this.amb=null;this.ctx=null;this.wind=null;this.windGain=null;this.windFilter=null;this.lastGrounded=true;this.phase='';this.stingerT=0}
  audio(f,loop=false){const a=new Audio(ROOT+f);a.preload='auto';a.loop=loop;a.playsInline=true;return a}
  pool(f,n=4){return this.pools[f]||(this.pools[f]=Array.from({length:n},()=>this.audio(f)))}
@@ -32,6 +33,6 @@ export class Soundscape{
   this.ensureWind();if(this.windGain){const speed=Math.min(1,Math.max(0,(f.speed||0)/24)),target=f.grounded?.006:.018+speed*.075;this.windGain.gain.setTargetAtTime(this.enabled?target*this.vol.ambient:0,this.ctx.currentTime,.12);this.windFilter.frequency.setTargetAtTime(500+speed*1900,this.ctx.currentTime,.12)}
  }
  setAmbient(on=true){if(!this.amb)this.amb=this.audio('ambient_fantasy.ogg',true);if(!this.enabled||!on){this.amb.pause();if(this.windGain&&this.ctx)this.windGain.gain.setTargetAtTime(0,this.ctx.currentTime,.08);return}this.amb.volume=this.vol.ambient;this.amb.play().catch(()=>{});this.ensureWind()}
- setVolume(c,v){this.vol[c]=Math.max(0,Math.min(1,+v));localStorage.setItem(c==='sfx'?'wf-sfx-vol':c==='ambient'?'wf-amb-vol':'wf-ui-vol',this.vol[c]);if(c==='ambient'&&this.amb)this.amb.volume=this.vol.ambient}
- toggle(){this.enabled=!this.enabled;localStorage.setItem('wf-sfx',this.enabled?'1':'0');if(!this.enabled)this.setAmbient(false);return this.enabled}
+ setVolume(c,v){this.vol[c]=Math.max(0,Math.min(1,+v));storage.setItem(c==='sfx'?'wf-sfx-vol':c==='ambient'?'wf-amb-vol':'wf-ui-vol',this.vol[c]);if(c==='ambient'&&this.amb)this.amb.volume=this.vol.ambient}
+ toggle(){this.enabled=!this.enabled;storage.setItem('wf-sfx',this.enabled?'1':'0');if(!this.enabled)this.setAmbient(false);return this.enabled}
 }

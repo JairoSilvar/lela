@@ -1,0 +1,5 @@
+PASS JSON inválido não impede carregar save
+PASS Save inválido é saneado e zero MP preservado
+PASS Progresso e grimório com estrutura corrompida recuperam defaults
+PASS Armazenamento negado usa memória sem alegar persistência
+{"passed":4,"total":4}

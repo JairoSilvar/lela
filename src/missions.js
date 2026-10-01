@@ -1,11 +1,12 @@
+import {storage} from './storage.js';
 const MISSIONS={
   floresta:{id:'sino-floresta',title:'O Sino da Floresta',intro:'Uma presença antiga chama entre as árvores.',start:'sino',finish:'runa',rings:3,steps:['Encontre o Sino Perdido com a Visão Mágica','Monte na vassoura e atravesse 3 anéis','Volte ao solo e examine a Runa do Bosque'],reward:250},
   vila:{id:'porta-lua',title:'A Porta da Lua Rosa',intro:'Uma carta fala de uma passagem que só responde a quem domina o céu.',start:'carta',finish:'lanterna',rings:4,steps:['Encontre a Carta da Vila','Atravesse 4 anéis para carregar a carta de magia','Examine a Lanterna Sussurrante'],reward:300},
   castelo:{id:'eco-torre',title:'O Eco da Torre',intro:'Uma voz presa nas torres procura os selos do luar.',start:'eco',finish:'brasao',rings:5,steps:['Encontre o Eco da Torre','Atravesse 5 anéis para reunir energia lunar','Examine o Brasão Lunar'],reward:400}
 };
 const KEY='lelinha-grimorio-v7';
-function read(){try{return JSON.parse(localStorage.getItem(KEY)||'{"entries":{},"completed":{}}')}catch{return {entries:{},completed:{}}}}
-function write(v){try{localStorage.setItem(KEY,JSON.stringify(v))}catch{}}
+function read(){try{const d=JSON.parse(storage.getItem(KEY)||'{}');return {entries:d?.entries&&typeof d.entries==='object'?d.entries:{},completed:d?.completed&&typeof d.completed==='object'?d.completed:{}}}catch{return {entries:{},completed:{}}}}
+function write(v){try{storage.setItem(KEY,JSON.stringify(v))}catch{}}
 export class MissionSystem{
   constructor(phase){this.phase=phase;this.def=MISSIONS[phase]||MISSIONS.floresta;this.data=read();this.step=this.data.completed[this.def.id]?3:0;this.rings=0;this.active=this.step>0&&this.step<3;}
   resetSession(){this.rings=0;if(!this.data.completed[this.def.id]){this.step=0;this.active=false}}

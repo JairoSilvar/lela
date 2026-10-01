@@ -301,3 +301,42 @@ body[data-graphics="low"] #game canvas{filter:saturate(1.04) contrast(1.01)}
 
 .reduce-game-motion *{scroll-behavior:auto!important}.reduce-game-motion #world-dialogue{transition:none!important}
 @media(max-width:760px){button,.action-button,.touch-button{min-width:48px;min-height:48px}}
+
+#gamer-hud-v34{position:fixed;left:14px;top:14px;z-index:65;width:min(220px,46vw);pointer-events:none;font:700 11px system-ui;color:#fff;text-shadow:0 1px 2px #000}.v34bar{height:13px;margin:0 0 6px;background:#160e20bb;border:1px solid #ffffff30;border-radius:9px;overflow:hidden;position:relative}.v34bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#ff4f87,#ff9ec4);transition:width .18s}.v34bar.mp i{background:linear-gradient(90deg,#8a62ff,#d5a8ff)}.v34bar b{position:absolute;inset:0;text-align:center;font-size:8px;line-height:12px}.v34stats{display:inline-block;padding:4px 8px;background:#1a1026cc;border-radius:9px}@media(max-width:760px){#gamer-hud-v34{top:8px;left:8px;width:150px}.v34bar{height:11px;margin-bottom:4px}.v34bar b{line-height:10px;font-size:7px}}
+
+.boss35{position:fixed;left:50%;top:12px;transform:translateX(-50%);width:min(420px,70vw);height:16px;background:#160b18dd;border:1px solid #ffffff45;border-radius:10px;overflow:hidden}.boss35 i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#8d173f,#ff557f);transition:width .18s}.boss35 span{position:absolute;inset:0;text-align:center;font-size:9px;line-height:15px;z-index:2}
+
+#cast-v38{position:fixed;right:24px;bottom:96px;z-index:90;width:64px;height:64px;border-radius:50%;border:2px solid #ffffff99;background:radial-gradient(circle at 35% 30%,#ffd3f2,#d64aa7 55%,#6b225f);color:#fff;font-size:30px;font-weight:900;box-shadow:0 5px 20px #0008;touch-action:none;-webkit-tap-highlight-color:transparent}
+#cast-v38:active{transform:scale(.93)}
+@media(min-width:900px) and (pointer:fine){#cast-v38{display:none}}
+
+:root{--hud-scale:1}#gamer-hud-v34{transform:scale(var(--hud-scale));transform-origin:top left}
+#settings-v39{position:fixed;inset:0;z-index:200;background:#08050db8;display:grid;place-items:center;padding:18px}
+#settings-v39[hidden]{display:none}.settings-card{width:min(430px,92vw);background:#21142e;color:#fff;border:1px solid #ffffff30;border-radius:18px;padding:20px;box-shadow:0 20px 60px #000a}
+.settings-card h2{margin:0 0 16px}.settings-card label{display:grid;gap:7px;margin:14px 0;font:600 14px system-ui}.settings-card input[type=range]{width:100%}.settings-card button{width:100%;min-height:48px;border:0;border-radius:12px;font-weight:800}
+
+.v41-contrast #gamer-hud-v34{filter:contrast(1.35)}.v41-large-text{font-size:112%}.v41-reduced-flashes *{animation-duration:.001ms!important;animation-iteration-count:1!important}
+#v41-access{position:fixed;inset:0;z-index:205;background:#08050dc7;display:grid;place-items:center;padding:18px}#v41-access[hidden]{display:none}
+
+#recovery-v42{position:fixed;inset:0;z-index:999;background:#09060ee8;display:grid;place-items:center;padding:20px;color:#fff;font-family:system-ui}#recovery-v42>div{max-width:420px;background:#21152e;border:1px solid #ffffff35;border-radius:18px;padding:24px;text-align:center}#recovery-v42 button{min-width:160px;min-height:48px;border:0;border-radius:12px;font-weight:800}
+
+/* v44: scrollable, bounded overlays; gameplay remains unobstructed. */
+#menu{overflow:auto;align-items:flex-start;padding:90px 20px 24px;touch-action:pan-y}
+#menu .intro{margin:0 0 0 3vw;width:min(510px,92vw);padding:20px;background:#24102cbd;border:1px solid #ff9ec833;border-radius:20px}
+#menu h1{font-size:clamp(36px,5vw,64px);margin:14px 0}#menu .primary{margin-top:16px}#menu .intro-footer{margin-top:16px}
+#menu .gamer-panel{font-size:11px}#menu .broom-grid{grid-template-columns:repeat(3,1fr)}#menu .broom-card{padding:8px;border-radius:12px}
+#gamer-hud-v34{top:82px;left:auto;right:24px;width:175px;z-index:5}[hidden]{display:none!important}
+body[data-state=playing] .brand,body[data-state=exploring] .brand,body[data-state=ground] .brand{opacity:.35}
+.boss35{top:70px}.top-actions button{padding:10px;min-width:40px;min-height:40px}#continue-save{margin-top:10px}
+@media(max-width:760px){#menu{padding:70px 12px 20px}#menu .intro{margin:0;width:100%;padding:14px}#menu p{font-size:12px;line-height:1.5}#menu .eyebrow{font-size:8px}#menu .broom-card span{display:none}#gamer-hud-v34{top:70px;right:12px;width:130px}.top-actions{gap:4px}.brand{display:none}.boss35{top:120px;width:60vw}}
+/* Keep photo/zen and the identity badge clear of the primary action buttons. */
+.final-tools{top:auto!important;bottom:145px;right:30px}
+.lelinha-signature{top:auto!important;bottom:10px;right:12px}
+@media(max-width:760px){.final-tools{top:195px!important;bottom:auto;right:12px;display:flex;gap:4px}.final-tools button{padding:7px 10px;min-height:36px}.lelinha-signature{font-size:10px;bottom:8px}}
+
+#gamer-hud-v34 .boss35{position:relative;left:auto;top:auto;transform:none;width:100%;margin-top:8px;box-sizing:border-box}
+
+/* Touch remains discoverable after release and in photo mode. */
+#stick.floating{opacity:1;transition:none}
+.photo-mode #touch{opacity:var(--control-opacity)}
+.photo-mode .final-tools{opacity:1;pointer-events:auto}

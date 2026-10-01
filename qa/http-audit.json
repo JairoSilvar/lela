@@ -1,0 +1,1339 @@
+{
+  "checked": 222,
+  "passed": 222,
+  "failures": [],
+  "results": [
+    {
+      "file": "assets/animations/UAL1_Standard.glb",
+      "status": 200,
+      "bytes": 7618436,
+      "pass": true
+    },
+    {
+      "file": "assets/arch.bin",
+      "status": 200,
+      "bytes": 28856,
+      "pass": true
+    },
+    {
+      "file": "assets/arch.gltf",
+      "status": 200,
+      "bytes": 3035,
+      "pass": true
+    },
+    {
+      "file": "assets/animations/UAL2_Standard.glb",
+      "status": 200,
+      "bytes": 8091444,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/kenney/impact/sfx_02.ogg",
+      "status": 200,
+      "bytes": 6570,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/kenney/impact/sfx_05.ogg",
+      "status": 200,
+      "bytes": 7403,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/kenney/impact/sfx_01.ogg",
+      "status": 200,
+      "bytes": 13915,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/kenney/impact/sfx_03.ogg",
+      "status": 200,
+      "bytes": 5949,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/kenney/impact/sfx_04.ogg",
+      "status": 200,
+      "bytes": 6110,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/kenney/impact/sfx_06.ogg",
+      "status": 200,
+      "bytes": 6353,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/kenney/impact/sfx_08.ogg",
+      "status": 200,
+      "bytes": 6411,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/kenney/impact/sfx_07.ogg",
+      "status": 200,
+      "bytes": 6411,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/kenney/impact/sfx_09.ogg",
+      "status": 200,
+      "bytes": 6301,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/kenney/impact/sfx_10.ogg",
+      "status": 200,
+      "bytes": 6301,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/kenney/impact/sfx_11.ogg",
+      "status": 200,
+      "bytes": 5808,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/kenney/ui/sfx_01.ogg",
+      "status": 200,
+      "bytes": 8968,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/kenney/impact/sfx_12.ogg",
+      "status": 200,
+      "bytes": 6308,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/kenney/ui/sfx_02.ogg",
+      "status": 200,
+      "bytes": 5468,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/kenney/ui/sfx_03.ogg",
+      "status": 200,
+      "bytes": 4876,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/kenney/ui/sfx_04.ogg",
+      "status": 200,
+      "bytes": 6753,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/kenney/ui/sfx_05.ogg",
+      "status": 200,
+      "bytes": 6997,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/kenney/ui/sfx_07.ogg",
+      "status": 200,
+      "bytes": 9915,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/kenney/ui/sfx_06.ogg",
+      "status": 200,
+      "bytes": 9834,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/kenney/ui/sfx_08.ogg",
+      "status": 200,
+      "bytes": 7029,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/kenney/ui/sfx_09.ogg",
+      "status": 200,
+      "bytes": 7208,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/licenses/80-CC0-RPG-SFX-source.txt",
+      "status": 200,
+      "bytes": 50,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/licenses/Kenney-RPG-Audio-License.txt",
+      "status": 200,
+      "bytes": 478,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/kenney/ui/sfx_10.ogg",
+      "status": 200,
+      "bytes": 6923,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/licenses/TinySized-SFX-readme.txt",
+      "status": 200,
+      "bytes": 194,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/music/fase-2.mp3",
+      "status": 200,
+      "bytes": 3743365,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/music/fase-1.mp3",
+      "status": 200,
+      "bytes": 3172807,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/music/fase-3.mp3",
+      "status": 200,
+      "bytes": 3081576,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/music/menu.mp3",
+      "status": 200,
+      "bytes": 3393966,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/sfx/ambient_fantasy.ogg",
+      "status": 200,
+      "bytes": 1353518,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/sfx/book_open.ogg",
+      "status": 200,
+      "bytes": 8273,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/sfx/book_page.ogg",
+      "status": 200,
+      "bytes": 18248,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/sfx/creature_roar.ogg",
+      "status": 200,
+      "bytes": 15061,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/sfx/door_open.ogg",
+      "status": 200,
+      "bytes": 22848,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/sfx/footstep_2.ogg",
+      "status": 200,
+      "bytes": 10559,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/sfx/footstep_1.ogg",
+      "status": 200,
+      "bytes": 9475,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/sfx/footstep_3.ogg",
+      "status": 200,
+      "bytes": 9885,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/sfx/magic_special.ogg",
+      "status": 200,
+      "bytes": 59071,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/sfx/orb.ogg",
+      "status": 200,
+      "bytes": 14690,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/sfx/reward.ogg",
+      "status": 200,
+      "bytes": 25394,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/sfx/ring.ogg",
+      "status": 200,
+      "bytes": 28423,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/sfx/spell_aegis.ogg",
+      "status": 200,
+      "bytes": 25118,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/sfx/spell_blink.ogg",
+      "status": 200,
+      "bytes": 53074,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/sfx/spell_lumen.ogg",
+      "status": 200,
+      "bytes": 29121,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/sfx/stone.ogg",
+      "status": 200,
+      "bytes": 35982,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/sfx/spell_ventus.ogg",
+      "status": 200,
+      "bytes": 71801,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/sfx/ui_click.ogg",
+      "status": 200,
+      "bytes": 13615,
+      "pass": true
+    },
+    {
+      "file": "assets/audio/sfx/wood.ogg",
+      "status": 200,
+      "bytes": 14089,
+      "pass": true
+    },
+    {
+      "file": "assets/candle_triple.bin",
+      "status": 200,
+      "bytes": 9924,
+      "pass": true
+    },
+    {
+      "file": "assets/broom.glb",
+      "status": 200,
+      "bytes": 174064,
+      "pass": true
+    },
+    {
+      "file": "assets/candle_triple.gltf",
+      "status": 200,
+      "bytes": 3056,
+      "pass": true
+    },
+    {
+      "file": "assets/characters/lelinha/Female_Ranger.gltf",
+      "status": 200,
+      "bytes": 45461,
+      "pass": true
+    },
+    {
+      "file": "assets/characters/lelinha/T_Ranger_Normal.png",
+      "status": 200,
+      "bytes": 933274,
+      "pass": true
+    },
+    {
+      "file": "assets/characters/lelinha/T_Ranger_BaseColor.png",
+      "status": 200,
+      "bytes": 839037,
+      "pass": true
+    },
+    {
+      "file": "assets/characters/lelinha/Female_Ranger.bin",
+      "status": 200,
+      "bytes": 1959556,
+      "pass": true
+    },
+    {
+      "file": "assets/characters/lelinha/T_Regular_Female_Dark_BaseColor.png",
+      "status": 200,
+      "bytes": 463630,
+      "pass": true
+    },
+    {
+      "file": "assets/characters/lelinha/T_Ranger_ORM.png",
+      "status": 200,
+      "bytes": 786546,
+      "pass": true
+    },
+    {
+      "file": "assets/characters/lelinha/T_Regular_Female_Normal.png",
+      "status": 200,
+      "bytes": 892940,
+      "pass": true
+    },
+    {
+      "file": "assets/characters/lelinha/T_Regular_Female_Roughness.png",
+      "status": 200,
+      "bytes": 683169,
+      "pass": true
+    },
+    {
+      "file": "assets/creatures/Bat.gltf",
+      "status": 200,
+      "bytes": 515943,
+      "pass": true
+    },
+    {
+      "file": "assets/creatures/Cyclops.gltf",
+      "status": 200,
+      "bytes": 572465,
+      "pass": true
+    },
+    {
+      "file": "assets/creatures/Deer.gltf",
+      "status": 200,
+      "bytes": 540514,
+      "pass": true
+    },
+    {
+      "file": "assets/creatures/Ghost.gltf",
+      "status": 200,
+      "bytes": 457860,
+      "pass": true
+    },
+    {
+      "file": "assets/crypt.bin",
+      "status": 200,
+      "bytes": 58640,
+      "pass": true
+    },
+    {
+      "file": "assets/crypt.gltf",
+      "status": 200,
+      "bytes": 2960,
+      "pass": true
+    },
+    {
+      "file": "assets/environment/Houses_FirstAge_1_Level1.gltf",
+      "status": 200,
+      "bytes": 32724,
+      "pass": true
+    },
+    {
+      "file": "assets/environment/TownCenter_FirstAge_Level1.gltf",
+      "status": 200,
+      "bytes": 66568,
+      "pass": true
+    },
+    {
+      "file": "assets/environment/Windmill_FirstAge.gltf",
+      "status": 200,
+      "bytes": 183663,
+      "pass": true
+    },
+    {
+      "file": "assets/environment/WatchTower_FirstAge_Level1.gltf",
+      "status": 200,
+      "bytes": 52593,
+      "pass": true
+    },
+    {
+      "file": "assets/external/ASSET-SOURCES.json",
+      "status": 200,
+      "bytes": 979,
+      "pass": true
+    },
+    {
+      "file": "assets/halloweenbits_texture.png",
+      "status": 200,
+      "bytes": 15093,
+      "pass": true
+    },
+    {
+      "file": "assets/gravestone.bin",
+      "status": 200,
+      "bytes": 12316,
+      "pass": true
+    },
+    {
+      "file": "assets/gravestone.gltf",
+      "status": 200,
+      "bytes": 3066,
+      "pass": true
+    },
+    {
+      "file": "assets/KayKit-LICENSE.txt",
+      "status": 200,
+      "bytes": 877,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/dungeon/corridor-corner.glb",
+      "status": 200,
+      "bytes": 80616,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/dungeon/corridor.glb",
+      "status": 200,
+      "bytes": 85104,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/dungeon/gate-door.glb",
+      "status": 200,
+      "bytes": 90640,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/dungeon/LICENSE.txt",
+      "status": 200,
+      "bytes": 708,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/dungeon/Textures/colormap.png",
+      "status": 200,
+      "bytes": 28309,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/dungeon/stairs.glb",
+      "status": 200,
+      "bytes": 271196,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/dungeon/room-small.glb",
+      "status": 200,
+      "bytes": 412996,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/nature/bridge_wood.glb",
+      "status": 200,
+      "bytes": 15692,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/nature/log.glb",
+      "status": 200,
+      "bytes": 14288,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/nature/grass_large.glb",
+      "status": 200,
+      "bytes": 18504,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/nature/mushroom_redGroup.glb",
+      "status": 200,
+      "bytes": 14960,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/nature/rock_largeA.glb",
+      "status": 200,
+      "bytes": 7552,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/nature/tree_oak.glb",
+      "status": 200,
+      "bytes": 14644,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/nature/tree_pineDefaultA.glb",
+      "status": 200,
+      "bytes": 17220,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/particles/circle_01.png",
+      "status": 200,
+      "bytes": 35915,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/particles/fire_01.png",
+      "status": 200,
+      "bytes": 96339,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/particles/flame_03.png",
+      "status": 200,
+      "bytes": 34261,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/particles/flare_01.png",
+      "status": 200,
+      "bytes": 17953,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/particles/smoke_01.png",
+      "status": 200,
+      "bytes": 86344,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/particles/magic_01.png",
+      "status": 200,
+      "bytes": 60113,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/particles/spark_01.png",
+      "status": 200,
+      "bytes": 82487,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/particles/star_01.png",
+      "status": 200,
+      "bytes": 29258,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/town/banner-red.glb",
+      "status": 200,
+      "bytes": 9988,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/town/cart.glb",
+      "status": 200,
+      "bytes": 52920,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/town/fountain-round.glb",
+      "status": 200,
+      "bytes": 84848,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/town/lantern.glb",
+      "status": 200,
+      "bytes": 14984,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/town/LICENSE.txt",
+      "status": 200,
+      "bytes": 705,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/town/pillar-stone.glb",
+      "status": 200,
+      "bytes": 11324,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/town/road.glb",
+      "status": 200,
+      "bytes": 2788,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/town/stall-green.glb",
+      "status": 200,
+      "bytes": 27120,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/town/Textures/colormap.png",
+      "status": 200,
+      "bytes": 11143,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/town/stall-red.glb",
+      "status": 200,
+      "bytes": 24304,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/town/wall-door.glb",
+      "status": 200,
+      "bytes": 29276,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/town/wall.glb",
+      "status": 200,
+      "bytes": 4792,
+      "pass": true
+    },
+    {
+      "file": "assets/lantern_standing.bin",
+      "status": 200,
+      "bytes": 12400,
+      "pass": true
+    },
+    {
+      "file": "assets/kenney/town/windmill.glb",
+      "status": 200,
+      "bytes": 71160,
+      "pass": true
+    },
+    {
+      "file": "assets/lantern_standing.gltf",
+      "status": 200,
+      "bytes": 3084,
+      "pass": true
+    },
+    {
+      "file": "assets/licenses/Quaternius_BaseCharacters_License.txt",
+      "status": 200,
+      "bytes": 806,
+      "pass": true
+    },
+    {
+      "file": "assets/licenses/Quaternius_Outfits_License.txt",
+      "status": 200,
+      "bytes": 728,
+      "pass": true
+    },
+    {
+      "file": "assets/manifest.json",
+      "status": 200,
+      "bytes": 13495,
+      "pass": true
+    },
+    {
+      "file": "assets/pumpkin_orange_jackolantern.bin",
+      "status": 200,
+      "bytes": 13348,
+      "pass": true
+    },
+    {
+      "file": "assets/pumpkin_orange_jackolantern.gltf",
+      "status": 200,
+      "bytes": 3089,
+      "pass": true
+    },
+    {
+      "file": "assets/pumpkin_orange_small.bin",
+      "status": 200,
+      "bytes": 9260,
+      "pass": true
+    },
+    {
+      "file": "assets/pumpkin_orange_small.gltf",
+      "status": 200,
+      "bytes": 3086,
+      "pass": true
+    },
+    {
+      "file": "assets/shrine.bin",
+      "status": 200,
+      "bytes": 6196,
+      "pass": true
+    },
+    {
+      "file": "assets/tree_dead_large.bin",
+      "status": 200,
+      "bytes": 7200,
+      "pass": true
+    },
+    {
+      "file": "assets/shrine.gltf",
+      "status": 200,
+      "bytes": 3035,
+      "pass": true
+    },
+    {
+      "file": "assets/tree_dead_large.gltf",
+      "status": 200,
+      "bytes": 3074,
+      "pass": true
+    },
+    {
+      "file": "assets/tree_dead_medium.gltf",
+      "status": 200,
+      "bytes": 3080,
+      "pass": true
+    },
+    {
+      "file": "assets/tree_pine_orange_large.bin",
+      "status": 200,
+      "bytes": 17492,
+      "pass": true
+    },
+    {
+      "file": "assets/tree_dead_medium.bin",
+      "status": 200,
+      "bytes": 5584,
+      "pass": true
+    },
+    {
+      "file": "assets/tree_pine_orange_large.gltf",
+      "status": 200,
+      "bytes": 3085,
+      "pass": true
+    },
+    {
+      "file": "assets/tree_pine_yellow_large.bin",
+      "status": 200,
+      "bytes": 17492,
+      "pass": true
+    },
+    {
+      "file": "vendor/GLTFLoader.js",
+      "status": 200,
+      "bytes": 110266,
+      "pass": true
+    },
+    {
+      "file": "assets/tree_pine_yellow_large.gltf",
+      "status": 200,
+      "bytes": 3085,
+      "pass": true
+    },
+    {
+      "file": "assets/witch.glb",
+      "status": 200,
+      "bytes": 86692,
+      "pass": true
+    },
+    {
+      "file": "vendor/BufferGeometryUtils.js",
+      "status": 200,
+      "bytes": 31768,
+      "pass": true
+    },
+    {
+      "file": "vendor/SkeletonUtils.js",
+      "status": 200,
+      "bytes": 8802,
+      "pass": true
+    },
+    {
+      "file": "src/accessibility-v41.js",
+      "status": 200,
+      "bytes": 613,
+      "pass": true
+    },
+    {
+      "file": "vendor/THREE-LICENSE.txt",
+      "status": 200,
+      "bytes": 1081,
+      "pass": true
+    },
+    {
+      "file": "vendor/three.module.js",
+      "status": 200,
+      "bytes": 1314681,
+      "pass": true
+    },
+    {
+      "file": "src/adaptive-quality-v33.js",
+      "status": 200,
+      "bytes": 260,
+      "pass": true
+    },
+    {
+      "file": "src/adventure.js",
+      "status": 200,
+      "bytes": 2321,
+      "pass": true
+    },
+    {
+      "file": "src/animation-state-v36.js",
+      "status": 200,
+      "bytes": 718,
+      "pass": true
+    },
+    {
+      "file": "src/assets.js",
+      "status": 200,
+      "bytes": 7397,
+      "pass": true
+    },
+    {
+      "file": "src/atmosphere-vfx.js",
+      "status": 200,
+      "bytes": 1706,
+      "pass": true
+    },
+    {
+      "file": "src/autosave-v39.js",
+      "status": 200,
+      "bytes": 209,
+      "pass": true
+    },
+    {
+      "file": "src/balance-v41.js",
+      "status": 200,
+      "bytes": 419,
+      "pass": true
+    },
+    {
+      "file": "src/boss-cyclops-v35.js",
+      "status": 200,
+      "bytes": 325,
+      "pass": true
+    },
+    {
+      "file": "src/challenges.js",
+      "status": 200,
+      "bytes": 1209,
+      "pass": true
+    },
+    {
+      "file": "src/checkpoint-v38.js",
+      "status": 200,
+      "bytes": 339,
+      "pass": true
+    },
+    {
+      "file": "src/character-controller.js",
+      "status": 200,
+      "bytes": 549,
+      "pass": true
+    },
+    {
+      "file": "src/character-camera-polish.js",
+      "status": 200,
+      "bytes": 2093,
+      "pass": true
+    },
+    {
+      "file": "src/combat-feedback-v37.js",
+      "status": 200,
+      "bytes": 367,
+      "pass": true
+    },
+    {
+      "file": "src/collision-registry-v40.js",
+      "status": 200,
+      "bytes": 778,
+      "pass": true
+    },
+    {
+      "file": "src/combat-loop-v36.js",
+      "status": 200,
+      "bytes": 938,
+      "pass": true
+    },
+    {
+      "file": "src/combat-v33.js",
+      "status": 200,
+      "bytes": 365,
+      "pass": true
+    },
+    {
+      "file": "src/comfort-v33.js",
+      "status": 200,
+      "bytes": 192,
+      "pass": true
+    },
+    {
+      "file": "src/creature-ai.js",
+      "status": 200,
+      "bytes": 1046,
+      "pass": true
+    },
+    {
+      "file": "src/creature-combat-v35.js",
+      "status": 200,
+      "bytes": 1778,
+      "pass": true
+    },
+    {
+      "file": "src/creature-models-v34.js",
+      "status": 200,
+      "bytes": 2475,
+      "pass": true
+    },
+    {
+      "file": "src/cyclops-encounter-v38.js",
+      "status": 200,
+      "bytes": 1862,
+      "pass": true
+    },
+    {
+      "file": "src/deep-exploration.js",
+      "status": 200,
+      "bytes": 2944,
+      "pass": true
+    },
+    {
+      "file": "src/dialogue-system.js",
+      "status": 200,
+      "bytes": 487,
+      "pass": true
+    },
+    {
+      "file": "src/dungeon-adventure.js",
+      "status": 200,
+      "bytes": 1738,
+      "pass": true
+    },
+    {
+      "file": "src/effects.js",
+      "status": 200,
+      "bytes": 2546,
+      "pass": true
+    },
+    {
+      "file": "src/entity-culling-v40.js",
+      "status": 200,
+      "bytes": 472,
+      "pass": true
+    },
+    {
+      "file": "src/equipment.js",
+      "status": 200,
+      "bytes": 1420,
+      "pass": true
+    },
+    {
+      "file": "src/exploration-poi.js",
+      "status": 200,
+      "bytes": 1401,
+      "pass": true
+    },
+    {
+      "file": "src/exploration.js",
+      "status": 200,
+      "bytes": 2863,
+      "pass": true
+    },
+    {
+      "file": "src/fair-play-v42.js",
+      "status": 200,
+      "bytes": 262,
+      "pass": true
+    },
+    {
+      "file": "src/external-art.js",
+      "status": 200,
+      "bytes": 226,
+      "pass": true
+    },
+    {
+      "file": "src/flight.js",
+      "status": 200,
+      "bytes": 9504,
+      "pass": true
+    },
+    {
+      "file": "src/game-audio-bus.js",
+      "status": 200,
+      "bytes": 1240,
+      "pass": true
+    },
+    {
+      "file": "src/gameplay-state-guard.js",
+      "status": 200,
+      "bytes": 554,
+      "pass": true
+    },
+    {
+      "file": "src/gamer-polish.js",
+      "status": 200,
+      "bytes": 1113,
+      "pass": true
+    },
+    {
+      "file": "src/graphics-profile.js",
+      "status": 200,
+      "bytes": 757,
+      "pass": true
+    },
+    {
+      "file": "src/ground-feedback.js",
+      "status": 200,
+      "bytes": 321,
+      "pass": true
+    },
+    {
+      "file": "src/hud-v34.js",
+      "status": 200,
+      "bytes": 892,
+      "pass": true
+    },
+    {
+      "file": "src/input-router-v41.js",
+      "status": 200,
+      "bytes": 311,
+      "pass": true
+    },
+    {
+      "file": "src/input.js",
+      "status": 200,
+      "bytes": 11602,
+      "pass": true
+    },
+    {
+      "file": "src/kenney-vfx.js",
+      "status": 200,
+      "bytes": 2023,
+      "pass": true
+    },
+    {
+      "file": "src/kenney-world.js",
+      "status": 200,
+      "bytes": 1912,
+      "pass": true
+    },
+    {
+      "file": "src/lelinha-identity.js",
+      "status": 200,
+      "bytes": 1895,
+      "pass": true
+    },
+    {
+      "file": "src/living-encounters.js",
+      "status": 200,
+      "bytes": 1928,
+      "pass": true
+    },
+    {
+      "file": "src/living-world.js",
+      "status": 200,
+      "bytes": 3792,
+      "pass": true
+    },
+    {
+      "file": "src/lod-v39.js",
+      "status": 200,
+      "bytes": 303,
+      "pass": true
+    },
+    {
+      "file": "src/loot-v36.js",
+      "status": 200,
+      "bytes": 757,
+      "pass": true
+    },
+    {
+      "file": "src/magic.js",
+      "status": 200,
+      "bytes": 1626,
+      "pass": true
+    },
+    {
+      "file": "src/main.js",
+      "status": 200,
+      "bytes": 48523,
+      "pass": true
+    },
+    {
+      "file": "src/missions.js",
+      "status": 200,
+      "bytes": 3816,
+      "pass": true
+    },
+    {
+      "file": "src/mobile-combat-v38.js",
+      "status": 200,
+      "bytes": 63,
+      "pass": true
+    },
+    {
+      "file": "src/mobile-flight-control.js",
+      "status": 200,
+      "bytes": 384,
+      "pass": true
+    },
+    {
+      "file": "src/music.js",
+      "status": 200,
+      "bytes": 1951,
+      "pass": true
+    },
+    {
+      "file": "src/npc-behavior.js",
+      "status": 200,
+      "bytes": 330,
+      "pass": true
+    },
+    {
+      "file": "src/performance-governor.js",
+      "status": 200,
+      "bytes": 448,
+      "pass": true
+    },
+    {
+      "file": "src/physics-polish-v37.js",
+      "status": 200,
+      "bytes": 506,
+      "pass": true
+    },
+    {
+      "file": "src/perception-v37.js",
+      "status": 200,
+      "bytes": 323,
+      "pass": true
+    },
+    {
+      "file": "src/player-vitals.js",
+      "status": 200,
+      "bytes": 443,
+      "pass": true
+    },
+    {
+      "file": "src/production-guard-v39.js",
+      "status": 200,
+      "bytes": 397,
+      "pass": true
+    },
+    {
+      "file": "src/progression.js",
+      "status": 200,
+      "bytes": 3474,
+      "pass": true
+    },
+    {
+      "file": "src/qa-monitor-v39.js",
+      "status": 200,
+      "bytes": 346,
+      "pass": true
+    },
+    {
+      "file": "src/recovery-v42.js",
+      "status": 200,
+      "bytes": 385,
+      "pass": true
+    },
+    {
+      "file": "src/region-quests.js",
+      "status": 200,
+      "bytes": 713,
+      "pass": true
+    },
+    {
+      "file": "src/release-gate-v41.js",
+      "status": 200,
+      "bytes": 361,
+      "pass": true
+    },
+    {
+      "file": "src/release-lifecycle-v42.js",
+      "status": 200,
+      "bytes": 514,
+      "pass": true
+    },
+    {
+      "file": "src/respawn-v36.js",
+      "status": 200,
+      "bytes": 520,
+      "pass": true
+    },
+    {
+      "file": "src/release-smoke-v40.js",
+      "status": 200,
+      "bytes": 531,
+      "pass": true
+    },
+    {
+      "file": "src/runtime-health-v40.js",
+      "status": 200,
+      "bytes": 446,
+      "pass": true
+    },
+    {
+      "file": "src/save-v33.js",
+      "status": 200,
+      "bytes": 289,
+      "pass": true
+    },
+    {
+      "file": "src/save-v35.js",
+      "status": 200,
+      "bytes": 645,
+      "pass": true
+    },
+    {
+      "file": "src/save-validation-v40.js",
+      "status": 200,
+      "bytes": 757,
+      "pass": true
+    },
+    {
+      "file": "src/session-qa-v41.js",
+      "status": 200,
+      "bytes": 408,
+      "pass": true
+    },
+    {
+      "file": "src/settings-ui-v42.js",
+      "status": 200,
+      "bytes": 1624,
+      "pass": true
+    },
+    {
+      "file": "src/settings-v39.js",
+      "status": 200,
+      "bytes": 534,
+      "pass": true
+    },
+    {
+      "file": "src/simulation-budget-v35.js",
+      "status": 200,
+      "bytes": 261,
+      "pass": true
+    },
+    {
+      "file": "src/soundscape.js",
+      "status": 200,
+      "bytes": 4999,
+      "pass": true
+    },
+    {
+      "file": "src/static-batch.js",
+      "status": 200,
+      "bytes": 1204,
+      "pass": true
+    },
+    {
+      "file": "src/storage.js",
+      "status": 200,
+      "bytes": 679,
+      "pass": true
+    },
+    {
+      "file": "src/visual-art-pass.js",
+      "status": 200,
+      "bytes": 3595,
+      "pass": true
+    },
+    {
+      "file": "src/world-colliders.js",
+      "status": 200,
+      "bytes": 430,
+      "pass": true
+    },
+    {
+      "file": "src/world-population-v38.js",
+      "status": 200,
+      "bytes": 315,
+      "pass": true
+    },
+    {
+      "file": "src/world-scheduler-v37.js",
+      "status": 200,
+      "bytes": 232,
+      "pass": true
+    },
+    {
+      "file": "src/world.js",
+      "status": 200,
+      "bytes": 19382,
+      "pass": true
+    }
+  ]
+}

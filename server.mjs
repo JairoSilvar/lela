@@ -14,7 +14,7 @@ const mime = {
   '.glb': 'model/gltf-binary',
   '.png': 'image/png',
   '.svg': 'image/svg+xml',
-  '.bin': 'application/octet-stream',
+  '.bin': 'application/octet-stream', '.ogg':'audio/ogg', '.mp3':'audio/mpeg', '.wav':'audio/wav',
 };
 
 const server = http.createServer(async (req, res) => {

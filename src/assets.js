@@ -38,14 +38,14 @@ export async function loadAssets(onProgress){
     const a1=await loader.loadAsync('./assets/animations/UAL1_Standard.glb');
     const a2=await loader.loadAsync('./assets/animations/UAL2_Standard.glb');
     assets.heroAnimations=[...(a1.animations||[]),...(a2.animations||[])];
-  }catch(err){ console.warn('Art Pass v17: usando personagem fallback',err); }
+  }catch(err){ throw new Error('Personagem/animações incompletas: '+err.message); }
   try{
     const env={};
     for(const [key,file] of Object.entries({town:'TownCenter_FirstAge_Level1.gltf',house:'Houses_FirstAge_1_Level1.gltf',tower:'WatchTower_FirstAge_Level1.gltf',windmill:'Windmill_FirstAge.gltf'})){
       const g=await loader.loadAsync('./assets/environment/'+file); env[key]=g.scene;
     }
     assets.environment=env;
-  }catch(err){ console.warn('Art Pass v17: cenários externos parciais',err); }
+  }catch(err){ throw new Error('Cenários incompletos: '+err.message); }
   // v24: curated Kenney world library. Only selected GLBs are shipped to protect mobile memory.
   try{
     const kenney={};
@@ -56,7 +56,7 @@ export async function loadAssets(onProgress){
     };
     await Promise.all(Object.entries(files).map(async([key,file])=>{const g=await loader.loadAsync('./assets/kenney/'+file);kenney[key]=g.scene;}));
     assets.kenney=kenney;
-  }catch(err){ console.warn('World Art v24: biblioteca Kenney parcial',err); }
+  }catch(err){ throw new Error('Biblioteca Kenney incompleta: '+err.message); }
 
   if(errors.length){
     throw new Error('Falha ao carregar modelos:\n'+errors.join('\n'));
@@ -64,7 +64,7 @@ export async function loadAssets(onProgress){
   if(!assets.witch||!assets.broom){
     throw new Error('Modelos essenciais (witch/broom) não carregaram.');
   }
-  return assets;
+  for(const value of Object.values(assets)){const sources=value?.isObject3D?[value]:Object.values(value||{}).filter(x=>x?.isObject3D);for(const source of sources)source.traverse(o=>{if(o.geometry)o.geometry.userData.assetOwned=true;if(o.material&&!Array.isArray(o.material))o.material.userData.assetOwned=true})}return assets;
 }
 
 export function normalized(source,height){
@@ -123,7 +123,9 @@ export function createWitch(assets){
     const play=(name,fade=.18)=>{const clip=clips[name];if(!clip||current===name)return;const next=mixer.clipAction(clip);next.reset().fadeIn(fade).play();if(current&&clips[current])mixer.clipAction(clips[current]).fadeOut(fade);current=name;};
     play('Idle_Loop',0);
     const alias=(name)=>clips[name]?name:(name==='Driving_Loop'&&clips['Idle_Loop']?'Idle_Loop':name==='Jog_Fwd_Loop'&&clips['Walk_Loop']?'Walk_Loop':name);
-    root.userData.animation={mixer,clips,play:(name,fade=.18)=>play(alias(name),fade),update:(dt,state)=>{play(alias(state));mixer.update(dt);},has:(name)=>!!clips[name],oneShot:(name,back='Idle_Loop')=>{const clip=clips[name];if(!clip)return false;const act=mixer.clipAction(clip);act.reset();act.setLoop(T.LoopOnce,1);act.clampWhenFinished=true;act.fadeIn(.08).play();mixer.addEventListener('finished',function done(e){if(e.action!==act)return;mixer.removeEventListener('finished',done);play(alias(back),.12)});return true;}};
+    let shot=null;let backState='Idle_Loop';
+    mixer.addEventListener('finished',e=>{if(e.action===shot){shot.fadeOut(.12);shot=null;current='';play(alias(backState),.12)}});
+    root.userData.animation={mixer,clips,play:(name,fade=.18)=>play(alias(name),fade),update:(dt,state)=>{backState=state;if(!shot)play(alias(state));mixer.update(dt)},has:name=>!!clips[name],oneShot:(name,back='Idle_Loop')=>{const clip=clips[name];if(!clip||shot)return false;backState=back;if(current)mixer.clipAction(clips[current]).fadeOut(.08);shot=mixer.clipAction(clip);shot.reset().setLoop(T.LoopOnce,1);shot.clampWhenFinished=true;shot.fadeIn(.08).play();return true}};
   }
   body.rotation.y=Math.PI;
   body.position.y=-.7;
@@ -148,6 +150,11 @@ export function createWitch(assets){
   holder.rotation.set(0,Math.PI/2,-.72);
   holder.position.set(0,.05,-.25);
   root.add(holder);
+  // v45: expose the broom as a first-class mount so ground/flight states can control it.
+  holder.name='LelinhaBroomMount';
+  holder.userData.baseScale=holder.scale.clone();
+  holder.userData.mountVisibility=1;
+  root.userData.broomHolder=holder;
   root.userData.body=body;
   return root;
 }

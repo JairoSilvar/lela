@@ -1,7 +1,8 @@
 import * as T from 'three';
+import {ground} from './world.js';
 export class KenneyWorld{
  constructor(scene,phase,assets){this.scene=scene;this.phase=phase;this.k=assets?.kenney||{};this.root=new T.Group();this.root.name='KenneyWorld-v24';scene.add(this.root);this.build()}
- place(src,x,z,h=3,ry=0){if(!src)return;const m=src.clone(true),b=new T.Box3().setFromObject(m),sz=b.getSize(new T.Vector3()),c=b.getCenter(new T.Vector3()),g=new T.Group();m.position.sub(new T.Vector3(c.x,b.min.y,c.z));g.add(m);g.scale.setScalar(h/Math.max(.01,sz.y));g.position.set(x,0,z);g.rotation.y=ry;g.traverse(o=>{if(o.isMesh){o.castShadow=document.body.dataset.graphics!=='low';o.receiveShadow=true}});this.root.add(g);return g}
+ place(src,x,z,h=3,ry=0){if(!src)return;const m=src.clone(true),b=new T.Box3().setFromObject(m),sz=b.getSize(new T.Vector3()),c=b.getCenter(new T.Vector3()),g=new T.Group();m.position.sub(new T.Vector3(c.x,b.min.y,c.z));g.add(m);g.scale.setScalar(h/Math.max(.01,sz.y));g.position.set(x,ground(x,z),z);g.rotation.y=ry;g.traverse(o=>{if(o.isMesh){o.castShadow=document.body.dataset.graphics!=='low';o.receiveShadow=true}});this.root.add(g);return g}
  build(){const k=this.k;
   if(this.phase==='floresta'){
    for(let i=0;i<18;i++){const a=i*2.399,r=16+(i%6)*7;this.place(i%3?k.treeOak:k.treePine,Math.cos(a)*r,Math.sin(a)*r,5.5+(i%4),a+.8)}
@@ -16,5 +17,5 @@ export class KenneyWorld{
    this.place(k.dungeonGate,0,13,5.4,Math.PI);this.place(k.dungeonRoom,0,25,8,0);this.place(k.dungeonCorridor,0,18,5,0);this.place(k.dungeonCorner,9,22,5,Math.PI/2);this.place(k.dungeonStairs,-9,20,4.5,0);
   }
  }
- dispose(){this.scene.remove(this.root);this.root.traverse(o=>{o.geometry?.dispose?.();if(Array.isArray(o.material))o.material.forEach(m=>m.dispose?.());else o.material?.dispose?.()})}
+ dispose(){this.scene.remove(this.root)}
 }

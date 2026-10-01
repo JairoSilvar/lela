@@ -1,14 +1,18 @@
+import {storage} from './storage.js';
 const KEY='lelinha-progression-v8';
 const DEFAULT={regions:{},totalStars:0,unlocks:{brooms:['classica'],trails:['rosa']}};
-function read(){try{return {...DEFAULT,...JSON.parse(localStorage.getItem(KEY)||'{}')}}catch{return structuredClone?structuredClone(DEFAULT):JSON.parse(JSON.stringify(DEFAULT))}}
-function write(v){try{localStorage.setItem(KEY,JSON.stringify(v))}catch{}}
+function read(){const base=JSON.parse(JSON.stringify(DEFAULT));try{const d=JSON.parse(storage.getItem(KEY)||'{}');if(!d||typeof d!=='object')return base;return {...base,...d,regions:d.regions&&typeof d.regions==='object'?d.regions:{},unlocks:{brooms:Array.isArray(d.unlocks?.brooms)?d.unlocks.brooms:['classica'],trails:Array.isArray(d.unlocks?.trails)?d.unlocks.trails:['rosa']}}}catch{return base}}
+function write(v){try{storage.setItem(KEY,JSON.stringify(v))}catch{}}
 const TARGETS={
   floresta:{time:72,essence:520,combo:6},
   vila:{time:76,essence:560,combo:7},
   castelo:{time:80,essence:620,combo:8}
 };
 export class ProgressionSystem{
-  constructor(){this.data=read();this.recalc();}
+  constructor(){this.data=read();this.xp=Number(this.data.xp)||0;this.level=1+Math.floor(this.xp/100);this.recalc();}
+ add(n){const before=this.level;this.xp+=Math.max(0,Number(n)||0);this.level=1+Math.floor(this.xp/100);this.data.xp=this.xp;write(this.data);return this.level>before}
+ snapshot(){return {...this.data,xp:this.xp,level:this.level}}
+ restore(d){if(!d||typeof d!=='object')return;this.data={...this.data,...d};this.xp=Math.max(0,Number(d.xp)||0);this.level=1+Math.floor(this.xp/100);this.recalc()}
   recalc(){this.data.totalStars=Object.values(this.data.regions||{}).reduce((n,r)=>n+(r.stars||0),0);write(this.data);}
   evaluate(phase,run){
     const t=TARGETS[phase]||TARGETS.floresta;
