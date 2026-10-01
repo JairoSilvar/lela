@@ -229,3 +229,93 @@ h2{font-family:Georgia,serif;font-size:24px;font-weight:400;margin:12px 0 18px;c
   #stick-thumb{top:40px;left:40px}
   .touch-right button{height:56px}
 }
+
+/* v4 Flight 2.0 — mobile gamer controls */
+#stick.floating{left:0;bottom:0;opacity:.28;transform:translate(-999px,-999px);transition:opacity .12s}
+#stick.floating.active{opacity:1}
+#flight-mode{font-size:9px;line-height:1.1;letter-spacing:.6px}
+.combo-hud{position:fixed;left:50%;top:22%;transform:translateX(-50%);z-index:4;text-align:center;pointer-events:none;text-shadow:0 3px 14px #1a0820;opacity:0;transition:opacity .18s}
+.combo-hud.show{opacity:1}.combo-hud b{display:block;font-size:28px;color:var(--gold)}.combo-hud span{font-size:9px;letter-spacing:2px;color:var(--pink)}
+@media(max-width:700px){.top-actions #sound,.top-actions #music{display:none}.touch-right{grid-template-columns:68px 68px}.touch-right button{width:68px}.mission{width:min(58vw,230px)}.mission h2{font-size:16px;margin:8px 0 10px}.stats{gap:8px}.brand{max-width:42vw}}
+/* v6 Exploration — contextual discovery */
+#vision-action{font-size:9px;letter-spacing:.7px}#vision-action.active{background:#6f3d87dd;box-shadow:0 0 18px #c68cff88;border-color:#e7c8ff}
+@media(max-width:700px){.touch-right{grid-template-columns:64px 64px}.touch-right button{width:64px}.stats{flex-wrap:wrap}}
+/* v7 Missions & Grimório */
+.grimorio-overlay{z-index:20;background:#17091de8;overflow:auto;padding:24px 12px}.grimorio-panel{width:min(680px,92vw);max-height:88vh;overflow:auto;text-align:left}.grim-summary{display:grid;grid-template-columns:auto 1fr auto 1fr;gap:8px 12px;align-items:center;margin:14px 0;padding:12px;border:1px solid #ff9ec833;border-radius:14px;background:#2a123688}.grim-summary b{font-size:22px;color:var(--gold)}.grim-summary span{font-size:10px;letter-spacing:1px;color:var(--lilac)}.grim-mission,.grim-entries{margin:16px 0;padding:14px;border-radius:14px;background:#220d2dcc;border:1px solid #ff9ec822}.grim-mission>span,.grim-entries>span{font-size:8px;letter-spacing:2px;color:var(--pink)}.grim-mission h3{margin:7px 0;color:var(--cream)}.grim-mission p,.grim-entries p{font-size:12px;line-height:1.5;color:var(--lilac)}.grim-step{padding:8px 10px;margin:6px 0;border-radius:10px;background:#ffffff08;font-size:12px}.grim-step.current{border:1px solid #f0c96a88;color:var(--gold)}.grim-step.done{color:#9de0c7}.grim-entries article{padding:9px 0;border-bottom:1px solid #ffffff12}.grim-entries article:last-child{border-bottom:0}.grim-entries article b{color:var(--cream);font-size:13px}.grim-entries article p{margin:4px 0 0}.top-actions #grimoire-open{font-size:15px}
+@media(max-width:700px){.grimorio-panel{padding:20px}.grim-summary{grid-template-columns:auto 1fr}.grimorio-panel h2{font-size:24px}.top-actions #grimoire-open{display:inline-flex}}
+/* v8 Gamer Progression */
+.phase-progress{display:block;margin-top:.45rem;font-size:.72rem;letter-spacing:.08em;color:#ffe6a5;opacity:.95}.rank-card b{font-size:2rem!important;line-height:1;color:#ffe08a!important;text-shadow:0 0 18px #ffca5d66}.stars-card b{letter-spacing:.12em;color:#ffe08a!important}.result-stats .record{grid-column:1/-1}
+
+:root{--control-scale:1;--control-opacity:.92}
+#touch{opacity:var(--control-opacity)}
+#stick,.touch-actions{transform:scale(var(--control-scale));transform-origin:bottom left}
+.touch-actions{transform-origin:bottom right}
+body.left-handed #stick{left:auto;right:max(18px,env(safe-area-inset-right))}
+body.left-handed .touch-actions{right:auto;left:max(18px,env(safe-area-inset-left));transform-origin:bottom left}
+.access-settings{border:1px solid #ffffff22;border-radius:14px;padding:10px 12px;display:grid;gap:8px;margin:8px 0}
+.access-settings legend{padding:0 6px;font-weight:700}
+.access-settings label{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.access-settings input[type=range]{min-width:120px}
+.access-settings select{min-height:40px}
+#input-device{opacity:.72}
+.touch-mode button[data-action],.touch-mode #flight-mode,.touch-mode #vision-action,.touch-mode #context-action{min-width:44px;min-height:44px}
+
+.living-status{position:fixed;top:max(72px,calc(env(safe-area-inset-top) + 58px));left:50%;transform:translateX(-50%);z-index:8;padding:6px 12px;border-radius:999px;background:#111426aa;border:1px solid #ffffff22;backdrop-filter:blur(6px);font-size:12px;letter-spacing:.04em;pointer-events:none}
+@media(max-width:760px){.living-status{top:max(58px,calc(env(safe-area-inset-top) + 48px));font-size:11px;padding:5px 9px}}
+
+/* v12 visual polish: cleaner glass hierarchy and richer magical highlights */
+.panel,.mission{box-shadow:0 18px 55px #07091455,inset 0 1px #ffffff12}
+.phase-card{transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.phase-card:hover,.phase-card.active{transform:translateY(-2px);box-shadow:0 12px 34px #07091455}
+#game canvas{filter:saturate(1.06) contrast(1.025)}
+@media(prefers-reduced-motion:reduce){.phase-card{transition:none}.phase-card:hover,.phase-card.active{transform:none}}
+
+.magic-label{position:fixed;top:max(108px,calc(env(safe-area-inset-top) + 94px));left:50%;transform:translateX(-50%);z-index:9;border:1px solid #d7b9ff44;background:#17132bbb;color:#f3eaff;border-radius:999px;padding:7px 12px;font-size:11px;min-height:36px}
+@media(max-width:760px){.magic-label{top:max(88px,calc(env(safe-area-inset-top) + 78px));font-size:10px}}
+
+.final-tools{position:fixed;right:max(10px,env(safe-area-inset-right));top:max(10px,env(safe-area-inset-top));z-index:10;display:flex;gap:6px}
+.final-tools button{min-width:44px;min-height:44px;border-radius:12px;background:#14152caa;color:#fff;border:1px solid #ffffff22}
+.photo-mode #hud,.photo-mode #touch,.photo-mode .living-status,.photo-mode .magic-label,.photo-mode .final-tools{opacity:0;pointer-events:none}
+.zen-mode .mission,.zen-mode #minimap,.zen-mode .magic-label{opacity:.08;pointer-events:none}
+
+/* v16 visual complete: cinematic but mobile-safe presentation */
+#game canvas{filter:saturate(1.10) contrast(1.035) brightness(1.015)}
+.panel,.mission,.living-status,.magic-label{border-color:#f1d9ff2c;box-shadow:0 12px 40px #09081745,inset 0 1px #ffffff12}
+button:focus-visible{outline:3px solid #ffd2ef;outline-offset:2px}
+@media(max-width:760px){#game canvas{filter:saturate(1.07) contrast(1.02)}}
+
+/* v22 Living Atmosphere */
+body[data-graphics="high"] #game canvas{filter:saturate(1.12) contrast(1.04) brightness(1.015)}
+body[data-graphics="low"] #game canvas{filter:saturate(1.04) contrast(1.01)}
+@media(prefers-reduced-motion:reduce){.phase-card,.mission,.panel,button{transition:none!important;animation:none!important}}
+
+/* v26 Lelinha Identity Pass */
+.lelinha-signature{position:fixed;right:12px;top:12px;z-index:40;padding:6px 11px;border:1px solid #ff9dcd88;border-radius:999px;background:#26152bcc;color:#ffd4e9;font-weight:700;font-size:12px;letter-spacing:.03em;backdrop-filter:blur(6px);pointer-events:none}@media(max-width:760px){.lelinha-signature{top:8px;right:8px;font-size:11px;padding:5px 9px}}@media(prefers-reduced-motion:reduce){.lelinha-signature{backdrop-filter:none}}
+/* v27 character/camera/mobile polish */
+@media(max-width:760px){.joystick,.touch-stick{transform:scale(1.08);transform-origin:center}.touch-button,.action-button{min-width:52px;min-height:52px}canvas{touch-action:none}}
+
+#world-dialogue{position:fixed;left:50%;bottom:94px;transform:translate(-50%,16px);z-index:90;width:min(560px,calc(100% - 28px));padding:12px 16px;border:1px solid #ffadd488;border-radius:16px;background:#1c1324ed;color:#fff;opacity:0;pointer-events:none;transition:.22s;box-shadow:0 10px 35px #0006}#world-dialogue.show{opacity:1;transform:translate(-50%,0)}#world-dialogue b{display:block;color:#ffacd4;margin-bottom:3px}#world-dialogue span{font-size:14px;line-height:1.35}@media(max-width:760px){#world-dialogue{bottom:116px}.joystick,.touch-stick{touch-action:none}}@media(prefers-reduced-motion:reduce){#world-dialogue{transition:none}}
+
+/* v32 physics/AI foundation keeps visuals lightweight; vitals hooks reserved for HUD pass */
+@media(max-width:760px){canvas{touch-action:none;-webkit-user-select:none;user-select:none}}
+
+.reduce-game-motion *{scroll-behavior:auto!important}.reduce-game-motion #world-dialogue{transition:none!important}
+@media(max-width:760px){button,.action-button,.touch-button{min-width:48px;min-height:48px}}
+
+#gamer-hud-v34{position:fixed;left:14px;top:14px;z-index:65;width:min(220px,46vw);pointer-events:none;font:700 11px system-ui;color:#fff;text-shadow:0 1px 2px #000}.v34bar{height:13px;margin:0 0 6px;background:#160e20bb;border:1px solid #ffffff30;border-radius:9px;overflow:hidden;position:relative}.v34bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#ff4f87,#ff9ec4);transition:width .18s}.v34bar.mp i{background:linear-gradient(90deg,#8a62ff,#d5a8ff)}.v34bar b{position:absolute;inset:0;text-align:center;font-size:8px;line-height:12px}.v34stats{display:inline-block;padding:4px 8px;background:#1a1026cc;border-radius:9px}@media(max-width:760px){#gamer-hud-v34{top:8px;left:8px;width:150px}.v34bar{height:11px;margin-bottom:4px}.v34bar b{line-height:10px;font-size:7px}}
+
+.boss35{position:fixed;left:50%;top:12px;transform:translateX(-50%);width:min(420px,70vw);height:16px;background:#160b18dd;border:1px solid #ffffff45;border-radius:10px;overflow:hidden}.boss35 i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#8d173f,#ff557f);transition:width .18s}.boss35 span{position:absolute;inset:0;text-align:center;font-size:9px;line-height:15px;z-index:2}
+
+#cast-v38{position:fixed;right:24px;bottom:96px;z-index:90;width:64px;height:64px;border-radius:50%;border:2px solid #ffffff99;background:radial-gradient(circle at 35% 30%,#ffd3f2,#d64aa7 55%,#6b225f);color:#fff;font-size:30px;font-weight:900;box-shadow:0 5px 20px #0008;touch-action:none;-webkit-tap-highlight-color:transparent}
+#cast-v38:active{transform:scale(.93)}
+@media(min-width:900px) and (pointer:fine){#cast-v38{display:none}}
+
+:root{--hud-scale:1}#gamer-hud-v34{transform:scale(var(--hud-scale));transform-origin:top left}
+#settings-v39{position:fixed;inset:0;z-index:200;background:#08050db8;display:grid;place-items:center;padding:18px}
+#settings-v39[hidden]{display:none}.settings-card{width:min(430px,92vw);background:#21142e;color:#fff;border:1px solid #ffffff30;border-radius:18px;padding:20px;box-shadow:0 20px 60px #000a}
+.settings-card h2{margin:0 0 16px}.settings-card label{display:grid;gap:7px;margin:14px 0;font:600 14px system-ui}.settings-card input[type=range]{width:100%}.settings-card button{width:100%;min-height:48px;border:0;border-radius:12px;font-weight:800}
+
+.v41-contrast #gamer-hud-v34{filter:contrast(1.35)}.v41-large-text{font-size:112%}.v41-reduced-flashes *{animation-duration:.001ms!important;animation-iteration-count:1!important}
+#v41-access{position:fixed;inset:0;z-index:205;background:#08050dc7;display:grid;place-items:center;padding:18px}#v41-access[hidden]{display:none}
+
+#recovery-v42{position:fixed;inset:0;z-index:999;background:#09060ee8;display:grid;place-items:center;padding:20px;color:#fff;font-family:system-ui}#recovery-v42>div{max-width:420px;background:#21152e;border:1px solid #ffffff35;border-radius:18px;padding:24px;text-align:center}#recovery-v42 button{min-width:160px;min-height:48px;border:0;border-radius:12px;font-weight:800}
