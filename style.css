@@ -301,7 +301,3 @@ body[data-graphics="low"] #game canvas{filter:saturate(1.04) contrast(1.01)}
 
 .reduce-game-motion *{scroll-behavior:auto!important}.reduce-game-motion #world-dialogue{transition:none!important}
 @media(max-width:760px){button,.action-button,.touch-button{min-width:48px;min-height:48px}}
-
-#gamer-hud-v34{position:fixed;left:14px;top:14px;z-index:65;width:min(220px,46vw);pointer-events:none;font:700 11px system-ui;color:#fff;text-shadow:0 1px 2px #000}.v34bar{height:13px;margin:0 0 6px;background:#160e20bb;border:1px solid #ffffff30;border-radius:9px;overflow:hidden;position:relative}.v34bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#ff4f87,#ff9ec4);transition:width .18s}.v34bar.mp i{background:linear-gradient(90deg,#8a62ff,#d5a8ff)}.v34bar b{position:absolute;inset:0;text-align:center;font-size:8px;line-height:12px}.v34stats{display:inline-block;padding:4px 8px;background:#1a1026cc;border-radius:9px}@media(max-width:760px){#gamer-hud-v34{top:8px;left:8px;width:150px}.v34bar{height:11px;margin-bottom:4px}.v34bar b{line-height:10px;font-size:7px}}
-
-.boss35{position:fixed;left:50%;top:12px;transform:translateX(-50%);width:min(420px,70vw);height:16px;background:#160b18dd;border:1px solid #ffffff45;border-radius:10px;overflow:hidden}.boss35 i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#8d173f,#ff557f);transition:width .18s}.boss35 span{position:absolute;inset:0;text-align:center;font-size:9px;line-height:15px;z-index:2}
