@@ -1,0 +1,1 @@
+export class ComfortV33{constructor(){this.reduced=matchMedia('(prefers-reduced-motion: reduce)').matches}apply(){document.documentElement.classList.toggle('reduce-game-motion',this.reduced)}}
