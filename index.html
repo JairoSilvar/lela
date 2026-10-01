@@ -1,3 +1,197 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta name="theme-color" content="#160b2e"><title>Spooky Mundo Rosa — Fase 1 v2</title><style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;height:100%;overflow:hidden;overscroll-behavior:none;touch-action:none;background:#160b2e;font-family:system-ui,Arial;color:#fff}canvas{display:block;touch-action:none}.hud{position:fixed;inset:0;pointer-events:none;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}.top{display:flex;justify-content:space-between;gap:8px;padding:12px}.pill{background:#32154de8;border:1px solid #ff9cda66;border-radius:18px;padding:8px 13px}#msg{position:absolute;left:50%;top:max(11%,58px);transform:translateX(-50%);width:min(92vw,650px);text-align:center;text-shadow:0 2px 8px #000}.touch{display:none;position:fixed;z-index:4;left:max(18px,env(safe-area-inset-left));right:max(18px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));justify-content:space-between;align-items:flex-end;pointer-events:none}.joystick{width:128px;height:128px;border-radius:50%;background:#35174db8;border:2px solid #ffb1e266;position:relative;pointer-events:auto;touch-action:none}.knob{position:absolute;width:58px;height:58px;left:33px;top:33px;border-radius:50%;background:#d765b7e8;border:2px solid #fff7;box-shadow:0 4px 12px #0007;will-change:transform}.jump{width:88px;height:88px;border-radius:50%;border:2px solid #fff7;background:#9b3c88e8;color:#fff;font-weight:900;pointer-events:auto;touch-action:none}.loading{position:fixed;inset:0;background:#160b2e;display:grid;place-items:center;z-index:10;text-align:center}.bar{width:min(310px,72vw);height:9px;background:#ffffff22;border-radius:9px;overflow:hidden;margin:14px auto 0}.bar i{display:block;height:100%;width:10%;background:#ff7fc8}@media(max-width:800px),(pointer:coarse){.touch{display:flex}.pill{font-size:12px;padding:7px 10px}.top{padding:8px}#msg{font-size:13px}}@media(max-height:500px) and (pointer:coarse){.joystick{width:108px;height:108px}.knob{width:50px;height:50px;left:27px;top:27px}.jump{width:74px;height:74px}.touch{bottom:max(8px,env(safe-area-inset-bottom))}}
-</style></head><body><div id="loading" class="loading"><div><b>Spooky Mundo Rosa</b><br><small>Preparando a Estrada Encantada...</small><div class="bar"><i id="bar"></i></div></div></div><div class="hud"><div class="top"><div class="pill">⭐ <b id="score">0</b>/12</div><div class="pill">🎃 Fase 1 — Estrada Encantada</div></div><div id="msg">Ajude Lelinha a encontrar 8 estrelas e chegar ao portal!</div></div><div class="touch"><div id="joystick" class="joystick"><div id="knob" class="knob"></div></div><button id="jump" class="jump">PULAR</button></div><script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"}}</script><script type="module" src="game.js"></script></body></html>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#2a0a2e">
+<title>Halloween Rosa — Lelinha Bruxa Encantada</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='52' font-size='52'%3E🎀%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+<script type="importmap">{"imports":{"three":"./vendor/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+
+<style>
+.gamer-panel{margin:12px 0;padding:12px;border:1px solid #ffffff24;border-radius:14px;background:#160d24aa}.gamer-panel h3{margin:0 0 8px}.broom-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.broom-card{display:flex;flex-direction:column;gap:4px;padding:9px;text-align:left}.broom-card small,.broom-card span{font-size:10px;opacity:.8}.broom-card.selected{outline:2px solid #f0c96a}.broom-card:disabled{opacity:.38}.challenge-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.challenge-row select{padding:8px;border-radius:10px}@media(max-width:650px){.broom-grid{grid-template-columns:1fr}.gamer-panel{font-size:12px}}
+</style>
+</head>
+<body><div class="lelinha-signature" aria-label="Identidade Lelinha">Lelinha ✦</div>
+<main id="game" aria-label="Halloween Rosa — Lelinha Bruxa Encantada"></main>
+<div class="vignette"></div>
+
+<header>
+  <div class="brand">
+    <span class="sigil">✦</span>
+    <div>HALLOWEEN ROSA<small>ESTRELANDO LELINHA</small></div>
+  </div>
+  <div class="top-actions">
+    <button id="fullscreen" aria-label="Alternar tela cheia">⛶</button>
+    <button id="sound" aria-label="Ativar efeitos sonoros">Som: off</button>
+    <button id="music" aria-label="Ativar ou desativar música">Música: on</button>
+    <button id="grimoire-open" aria-label="Abrir Grimório">📖</button>
+    <button id="pause" aria-label="Pausar jogo">Ⅱ</button>
+  </div>
+</header>
+
+<div id="hud" class="hidden">
+  <div id="living-status" class="living-status" aria-live="polite">Dia · Céu limpo</div>
+  <button id="magic-label" class="magic-label" type="button" aria-label="Trocar feitiço">Lumen · revelar</button>
+  <div class="final-tools"><button id="photo-btn" type="button">📷</button><button id="zen-btn" type="button">ZEN</button></div>
+  <section class="mission">
+    <span class="eyebrow">🎃 FASE 1 — ESTRADA ENCANTADA</span>
+    <h2 id="objective">Ajude Lelinha a seguir as estrelas até o portal encantado</h2>
+    <div class="stats">
+      <span><b id="rings">00</b> / 18 anéis</span>
+      <span><b id="essence">0</b> essência</span>
+      <span><b id="discoveries">0</b> / 3 segredos</span>
+      <span id="timer">1:30</span>
+    </div>
+    <div class="progress"><i id="route-progress"></i></div>
+  </section>
+  <div class="compass">
+    <span id="bearing">N</span>
+    <span class="target">◇ <span id="distance">30</span> m</span>
+  </div>
+  <div class="bottom-left">
+    <canvas id="map" width="160" height="160" aria-label="Mapa do reino e próximo anel"></canvas>
+    <div class="map-label">FLORESTA ENCANTADA <span id="quality-label">AUTO</span></div>
+  </div>
+  <div class="flight-info">
+    <div><b id="speed">0</b><span>km/h</span><em id="altitude">6 m</em></div>
+    <label>ENERGIA MÁGICA <span id="boost-label">TURBO</span></label>
+    <div class="energy" id="energy-wrap"><i id="energy"></i></div>
+  </div>
+  <div id="toast" role="status"></div>
+  <div id="combo-hud" class="combo-hud"><b id="combo-value">×1</b><span id="combo-label">FLIGHT COMBO</span></div>
+  <div class="keyboard-hint">W/S acelerar · A/D virar · ↑/↓ subir/descer · Shift turbo · Espaço magia · F tela cheia · M som · Esc pausa</div>
+</div>
+
+<div id="menu" class="overlay">
+  <div class="intro">
+    <span class="eyebrow">ESTRELANDO LELINHA BRUXA ENCANTADA</span>
+    <h1>Halloween<br><i>Rosa</i><span>✦</span></h1>
+    <p>O castelo acendeu as luzes.<br>
+    Voe entre névoa rosa, magia doce<br>
+    e os sussurros do luar de outubro.</p>
+    <div id="phase-select" class="phase-select" role="listbox" aria-label="Escolher fase">
+      <button type="button" class="phase-card active" data-phase="floresta" role="option" aria-selected="true">
+        <span class="phase-num">01</span>
+        <span class="phase-name">Floresta Encantada</span>
+        <span class="phase-desc">Runas · riacho · anéis</span>
+      </button>
+      <button type="button" class="phase-card" data-phase="vila" role="option" aria-selected="false">
+        <span class="phase-num">02</span>
+        <span class="phase-name">Vila de Halloween</span>
+        <span class="phase-desc">Abóboras · telhados · lua</span>
+      </button>
+      <button type="button" class="phase-card" data-phase="castelo" role="option" aria-selected="false">
+        <span class="phase-num">03</span>
+        <span class="phase-name">Castelo da Lua</span>
+        <span class="phase-desc">Torres · lago · penhascos</span>
+      </button>
+    </div>
+    <section class="gamer-panel"><h3>🎮 Equipamento & Desafio</h3><div id="broom-list" class="broom-grid"></div><div class="challenge-row"><label>Modo <select id="challenge-mode"><option value="adventure">Aventura</option><option value="time">Time Trial</option></select></label><small id="challenge-best"></small></div></section>
+    <button id="start" class="primary" disabled>Preparando o reino…</button>
+    <div id="loading" role="status">Carregando modelos 3D</div>
+    <div id="best-score"></div>
+    <div class="intro-footer">VOO LIVRE 3D <span>✧</span> RITUAL DE 90 SEGUNDOS</div>
+  </div>
+  <div class="menu-note" id="menu-phase-note">01 / FLORESTA ENCANTADA<br><span>Escolha a fase e voe</span></div>
+</div>
+
+<div id="pause-menu" class="overlay hidden">
+  <div class="panel">
+    <span class="eyebrow">O REINO ESPERA POR VOCÊ</span>
+    <h2>Uma pausa no voo</h2>
+    <p>W/S: acelerar e frear · A/D: virar<br>
+    ↑/↓ ou E/Q: subir e descer<br>
+    Shift: turbo · Espaço: pulso mágico · C: modo de voo · V: Visão Mágica<br>
+    R: voltar à clareira inicial</p>
+    <label>Qualidade
+      <select id="quality">
+        <option value="auto">Automática</option>
+        <option value="high">Alta</option>
+        <option value="low">Leve</option>
+      </select>
+    </label>
+    <button type="button" id="tilt-toggle" class="tilt-btn">Inclinar celular: off</button>
+    <fieldset class="access-settings"><legend>Controles & acessibilidade</legend>
+    <label>Sensibilidade horizontal <input id="sens-x" type="range" min="55" max="160" value="100"></label>
+    <label>Sensibilidade vertical <input id="sens-y" type="range" min="55" max="160" value="100"></label>
+    <label><input id="floating-stick" type="checkbox" checked> Joystick flutuante</label>
+    <label><input id="invert-y" type="checkbox"> Inverter eixo vertical</label>
+    <label><input id="left-handed" type="checkbox"> Layout canhoto</label>
+    <label>Assistência <select id="flight-assist"><option value="casual">Casual</option><option value="normal">Normal</option><option value="expert">Expert</option></select></label>
+    <label>Movimento de câmera <input id="motion-level" type="range" min="0" max="100" value="55"></label>
+    <label>Tamanho dos controles <input id="control-size" type="range" min="80" max="130" value="100"></label>
+    <label>Opacidade dos controles <input id="control-opacity" type="range" min="45" max="100" value="92"></label>
+    <label><input id="haptics-toggle" type="checkbox" checked> Vibração / haptics quando disponível</label>
+    <label>Qualidade gráfica <select id="graphics-profile"><option value="auto">Automática</option><option value="low">Baixa</option><option value="medium">Média</option><option value="high">Alta</option></select></label>
+    <small id="input-device">Entrada: automática · touch, teclado/mouse ou gamepad</small>
+    </fieldset>
+    <label>Música <input id="music-volume" type="range" min="0" max="100" value="42" aria-label="Volume da música"></label><label>Efeitos <input id="sfx-volume" type="range" min="0" max="100" value="72"></label><label>Ambiente <input id="ambient-volume" type="range" min="0" max="100" value="28"></label><label>Interface <input id="ui-volume" type="range" min="0" max="100" value="55"></label>
+    <small>Áudio dinâmico: vento acompanha a velocidade · decolagem/pouso · Perfect Ring · interface.</small>
+    <button id="resume" class="primary">Continuar voo</button>
+    <button id="restart">Recomeçar ritual</button>
+    <button id="to-menu">Menu principal</button>
+  </div>
+</div>
+
+
+<div id="grimoire" class="overlay hidden grimorio-overlay">
+  <div class="panel grimorio-panel">
+    <span class="eyebrow">GRIMÓRIO DA LELINHA</span>
+    <h2>Descobertas & Missões</h2>
+    <div id="grimoire-body"></div>
+    <button id="grimoire-close" class="primary">Voltar à aventura</button>
+  </div>
+</div>
+
+<div id="result" class="overlay hidden">
+  <div class="panel">
+    <span class="eyebrow">RITUAL CONCLUÍDO</span>
+    <h2 id="result-title">A lua rosa ouviu você.</h2>
+    <p id="result-text"></p>
+    <div id="result-stats" class="result-stats"></div>
+    <button id="explore" class="primary">Continuar explorando</button>
+    <button id="retry">Tentar outra vez</button>
+    <button id="to-menu-result">Menu principal</button>
+  </div>
+</div>
+
+<div id="touch" class="hidden">
+  <div id="stick" aria-label="Direcional 2D: esquerda, direita, subir e descer"><div id="stick-thumb"></div></div>
+  <div class="touch-right">
+    <button data-action="boost" aria-label="Pular / impulso">PULAR</button>
+    <button id="flight-mode" data-action="mode" aria-label="Voar de vassoura">VOO</button>
+    <button id="vision-action" data-action="vision" aria-label="Câmera / visão mágica">CÂMERA</button>
+    <button id="context-action" data-action="interact" aria-label="Ação contextual">AÇÃO</button>
+    <button data-action="magic" aria-label="Magia">✦</button>
+  </div>
+</div>
+
+<script type="module" src="src/main.js"></script>
+
+<div id="settings-v39" hidden>
+  <div class="settings-card">
+    <h2>Configurações</h2>
+    <label>Sensibilidade da câmera <input id="v39-sens" type="range" min=".5" max="2" step=".1" value="1"></label>
+    <label>Partículas <input id="v39-particles" type="range" min=".3" max="1" step=".1" value="1"></label>
+    <label>Tamanho do HUD <input id="v39-hud" type="range" min=".8" max="1.35" step=".05" value="1"></label>
+    <label><input id="v39-vibration" type="checkbox" checked> Vibração</label>
+    <button id="v39-close">Fechar</button>
+  </div>
+</div>
+
+<div id="v41-access" hidden>
+ <div class="settings-card">
+  <h2>Acessibilidade</h2>
+  <label><input id="v41-contrast" type="checkbox"> Alto contraste</label>
+  <label><input id="v41-flashes" type="checkbox"> Reduzir flashes</label>
+  <label><input id="v41-large" type="checkbox"> Texto maior</label>
+  <label><input id="v41-subtitles" type="checkbox" checked> Legendas</label>
+  <label>Movimento de câmera <input id="v41-shake" type="range" min="0" max="1" step=".1" value="1"></label>
+  <button id="v41-close">Fechar</button>
+ </div>
+</div>
+</body>
+</html>
