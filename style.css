@@ -340,3 +340,6 @@ body[data-state=playing] .brand,body[data-state=exploring] .brand,body[data-stat
 #stick.floating{opacity:1;transition:none}
 .photo-mode #touch{opacity:var(--control-opacity)}
 .photo-mode .final-tools{opacity:1;pointer-events:auto}
+
+/* v46 mobile action pad */
+.touch-right{grid-template-columns:68px 68px!important;max-width:150px}.touch-right button{font-size:13px!important;line-height:1.05}.touch-right button small{font-size:8px;opacity:.72}#camera-action{background:#40205ccc}.touch-mode #stick{box-shadow:0 0 0 5px #ff9ec814,0 10px 30px #12081866}
