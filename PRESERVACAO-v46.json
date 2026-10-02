@@ -1,0 +1,18 @@
+{
+ "version": 46,
+ "base": "v45 Mundo Rosa",
+ "policy": "preservar recursos existentes; legibilidade visual, sensação de velocidade, colisão do palácio e higiene do pacote",
+ "removed": [],
+ "added_count": 8,
+ "modified": [
+  "ASSET-AUDIT-v44.json",
+  "CREDITOS.md",
+  "package.json",
+  "server.mjs",
+  "src/assets.js",
+  "src/flight.js",
+  "src/main.js",
+  "src/visual-art-pass.js",
+  "src/world.js"
+ ]
+}

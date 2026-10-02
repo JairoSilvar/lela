@@ -1,0 +1,307 @@
+{
+  "passed": 47,
+  "total": 47,
+  "results": [
+    {
+      "name": "Perseguição inicia seu próprio cronômetro",
+      "pass": true,
+      "detail": null,
+      "state": "menu"
+    },
+    {
+      "name": "Fragmento da rival é coletável uma vez",
+      "pass": true,
+      "detail": null,
+      "state": "menu"
+    },
+    {
+      "name": "Hero, animações e biblioteca Kenney completos",
+      "pass": true,
+      "detail": {
+        "animations": 86,
+        "kenney": 23
+      },
+      "state": "menu"
+    },
+    {
+      "name": "Partida fecha menu e cria apenas um HUD",
+      "pass": true,
+      "detail": null,
+      "state": "playing"
+    },
+    {
+      "name": "Deer e Bat carregam e possuem animações",
+      "pass": true,
+      "detail": null,
+      "state": "playing"
+    },
+    {
+      "name": "Joystick flutuante movimenta dois eixos",
+      "pass": true,
+      "detail": null,
+      "state": "playing"
+    },
+    {
+      "name": "Soltar joystick mantém base visível e zera eixos",
+      "pass": true,
+      "detail": null,
+      "state": "playing"
+    },
+    {
+      "name": "Cancelar toque restaura joystick",
+      "pass": true,
+      "detail": null,
+      "state": "playing"
+    },
+    {
+      "name": "Perda de foco limpa captura e restaura joystick",
+      "pass": true,
+      "detail": null,
+      "state": "playing"
+    },
+    {
+      "name": "Joystick retorna após pausa",
+      "pass": true,
+      "detail": null,
+      "state": "playing"
+    },
+    {
+      "name": "Joystick retorna após Grimório",
+      "pass": true,
+      "detail": null,
+      "state": "playing"
+    },
+    {
+      "name": "Modo foto preserva controles e botão de saída",
+      "pass": true,
+      "detail": null,
+      "state": "playing"
+    },
+    {
+      "name": "Movimento e subida no loop real",
+      "pass": true,
+      "detail": null,
+      "state": "playing"
+    },
+    {
+      "name": "Magia cria projétil e consome MP",
+      "pass": true,
+      "detail": null,
+      "state": "playing"
+    },
+    {
+      "name": "Cooldown impede disparo duplicado",
+      "pass": true,
+      "detail": null,
+      "state": "playing"
+    },
+    {
+      "name": "Pouso e montagem usam terreno real",
+      "pass": true,
+      "detail": null,
+      "state": "playing"
+    },
+    {
+      "name": "Aegis realmente bloqueia dano",
+      "pass": true,
+      "detail": null,
+      "state": "playing"
+    },
+    {
+      "name": "Ventus recupera energia",
+      "pass": true,
+      "detail": null,
+      "state": "playing"
+    },
+    {
+      "name": "Blink desloca personagem",
+      "pass": true,
+      "detail": null,
+      "state": "playing"
+    },
+    {
+      "name": "Pausa congela tempo, posição e MP",
+      "pass": true,
+      "detail": null,
+      "state": "paused"
+    },
+    {
+      "name": "Projétil mata criatura e credita XP uma vez",
+      "pass": true,
+      "detail": {
+        "hp": 0,
+        "xp": 10
+      },
+      "state": "playing"
+    },
+    {
+      "name": "Derrota gera loot físico",
+      "pass": true,
+      "detail": null,
+      "state": "playing"
+    },
+    {
+      "name": "Coleta de loot credita essência",
+      "pass": true,
+      "detail": null,
+      "state": "playing"
+    },
+    {
+      "name": "Morte restaura HP e ponto seguro",
+      "pass": true,
+      "detail": null,
+      "state": "playing"
+    },
+    {
+      "name": "Visão Mágica é compartilhada com exploração profunda",
+      "pass": true,
+      "detail": null,
+      "state": "playing"
+    },
+    {
+      "name": "Investigação avança com Visão Mágica",
+      "pass": true,
+      "detail": null,
+      "state": "playing"
+    },
+    {
+      "name": "Continuar restaura posição e MP zero",
+      "pass": true,
+      "detail": null,
+      "state": "paused"
+    },
+    {
+      "name": "Save restaura missão, descobertas e inimigo derrotado",
+      "pass": true,
+      "detail": null,
+      "state": "paused"
+    },
+    {
+      "name": "Reinício não duplica HUD e raízes de criaturas",
+      "pass": true,
+      "detail": null,
+      "state": "paused"
+    },
+    {
+      "name": "Vila reconstrói cenário e Deer",
+      "pass": true,
+      "detail": null,
+      "state": "playing"
+    },
+    {
+      "name": "Castelo carrega Ghost, Bat e Cyclops",
+      "pass": true,
+      "detail": null,
+      "state": "playing"
+    },
+    {
+      "name": "Cyclops entra em telegraph",
+      "pass": true,
+      "detail": null,
+      "state": "paused"
+    },
+    {
+      "name": "Strike aplica dano uma única vez",
+      "pass": true,
+      "detail": null,
+      "state": "paused"
+    },
+    {
+      "name": "Strike termina em recovery",
+      "pass": true,
+      "detail": null,
+      "state": "paused"
+    },
+    {
+      "name": "Cyclops fase 2 por HP",
+      "pass": true,
+      "detail": null,
+      "state": "paused"
+    },
+    {
+      "name": "Cyclops fase 3 por HP",
+      "pass": true,
+      "detail": null,
+      "state": "paused"
+    },
+    {
+      "name": "Fase 3 amplia ataque e permite esquiva",
+      "pass": true,
+      "detail": null,
+      "state": "paused"
+    },
+    {
+      "name": "Criatura morta não continua IA",
+      "pass": true,
+      "detail": null,
+      "state": "paused"
+    },
+    {
+      "name": "Masmorra completa as três runas",
+      "pass": true,
+      "detail": null,
+      "state": "paused"
+    },
+    {
+      "name": "Qualidade low aplica limite de resolução",
+      "pass": true,
+      "detail": {
+        "dpr": 0.85
+      },
+      "state": "paused"
+    },
+    {
+      "name": "Qualidade medium aplica limite de resolução",
+      "pass": true,
+      "detail": {
+        "dpr": 1
+      },
+      "state": "paused"
+    },
+    {
+      "name": "Qualidade high aplica limite de resolução",
+      "pass": true,
+      "detail": {
+        "dpr": 1
+      },
+      "state": "paused"
+    },
+    {
+      "name": "Save contém runas e fase",
+      "pass": true,
+      "detail": null,
+      "state": "paused"
+    },
+    {
+      "name": "Reduzir flashes desativa partículas ambiente",
+      "pass": true,
+      "detail": null,
+      "state": "paused"
+    },
+    {
+      "name": "Profiling de 90 frames concluído",
+      "pass": true,
+      "detail": {
+        "medianMs": 266.8000000000029,
+        "p95Ms": 350,
+        "drawCalls": 352,
+        "triangles": 212812,
+        "geometries": 144,
+        "textures": 56
+      },
+      "state": "playing"
+    },
+    {
+      "name": "Fim de ritual abre resultado",
+      "pass": true,
+      "detail": null,
+      "state": "result"
+    },
+    {
+      "name": "Sessão sem exceções JavaScript",
+      "pass": true,
+      "detail": [],
+      "state": "menu"
+    }
+  ]
+}

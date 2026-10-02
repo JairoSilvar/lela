@@ -13,8 +13,9 @@ export class Flight{
     this.perfectTimer=0;
     this.perfectStreak=0;
     this.nearObstacle=false;
-    this.mode="precision";this.lookYaw=0;this.lookPitch=0;
+    this.mode="precision";this.lookYaw=0;this.lookPitch=0;this.cameraMode=0;
     this.grounded=false;
+    this.groundJumpVel=0; this.groundJumping=false;
     this.broomBlend=1;
     this.broomTarget=1;
     this.profile={speed:1,accel:1,control:1,stability:1,turbo:1};
@@ -33,7 +34,7 @@ export class Flight{
     this.perfectTimer=0;
     this.perfectStreak=0;
     this.nearObstacle=false;
-    this.grounded=false;
+    this.grounded=false; this.groundJumpVel=0; this.groundJumping=false;
     this.broomTarget=1; this.broomBlend=1;
     this.syncBroom(0,true);
     this.model.position.copy(this.position);
@@ -44,6 +45,7 @@ export class Flight{
   setProfile(stats){ this.profile={...this.profile,...stats}; }
 
   toggleMode(){ this.mode=this.mode==="precision"?"cruise":"precision"; return this.mode; }
+  toggleCamera(){this.cameraMode=(this.cameraMode+1)%3;return ["EXPLORAÇÃO","PRÓXIMA","CINEMA"][this.cameraMode]}
 
   canLand(){
     const floor=ground(this.position.x,this.position.z);
@@ -52,7 +54,7 @@ export class Flight{
 
   land(){
     if(!this.canLand()) return false;
-    this.grounded=true; this.boosting=false; this.speed=0; this.velocity.set(0,0,0);
+    this.grounded=true; this.boosting=false; this.speed=0; this.velocity.set(0,0,0); this.groundJumpVel=0; this.groundJumping=false;
     this.broomTarget=0;
     this.position.y=ground(this.position.x,this.position.z)+1.05;
     return true;
@@ -86,16 +88,20 @@ export class Flight{
     const right=new T.Vector3(Math.cos(this.yaw),0,-Math.sin(this.yaw));
     const f=T.MathUtils.clamp(input.throttle,-1,1), side=T.MathUtils.clamp(input.turn,-1,1);
     const running=!!input.boost;
-    const move=forward.multiplyScalar(Math.max(0,f)).add(right.multiplyScalar(side*.72));
+    const move=forward.multiplyScalar(f>=0?f:f*.55).add(right.multiplyScalar(side*.72));
     if(move.lengthSq()>1) move.normalize();
-    const walk=running?7.2:4.1;
-    this.velocity.lerp(move.multiplyScalar(walk),1-Math.exp(-8*dt)); this.velocity.y=0;
-    this.position.addScaledVector(this.velocity,dt); this.position.y=floor; this.speed=this.velocity.length();
+    const walk=running?8.6:4.7;
+    this.velocity.x=T.MathUtils.damp(this.velocity.x,move.x*walk,9,dt); this.velocity.z=T.MathUtils.damp(this.velocity.z,move.z*walk,9,dt);
+    if(!this.groundJumping && input.lift>.55){this.groundJumping=true;this.groundJumpVel=7.4;}
+    if(this.groundJumping){this.groundJumpVel-=18.5*dt;this.position.y+=this.groundJumpVel*dt;if(this.position.y<=floor){this.position.y=floor;this.groundJumpVel=0;this.groundJumping=false;}}else this.position.y=floor;
+    this.position.x+=this.velocity.x*dt; this.position.z+=this.velocity.z*dt; this.velocity.y=this.groundJumpVel; this.speed=Math.hypot(this.velocity.x,this.velocity.z);
     this.model.position.copy(this.position); this.model.rotation.set(0,this.yaw,0);
-    const back=new T.Vector3(0,2.7,7.2).applyAxisAngle(new T.Vector3(0,1,0),this.yaw);
+    const groundViews=[[0,2.7,7.2],[0,2.05,4.6],[1.8,3.5,9.4]],gv=groundViews[this.cameraMode]||groundViews[0];
+    this.lookYaw=T.MathUtils.clamp(this.lookYaw+(input.lookX||0)*dt*2.2,-1.25,1.25);this.lookPitch=T.MathUtils.clamp(this.lookPitch+(input.lookY||0)*dt*2.0,-.45,.5);
+    const back=new T.Vector3(...gv).applyAxisAngle(new T.Vector3(0,1,0),this.yaw+this.lookYaw);
     const desired=this.position.clone().add(back); desired.y=Math.max(desired.y,floor+2.4);
     this.camera.position.lerp(desired,1-Math.exp(-7*dt));
-    const target=this.position.clone().add(new T.Vector3(0,1.25,0)).add(new T.Vector3(-Math.sin(this.yaw),0,-Math.cos(this.yaw)).multiplyScalar(3));
+    const target=this.position.clone().add(new T.Vector3(0,1.25+this.lookPitch*2.2,0)).add(new T.Vector3(-Math.sin(this.yaw+this.lookYaw),0,-Math.cos(this.yaw+this.lookYaw)).multiplyScalar(3));
     this.look.lerp(target,1-Math.exp(-8*dt)); this.camera.lookAt(this.look);
     this.camera.fov=T.MathUtils.damp(this.camera.fov,58,5,dt); this.camera.updateProjectionMatrix();
     // Jog bridges the large visual speed gap between walking and sprinting.
@@ -218,8 +224,9 @@ export class Flight{
     const mobile=matchMedia('(pointer:coarse)').matches||navigator.maxTouchPoints>0||innerWidth<760;
     // Mobile camera: a slightly higher/longer chase view keeps the witch near the
     // useful middle of the screen while preserving a clear view of rings ahead.
-    const camDist=this.boosting?(mobile?15:13.5):(mobile?12.4:10.5);
-    const camHeight=mobile?5.2:3.6;
+    const views=this.cameraMode===1?{d:mobile?8.8:7.2,h:mobile?3.8:2.8}:this.cameraMode===2?{d:mobile?16.5:15,h:mobile?7.2:5.6}:{d:this.boosting?(mobile?15:13.5):(mobile?12.4:10.5),h:mobile?5.2:3.6};
+    const camDist=views.d;
+    const camHeight=views.h;
     const offset=new T.Vector3(0,camHeight+Math.max(0,-this.velocity.y)*(mobile?.04:.08),camDist).applyAxisAngle(new T.Vector3(0,1,0),this.yaw);
     offset.applyAxisAngle(new T.Vector3(0,1,0),this.lookYaw);offset.y+=this.lookPitch*5;const desiredCamera=this.position.clone().add(offset);
     desiredCamera.y=Math.max(desiredCamera.y,ground(desiredCamera.x,desiredCamera.z)+2);

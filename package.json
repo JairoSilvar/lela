@@ -1,10 +1,13 @@
 {
   "name": "halloween-rosa-lelinha",
-  "version": "44.0.0",
+  "version": "47.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "start": "node server.mjs",
-    "audit": "node tests/asset-audit.mjs"
+    "audit": "node tests/asset-audit.mjs",
+    "test:storage": "node tests/storage-tests.mjs",
+    "test:gameplay": "node tests/gameplay-tests.mjs",
+    "test:all": "npm run audit && npm run test:storage && npm run test:gameplay"
   }
 }

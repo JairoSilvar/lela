@@ -1,5 +1,6 @@
 import * as T from 'three';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
+import {applyHeroOutfit} from './hero-recolor-v46.js';
 import {clone as skeletonClone} from '../vendor/SkeletonUtils.js';
 
 export async function loadAssets(onProgress){
@@ -111,9 +112,12 @@ export function createWitch(assets){
     o.material.roughness=1;
     o.material.metalness=0;
     if(o.material.name==='DarkBlue'||(assets.lelinha&&/ranger|cloth|body/i.test(o.material.name||''))){
-      o.material.color.set('#6b2d6e');
-      o.material.emissive.set('#3a1548');
-      o.material.emissiveIntensity=.28;
+      // v46: remapeia a textura escura do figurino (evita a silhueta preta); cai na tinta antiga se indisponível.
+      if(!(assets.lelinha&&applyHeroOutfit(o.material))){
+        o.material.color.set('#6b2d6e');
+        o.material.emissive.set('#3a1548');
+        o.material.emissiveIntensity=.28;
+      }
     }
   });
   if(assets.lelinha&&assets.heroAnimations?.length){
