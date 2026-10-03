@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+let passed=0;const test=(n,f)=>{try{f();passed++;console.log('PASS',n)}catch(e){console.error('FAIL',n,e);process.exitCode=1}};
+const sky=fs.readFileSync(new URL('../src/sky-adventure-v49.js',import.meta.url),'utf8');
+const npc=fs.readFileSync(new URL('../src/sky-companions-v49.js',import.meta.url),'utf8');
+const living=fs.readFileSync(new URL('../src/living-world.js',import.meta.url),'utf8');
+test('Camada celeste possui reset determinístico abaixo de 22m',()=>{assert.match(sky,/pos\.y>22/);assert.match(sky,/this\.root\.visible=celestial/);assert.match(sky,/if\(!celestial\).*return null/s)});
+test('NPCs usam juntas ancoradas ao cabo e não braços abertos',()=>{assert.match(npc,/shoulder.*elbow.*handP/);assert.match(npc,/NPC-Hand-/);assert.match(npc,/hip.*knee.*foot/);assert.doesNotMatch(npc,/rotation\.z=s\*\.28/)});
+test('Vaga-lumes não acumulam deslocamento vertical por frame',()=>{assert.match(living,/baseY:m\.position\.y/);assert.match(living,/position\.y=f\.baseY\+/);assert.doesNotMatch(living,/position\.y\+=Math\.sin/)});
+console.log(JSON.stringify({passed,total:3}));if(passed!==3)process.exit(1);

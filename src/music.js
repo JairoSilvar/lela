@@ -50,6 +50,9 @@ export class MusicPlayer {
     return this.enabled;
   }
   toggle(){return this.setEnabled(!this.enabled);}
+  // v52: pausa/retoma ao ir para segundo plano (iOS/Android continuam tocando áudio de abas ocultas).
+  suspend(){this._wasPlaying=!this.el.paused;this.el.pause();}
+  resumeFromBackground(){if(this._wasPlaying)this.playCurrent();this._wasPlaying=false;}
   setVolume(v){
     this.el.volume=Math.max(0,Math.min(1,Number(v)||0));
     try{storage.setItem('wf-music-volume',String(this.el.volume));}catch{}

@@ -12,7 +12,7 @@ export class LivingWorld {
   _makeAmbient(){
     const geo=new T.SphereGeometry(.07,5,4), mat=new T.MeshBasicMaterial({color:0xffe8a6,transparent:true,opacity:.8});
     const count=this.phase==='castelo'?16:28;
-    for(let i=0;i<count;i++){const m=new T.Mesh(geo,mat.clone());m.position.set((Math.random()-.5)*115,1+Math.random()*10,(Math.random()-.5)*115);this.scene.add(m);this.fireflies.push({m,seed:Math.random()*20});}
+    for(let i=0;i<count;i++){const m=new T.Mesh(geo,mat.clone());m.position.set((Math.random()-.5)*115,1+Math.random()*10,(Math.random()-.5)*115);this.scene.add(m);this.fireflies.push({m,seed:Math.random()*20,baseY:m.position.y});}
     // Lightweight magical fauna silhouettes: no external assets/draw-call explosion.
     const fgeo=new T.ConeGeometry(.18,.7,5), fmat=new T.MeshBasicMaterial({color:0xbfd9cf,transparent:true,opacity:.55});
     for(let i=0;i<7;i++){const m=new T.Mesh(fgeo,fmat.clone());m.rotation.x=Math.PI/2;m.position.set((Math.random()-.5)*100,5+Math.random()*14,(Math.random()-.5)*100);this.scene.add(m);this.fauna.push({m,seed:Math.random()*30,r:12+Math.random()*18,s:.35+Math.random()*.4});}
@@ -35,7 +35,7 @@ export class LivingWorld {
     if(this.eventTimer<=0){this.eventTimer=24+Math.random()*32;const ev=['Um bando mágico cruza o céu','Vaga-lumes revelam uma trilha antiga','O vento traz sinos distantes','Uma estrela rosa risca o horizonte'];this.eventText=ev[Math.floor(Math.random()*ev.length)];}
     const night=this.time<.22||this.time>.78, dusk=Math.max(0,1-Math.abs(this.time-.78)*9);
     const glow=night?1:.18+dusk*.5;
-    this.fireflies.forEach((f,i)=>{f.m.visible=glow>.2;f.m.material.opacity=.15+glow*.72*(.65+.35*Math.sin(performance.now()/600+f.seed));f.m.position.y+=Math.sin(performance.now()/900+f.seed)*.0015;});
+    this.fireflies.forEach((f,i)=>{f.m.visible=glow>.2;f.m.material.opacity=.15+glow*.72*(.65+.35*Math.sin(performance.now()/600+f.seed));f.m.position.y=f.baseY+Math.sin(performance.now()/900+f.seed)*.08;});
     this.fauna.forEach(f=>{const a=performance.now()/1000*f.s+f.seed;f.m.position.x=Math.cos(a)*f.r;f.m.position.z=Math.sin(a)*f.r;f.m.position.y=7+Math.sin(a*1.7)*3;f.m.rotation.z=-a;});
     // Atmospheric fog is intentionally modest for visibility and mobile performance.
     if(this.scene.fog){const target=this.weather==='mist'?0.028:this.weather==='drizzle'?0.018:0.009;this.scene.fog.density+=(target-this.scene.fog.density)*Math.min(1,dt*1.2);}

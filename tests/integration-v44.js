@@ -1,6 +1,7 @@
 import * as T from 'three';
 import {AdventureSystem} from '../src/adventure.js';
 export function install(api){
+ window.__qa=api;
  const panel=document.createElement('section');panel.id='qa-v44';panel.style='position:fixed;bottom:0;left:0;z-index:999;background:#130b20e8;color:white;max-height:45vh;overflow:auto;width:min(620px,100vw);font:12px monospace;padding:8px';panel.innerHTML='<button id="qa-run">Executar regressão v44</button><button id="qa-hide">Ocultar painel</button><pre id="qa-results">Pronto</pre>';document.body.append(panel);if(new URLSearchParams(location.search).has('responsive'))panel.hidden=true;panel.querySelector('#qa-hide').onclick=()=>panel.hidden=true;panel.querySelector('#qa-run').onclick=run;
  const results=[],out=panel.querySelector('pre'),wait=ms=>new Promise(r=>setTimeout(r,ms));
  async function until(predicate,timeout=5000){const end=performance.now()+timeout;while(!predicate()&&performance.now()<end)await wait(40);return predicate()}

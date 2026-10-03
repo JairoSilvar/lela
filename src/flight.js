@@ -1,6 +1,10 @@
 import * as T from 'three';
 import {ground} from './world.js';
 
+// v52: caches e vetores temporários — removem alocações por frame (GC/jank no celular).
+const COARSE=typeof matchMedia!=='undefined'&&(matchMedia('(pointer:coarse)').matches||(navigator.maxTouchPoints||0)>0);
+const _Y=new T.Vector3(0,1,0),_vA=new T.Vector3(),_vB=new T.Vector3(),_vC=new T.Vector3(),_vD=new T.Vector3(),_vE=new T.Vector3(),_vF=new T.Vector3();
+
 export class Flight{
   constructor(model,camera,world){
     this.model=model;
@@ -84,8 +88,8 @@ export class Flight{
     this.syncBroom(dt);
     const floor=ground(this.position.x,this.position.z)+1.05;
     this.yaw-=input.turn*2.1*dt;
-    const forward=new T.Vector3(-Math.sin(this.yaw),0,-Math.cos(this.yaw));
-    const right=new T.Vector3(Math.cos(this.yaw),0,-Math.sin(this.yaw));
+    const forward=_vE.set(-Math.sin(this.yaw),0,-Math.cos(this.yaw));
+    const right=_vF.set(Math.cos(this.yaw),0,-Math.sin(this.yaw));
     const f=T.MathUtils.clamp(input.throttle,-1,1), side=T.MathUtils.clamp(input.turn,-1,1);
     const running=!!input.boost;
     const move=forward.multiplyScalar(f>=0?f:f*.55).add(right.multiplyScalar(side*.72));
@@ -98,10 +102,10 @@ export class Flight{
     this.model.position.copy(this.position); this.model.rotation.set(0,this.yaw,0);
     const groundViews=[[0,2.7,7.2],[0,2.05,4.6],[1.8,3.5,9.4]],gv=groundViews[this.cameraMode]||groundViews[0];
     this.lookYaw=T.MathUtils.clamp(this.lookYaw+(input.lookX||0)*dt*2.2,-1.25,1.25);this.lookPitch=T.MathUtils.clamp(this.lookPitch+(input.lookY||0)*dt*2.0,-.45,.5);
-    const back=new T.Vector3(...gv).applyAxisAngle(new T.Vector3(0,1,0),this.yaw+this.lookYaw);
-    const desired=this.position.clone().add(back); desired.y=Math.max(desired.y,floor+2.4);
+    const back=_vB.set(gv[0],gv[1],gv[2]).applyAxisAngle(_Y,this.yaw+this.lookYaw);
+    const desired=_vC.copy(this.position).add(back); desired.y=Math.max(desired.y,floor+2.4);
     this.camera.position.lerp(desired,1-Math.exp(-7*dt));
-    const target=this.position.clone().add(new T.Vector3(0,1.25+this.lookPitch*2.2,0)).add(new T.Vector3(-Math.sin(this.yaw+this.lookYaw),0,-Math.cos(this.yaw+this.lookYaw)).multiplyScalar(3));
+    const ga=this.yaw+this.lookYaw,target=_vD.set(-Math.sin(ga)*3,1.25+this.lookPitch*2.2,-Math.cos(ga)*3).add(this.position);
     this.look.lerp(target,1-Math.exp(-8*dt)); this.camera.lookAt(this.look);
     this.camera.fov=T.MathUtils.damp(this.camera.fov,58,5,dt); this.camera.updateProjectionMatrix();
     // Jog bridges the large visual speed gap between walking and sprinting.
@@ -148,7 +152,7 @@ export class Flight{
     this.speed=T.MathUtils.damp(this.speed,target,1.6*this.profile.accel,dt);
 
     this.forward.set(-Math.sin(this.yaw),0,-Math.cos(this.yaw));
-    const desired=this.forward.clone().multiplyScalar(this.speed);
+    const desired=_vA.copy(this.forward).multiplyScalar(this.speed);
     desired.y=input.lift*(precision?(this.boosting?12:8.5):(this.boosting?10:6.5));
     // Extra gravity feel when not lifting
     if(input.lift<.1) desired.y-=1.8;
@@ -158,7 +162,7 @@ export class Flight{
     // Ground
     const floor=ground(this.position.x,this.position.z)+1.3;
     if(this.position.y<floor){
-      this.position.y=T.MathUtils.lerp(this.position.y,floor,.7);
+      this.position.y=T.MathUtils.lerp(this.position.y,floor,1-Math.exp(-72*dt)); // ≈ .7 a 60 Hz
       this.velocity.y=Math.max(0,this.velocity.y);
       this.speed*=Math.exp(-2*dt);
     }
@@ -167,11 +171,13 @@ export class Flight{
     // Colliders
     this.nearObstacle=false;
     let closestDist=99;
+    const pushK=1-Math.exp(-63*dt); // ≈ .65 a 60 Hz, independente do framerate
     for(const c of this.world.colliders){
       if(this.position.y>c.y+c.height+1||this.position.y<c.y-1) continue;
       let dx=this.position.x-c.x,dz=this.position.z-c.z;
+      const r=c.r+.7,reach=r+3.2;
+      if(dx*dx+dz*dz>=reach*reach) continue; // fora do alcance: evita hypot/ramificações para a maioria dos colliders
       let d=Math.hypot(dx,dz);
-      const r=c.r+.7;
       const gap=d-r;
       if(gap<3.2&&gap>0){
         this.nearObstacle=true;
@@ -179,8 +185,8 @@ export class Flight{
       }
       if(d<r){
         if(d<.001){dx=1;dz=0;d=1;}
-        this.position.x+=dx/d*(r-d)*.65;
-        this.position.z+=dz/d*(r-d)*.65;
+        this.position.x+=dx/d*(r-d)*pushK;
+        this.position.z+=dz/d*(r-d)*pushK;
         this.speed*=Math.exp(-6*dt);
         this.bump=.25;
         this.perfectTimer=0;
@@ -221,14 +227,14 @@ export class Flight{
 
     // Camera
     this.lookYaw=T.MathUtils.clamp(this.lookYaw+(input.lookX||0)*dt*2,-1.2,1.2);this.lookPitch=T.MathUtils.clamp(this.lookPitch+(input.lookY||0)*dt*2,-.5,.5);
-    const mobile=matchMedia('(pointer:coarse)').matches||navigator.maxTouchPoints>0||innerWidth<760;
+    const mobile=COARSE||innerWidth<760;
     // Mobile camera: a slightly higher/longer chase view keeps the witch near the
     // useful middle of the screen while preserving a clear view of rings ahead.
     const views=this.cameraMode===1?{d:mobile?8.8:7.2,h:mobile?3.8:2.8}:this.cameraMode===2?{d:mobile?16.5:15,h:mobile?7.2:5.6}:{d:this.boosting?(mobile?15:13.5):(mobile?12.4:10.5),h:mobile?5.2:3.6};
     const camDist=views.d;
     const camHeight=views.h;
-    const offset=new T.Vector3(0,camHeight+Math.max(0,-this.velocity.y)*(mobile?.04:.08),camDist).applyAxisAngle(new T.Vector3(0,1,0),this.yaw);
-    offset.applyAxisAngle(new T.Vector3(0,1,0),this.lookYaw);offset.y+=this.lookPitch*5;const desiredCamera=this.position.clone().add(offset);
+    const offset=_vB.set(0,camHeight+Math.max(0,-this.velocity.y)*(mobile?.04:.08),camDist).applyAxisAngle(_Y,this.yaw);
+    offset.applyAxisAngle(_Y,this.lookYaw);offset.y+=this.lookPitch*5;const desiredCamera=_vC.copy(this.position).add(offset);
     desiredCamera.y=Math.max(desiredCamera.y,ground(desiredCamera.x,desiredCamera.z)+2);
     // Pull camera in near obstacles
     if(this.nearObstacle){
@@ -238,7 +244,7 @@ export class Flight{
     this.camera.position.lerp(desiredCamera,1-Math.exp(-(mobile?5.2:4)*dt));
     const lookDistance=mobile?10:8;
     const lookY=this.position.y+(mobile?0.75:0)+this.velocity.y*(mobile?.16:.3);
-    const lookTarget=this.position.clone().add(this.forward.clone().multiplyScalar(lookDistance));
+    const lookTarget=_vD.copy(this.forward).multiplyScalar(lookDistance).add(this.position);
     lookTarget.y=lookY;
     this.look.lerp(lookTarget,1-Math.exp(-(mobile?6:5)*dt));
     this.camera.lookAt(this.look);

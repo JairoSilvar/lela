@@ -484,3 +484,46 @@ body[data-state=playing] .brand,body[data-state=exploring] .brand,body[data-stat
   .touch-primary button{width:64px;height:50px}
   .touch-secondary button{width:44px;height:36px}
 }
+
+/* ========== v53 — Hit juice + ZEN/PHOTO profundos (sem tocar lifecycle Sky Traffic) ========== */
+#dmg-floats{position:fixed;inset:0;pointer-events:none;z-index:50;overflow:hidden}
+.dmg-float{
+  position:absolute;transform:translate(-50%,-50%);
+  font:800 22px/1 system-ui,Segoe UI,sans-serif;color:#ffe0f0;
+  text-shadow:0 0 8px #ff4f87cc,0 2px 4px #000;letter-spacing:.5px;white-space:nowrap;
+}
+.dmg-float.crit{font-size:28px;color:#f0c96a;text-shadow:0 0 12px #f0c96acc,0 2px 6px #000}
+.dmg-float.death{font-size:32px;color:#fff;text-shadow:0 0 16px #ff9ec8,0 0 8px #f0c96a}
+
+body.zen-mode #hud .mission,
+body.zen-mode #hud .compass,
+body.zen-mode #hud .bottom-left,
+body.zen-mode #hud .combo-hud,
+body.zen-mode #hud .final-tools,
+body.zen-mode #gamer-hud-v34,
+body.zen-mode #living-status,
+body.zen-mode .lelinha-signature,
+body.zen-mode header .brand,
+body.zen-mode #mobile-lock,
+body.zen-mode .boss35,
+body.zen-mode .mission,
+body.zen-mode #minimap,
+body.zen-mode .magic-label{
+  opacity:0!important;pointer-events:none!important;transition:opacity .35s ease;
+}
+body.zen-mode #hud .flight-info{opacity:.55}
+body.zen-mode header .top-actions button:not(#pause):not(#zen-btn){opacity:.25}
+body.zen-mode #touch .touch-secondary{opacity:.35}
+
+body.photo-mode #hud,
+body.photo-mode #gamer-hud-v34,
+body.photo-mode #touch,
+body.photo-mode header,
+body.photo-mode .lelinha-signature,
+body.photo-mode #mobile-lock,
+body.photo-mode .boss35,
+body.photo-mode #dmg-floats,
+body.photo-mode .vignette,
+body.photo-mode #toast{
+  opacity:0!important;pointer-events:none!important;
+}

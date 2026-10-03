@@ -1,6 +1,6 @@
 {
   "name": "halloween-rosa-lelinha",
-  "version": "50.0.0",
+  "version": "53.0.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -8,6 +8,8 @@
     "audit": "node tests/asset-audit.mjs",
     "test:storage": "node tests/storage-tests.mjs",
     "test:gameplay": "node tests/gameplay-tests.mjs",
-    "test:all": "npm run audit && npm run test:storage && npm run test:gameplay"
+    "test:all": "npm run audit && npm run test:storage && npm run test:gameplay && npm run test:v51",
+    "test:v51": "node tests/v51-regression.mjs",
+    "test:browser": "python3 tests/browser-session-leak.py && python3 tests/browser-resilience.py"
   }
 }
