@@ -41,3 +41,16 @@ Checklist humano:
 2. Atacar Cyclops — números + tremor  
 3. Z e P — HUD some como esperado  
 4. Reiniciar 5× — um único grupo Sky Traffic  
+
+
+## v53.1 — Audio hygiene
+
+Corrigido ruído de fundo tipo “serra” / loop estranho:
+
+1. **Removido pad contínuo** de 3 osciladores em `effects.js` (110 / 165 / 220 Hz ligados o tempo todo com Som: on).
+2. **Vento procedural** passou de ruído branco agressivo para ruído rosa + lowpass mais grave e ganho menor.
+3. **phaseOsc** não empilha mais ao trocar de fase; ganho reduzido.
+4. **Ambient** com volume máximo limitado; default mais baixo.
+5. Cooldown em land / wood para não repetir em rajada; passos mais espaçados.
+
+Se ainda ouvir algo estranho: baixe o slider **Ambiente** na pausa ou desligue Som e religue (recria o grafo limpo).

@@ -527,3 +527,244 @@ body.photo-mode .vignette,
 body.photo-mode #toast{
   opacity:0!important;pointer-events:none!important;
 }
+
+/* ========== v53.2 — Pausa PC/Mobile + touch + safe-area ========== */
+
+/* Modal de pausa: centralizado no PC, full-friendly no mobile */
+#pause-menu.overlay{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+  overflow:hidden;
+  background:rgba(18, 8, 24, 0.72);
+  backdrop-filter:blur(6px);
+  z-index:80;
+}
+#pause-menu.hidden{display:none!important}
+
+#pause-menu .pause-panel,
+#pause-menu .panel.pause-panel{
+  margin:0;
+  width:min(440px, 100%);
+  max-height:min(92vh, 900px);
+  display:flex;
+  flex-direction:column;
+  padding:0;
+  overflow:hidden;
+  border-radius:20px;
+  background:var(--panel, #2a1236ee);
+  border:1px solid #ff9ec855;
+  box-shadow:0 24px 80px #00000088;
+}
+
+#pause-menu .pause-head{
+  flex:0 0 auto;
+  padding:18px 20px 10px;
+  border-bottom:1px solid #ffffff14;
+}
+#pause-menu .pause-head h2{
+  margin:6px 0 8px;
+  font-size:clamp(22px, 4vw, 28px);
+  line-height:1.15;
+}
+#pause-menu .pause-head .eyebrow{margin:0}
+#pause-menu .pause-head .keyboard-hint{
+  margin:0;
+  font-size:11px;
+  line-height:1.45;
+  color:#e8c8dc;
+  opacity:.9;
+}
+
+#pause-menu .pause-scroll{
+  flex:1 1 auto;
+  overflow-y:auto;
+  overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+  padding:12px 20px 8px;
+  touch-action:pan-y;
+}
+#pause-menu .pause-scroll label{
+  display:block;
+  font-size:12px;
+  margin:12px 0 6px;
+  color:var(--lilac, #d4b0ff);
+}
+#pause-menu .pause-scroll label input[type=range],
+#pause-menu .pause-scroll label select{
+  width:100%;
+  margin-top:4px;
+}
+#pause-menu .access-settings{
+  max-height:none;
+  overflow:visible;
+  margin:10px 0;
+  padding:12px;
+  border:1px solid #ff9ec833;
+  border-radius:14px;
+  background:#160d24aa;
+}
+#pause-menu .access-settings legend{
+  font-size:11px;
+  letter-spacing:1px;
+  color:var(--pink, #ff9ec8);
+  padding:0 6px;
+}
+
+#pause-menu .pause-actions{
+  flex:0 0 auto;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  padding:12px 16px max(14px, env(safe-area-inset-bottom));
+  border-top:1px solid #ffffff18;
+  background:linear-gradient(180deg, #2a1236cc, #1a0a22f0);
+  z-index:2;
+}
+#pause-menu .pause-actions button{
+  width:100%;
+  min-height:48px;
+  font-weight:700;
+  border-radius:14px;
+}
+#pause-menu .pause-actions .primary{
+  background:linear-gradient(135deg, #e85aad, #b56dff);
+  border:none;
+}
+
+/* Touch: esconde dicas de teclado */
+body.touch-mode .keyboard-hint{display:none!important}
+body.touch-mode #pause-menu .pause-head{padding-bottom:12px}
+
+/* Controles touch com escala e safe-area */
+#touch{
+  padding-bottom:env(safe-area-inset-bottom);
+  padding-left:env(safe-area-inset-left);
+  padding-right:env(safe-area-inset-right);
+}
+#stick{
+  transform:scale(var(--control-scale, 1));
+  transform-origin:left bottom;
+  opacity:var(--control-opacity, 0.92);
+  bottom:max(36px, env(safe-area-inset-bottom));
+  left:max(16px, env(safe-area-inset-left));
+}
+.touch-right{
+  transform:scale(var(--control-scale, 1));
+  transform-origin:right bottom;
+  opacity:var(--control-opacity, 0.92);
+  bottom:max(24px, env(safe-area-inset-bottom));
+  right:max(12px, env(safe-area-inset-right));
+}
+body.left-handed #stick{
+  left:auto;
+  right:max(16px, env(safe-area-inset-right));
+  transform-origin:right bottom;
+}
+body.left-handed .touch-right{
+  right:auto;
+  left:max(12px, env(safe-area-inset-left));
+  transform-origin:left bottom;
+}
+
+/* Header: alvos de toque maiores no mobile */
+@media(max-width:760px){
+  header{top:max(10px, env(safe-area-inset-top)); left:10px; right:10px;}
+  .top-actions{gap:4px; flex-wrap:wrap; justify-content:flex-end; max-width:62vw;}
+  .top-actions button{
+    min-width:44px; min-height:44px;
+    padding:8px 10px;
+    font-size:12px;
+  }
+  .brand{display:none}
+  #pause-menu .pause-panel{max-height:94vh; border-radius:16px}
+  #pause-menu .pause-scroll{padding:10px 14px}
+  #hud .mission{max-width:min(280px, 70vw); font-size:13px}
+  .touch-mode .flight-info{bottom:max(160px, calc(env(safe-area-inset-bottom) + 140px))}
+}
+
+/* PC: painel confortável, dicas de teclado visíveis */
+@media(min-width:761px) and (pointer:fine){
+  #pause-menu .pause-panel{width:min(460px, 92vw)}
+  body:not(.touch-mode) #touch{display:none!important}
+}
+
+/* Botões do HUD inferior não cobrem safe area */
+.final-tools{
+  bottom:max(12px, env(safe-area-inset-bottom));
+}
+
+/* ========== v53.3 — Mobile scroll lock, HUD compacto, PC polish ========== */
+html, body{
+  overscroll-behavior:none;
+  -webkit-text-size-adjust:100%;
+  touch-action:manipulation;
+}
+body{
+  position:fixed;
+  width:100%;
+  height:100%;
+  height:100dvh;
+}
+#game, canvas{
+  touch-action:none;
+  -webkit-user-select:none;
+  user-select:none;
+}
+
+/* Evita highlight azul no toque */
+button, .touch-right button, #stick{
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+
+/* HUD mais compacto em telas estreitas */
+@media(max-width:760px){
+  #hud .mission{
+    max-width:min(240px,62vw);
+    padding:10px 12px;
+    font-size:12px;
+  }
+  #hud .mission h2{font-size:15px;line-height:1.2;margin:4px 0}
+  #hud .stats{font-size:10px;gap:6px}
+  #hud .compass{font-size:11px}
+  .bottom-left canvas#map{width:120px!important;height:120px!important}
+  .flight-info b{font-size:26px}
+  #living-status{font-size:10px;padding:6px 10px}
+  .top-actions button{font-size:11px}
+}
+
+@media(max-width:400px){
+  #hud .mission{display:none} /* em telas muito pequenas: prioriza voo */
+  .touch-primary button{width:60px;height:48px;font-size:10px!important}
+}
+
+/* PC: cursor e painel */
+@media(min-width:761px) and (pointer:fine){
+  canvas{cursor:crosshair}
+  body.paused canvas, body[data-state=paused] canvas{cursor:default}
+  #pause-menu .pause-actions{
+    flex-direction:row;
+    flex-wrap:wrap;
+  }
+  #pause-menu .pause-actions button{
+    flex:1 1 30%;
+    min-width:120px;
+  }
+}
+
+/* Overlay de pausa: clique fora fecha no PC (via JS) */
+#pause-menu.overlay{cursor:default}
+#pause-menu .pause-panel{cursor:auto}
+
+/* Indicador de dispositivo na pausa */
+#input-device{
+  display:block;
+  margin-top:8px;
+  font-size:10px;
+  opacity:.75;
+  letter-spacing:.3px;
+}
