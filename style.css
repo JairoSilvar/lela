@@ -768,3 +768,160 @@ button, .touch-right button, #stick{
   opacity:.75;
   letter-spacing:.3px;
 }
+
+/* ========== v53.4 — Menu principal visível + touch minimalista ========== */
+
+/* Ações da pausa no TOPO — sempre a primeira coisa visível */
+#pause-menu .pause-actions-top{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin-top:14px;
+  padding:0;
+  border:none;
+  background:transparent;
+}
+#pause-menu .pause-actions-top button{
+  width:100%;
+  min-height:50px;
+  font-weight:800;
+  font-size:15px;
+  border-radius:14px;
+}
+#pause-menu .pause-actions-top .primary{
+  background:linear-gradient(135deg,#e85aad,#b56dff);
+  border:none;
+  color:#fff;
+}
+#pause-menu .pause-actions-top .btn-menu{
+  background:#3a1848;
+  border:2px solid #ff9ec8aa;
+  color:#fff0f6;
+}
+#pause-menu .pause-actions-top .btn-ghost{
+  background:transparent;
+  border:1px solid #ffffff33;
+  color:#e8c8dc;
+  min-height:42px;
+  font-weight:600;
+}
+#pause-menu .pause-actions-bottom{
+  padding:8px 16px 12px;
+  border-top:1px solid #ffffff12;
+  background:transparent;
+}
+#pause-menu .pause-tip{
+  margin:0;
+  text-align:center;
+  font-size:11px;
+  opacity:.65;
+  color:#d4b0ff;
+}
+
+@media(min-width:761px){
+  #pause-menu .pause-actions-top{
+    flex-direction:row;
+    flex-wrap:wrap;
+  }
+  #pause-menu .pause-actions-top button{flex:1 1 30%;}
+}
+
+/* --- Touch minimal: 3 botões + menu ··· --- */
+body.touch-mode .touch-right{
+  display:flex!important;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:8px;
+  bottom:max(20px, env(safe-area-inset-bottom));
+  right:max(10px, env(safe-area-inset-right));
+  max-width:none!important;
+  opacity:0.72;
+}
+body.touch-mode .touch-primary{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+body.touch-mode .touch-primary button{
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  font-size:12px!important;
+  font-weight:800;
+  padding:0;
+  background:#2a1438aa!important;
+  border:1px solid #ffffff33!important;
+  backdrop-filter:blur(8px);
+  box-shadow:0 4px 16px #00000055;
+}
+body.touch-mode .touch-primary #mobile-attack{
+  width:60px;height:60px;
+  font-size:22px!important;
+  background:#6a184899!important;
+  border-color:#ff9ec866!important;
+}
+body.touch-mode .touch-primary [data-action=boost]{
+  font-size:10px!important;
+  letter-spacing:.5px;
+}
+body.touch-mode .touch-more{
+  width:40px;height:40px;
+  border-radius:50%;
+  font-size:16px;
+  font-weight:900;
+  padding:0;
+  background:#1a102699!important;
+  border:1px solid #ffffff22!important;
+  color:#fff;
+  opacity:.7;
+}
+body.touch-mode .touch-secondary{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+body.touch-mode .touch-secondary[hidden]{display:none!important}
+body.touch-mode .touch-secondary button{
+  width:48px;height:40px;
+  border-radius:12px;
+  font-size:9px!important;
+  background:#1a1026bb!important;
+  border:1px solid #ffffff22!important;
+  opacity:.85;
+}
+body.touch-mode #stick{
+  width:100px;height:100px;
+  opacity:0.65;
+  border:1px solid #ffffff28;
+  background:#1a102666;
+  bottom:max(28px, env(safe-area-inset-bottom));
+  left:max(12px, env(safe-area-inset-left));
+}
+body.touch-mode #stick-thumb{
+  width:34px;height:34px;
+  top:33px;left:33px;
+  background:#ff9ec888;
+}
+
+/* Não cobrir o centro da tela */
+body.touch-mode .flight-info{
+  bottom:auto!important;
+  top:max(70px, env(safe-area-inset-top));
+  right:12px;
+  width:auto;
+  opacity:.8;
+}
+body.touch-mode .final-tools{
+  top:auto!important;
+  bottom:max(12px, env(safe-area-inset-bottom));
+  left:50%;
+  right:auto;
+  transform:translateX(-50%);
+  opacity:.55;
+}
+
+@media(max-width:400px){
+  body.touch-mode .touch-primary button{width:50px;height:50px}
+  body.touch-mode .touch-primary #mobile-attack{width:54px;height:54px}
+  body.touch-mode #stick{width:88px;height:88px}
+}

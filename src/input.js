@@ -15,7 +15,7 @@ export class Input {
     this.assist=storage.getItem('wf-assist')||'normal';
     this.motion=Number(storage.getItem('wf-motion')??.55);
     this.controlScale=Number(storage.getItem('wf-control-scale')||1);
-    this.controlOpacity=Number(storage.getItem('wf-control-opacity')||.92);
+    this.controlOpacity=Number(storage.getItem('wf-control-opacity')||.68);
     this.haptics=storage.getItem('wf-haptics')!=='0';
     this.applyUISettings();
 
