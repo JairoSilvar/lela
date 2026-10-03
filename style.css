@@ -343,3 +343,144 @@ body[data-state=playing] .brand,body[data-state=exploring] .brand,body[data-stat
 
 /* v46 mobile action pad */
 .touch-right{grid-template-columns:68px 68px!important;max-width:150px}.touch-right button{font-size:13px!important;line-height:1.05}.touch-right button small{font-size:8px;opacity:.72}#camera-action{background:#40205ccc}.touch-mode #stick{box-shadow:0 0 0 5px #ff9ec814,0 10px 30px #12081866}
+
+/* ========== v48 — Pause scrollável + botões sempre visíveis + combate mobile ========== */
+#pause-menu.overlay{
+  align-items:flex-start;
+  justify-content:center;
+  overflow-y:auto;
+  overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+  touch-action:pan-y;
+  padding:max(12px,env(safe-area-inset-top)) 12px max(20px,env(safe-area-inset-bottom));
+  background:linear-gradient(160deg,#1a0820ee 0%,#2a0a2ecc 55%,#1a0820dd 100%);
+}
+#pause-menu .panel{
+  margin:12px auto 24px;
+  max-width:min(440px,94vw);
+  max-height:none;
+  width:100%;
+  padding:22px 20px 18px;
+  display:flex;
+  flex-direction:column;
+  gap:0;
+}
+#pause-menu .panel > p{
+  font-size:12px;
+  line-height:1.55;
+  margin-bottom:12px;
+}
+#pause-menu .access-settings{
+  max-height:min(42vh,320px);
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  padding-right:6px;
+  margin:8px 0 12px;
+  border:1px solid #ff9ec833;
+  border-radius:14px;
+  padding:10px 12px;
+  background:#160d24aa;
+}
+#pause-menu .pause-actions{
+  position:sticky;
+  bottom:0;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin-top:14px;
+  padding-top:12px;
+  background:linear-gradient(180deg,transparent,#2a1236 18%);
+  z-index:2;
+}
+#pause-menu .pause-actions .primary{margin-top:0}
+#pause-menu .pause-actions button{width:100%}
+
+/* Botão ATACAR mobile */
+#mobile-attack{
+  order:-1;
+  background:#6a1848cc!important;
+  border:1px solid #ff6a9e99!important;
+  font-size:11px!important;
+  letter-spacing:.5px;
+}
+#mobile-attack:disabled{opacity:.4}
+#mobile-attack small{display:block;font-size:14px;line-height:1}
+
+@media(max-width:760px){
+  #pause-menu .panel{padding:16px 14px 12px;border-radius:18px}
+  #pause-menu .panel h2{font-size:22px;margin:6px 0 10px}
+  #pause-menu .access-settings{max-height:38vh}
+  .touch-right{
+    grid-template-columns:64px!important;
+    gap:8px;
+    bottom:max(28px,env(safe-area-inset-bottom));
+    right:max(14px,env(safe-area-inset-right));
+  }
+  .touch-right button{height:50px;font-size:12px!important}
+  #stick{
+    bottom:max(36px,env(safe-area-inset-bottom));
+    left:max(16px,env(safe-area-inset-left));
+  }
+}
+
+/* ========== v48.1 — Touch reorganizado (primário / secundário) ========== */
+.touch-right{
+  display:flex!important;
+  flex-direction:row;
+  align-items:flex-end;
+  gap:10px;
+  grid-template-columns:none!important;
+  max-width:none!important;
+  right:max(12px,env(safe-area-inset-right));
+  bottom:max(24px,env(safe-area-inset-bottom));
+}
+.touch-primary,.touch-secondary{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.touch-primary button{
+  width:72px;
+  height:54px;
+  font-size:11px!important;
+  font-weight:700;
+  border-radius:16px;
+}
+.touch-primary #mobile-attack{
+  background:#7a1a4ecc!important;
+  border:1px solid #ff7ab0aa!important;
+  height:58px;
+}
+.touch-primary #mobile-attack.locked{
+  box-shadow:0 0 0 2px #f0c96a88,0 0 14px #f0c96a44;
+}
+.touch-primary [data-action=magic]{
+  background:#4a2080cc!important;
+  border:1px solid #b48cff88!important;
+}
+.touch-primary [data-action=boost]{
+  background:#5a3a18cc!important;
+  border:1px solid #f0c96a66!important;
+}
+.touch-secondary button{
+  width:48px;
+  height:40px;
+  font-size:10px!important;
+  padding:0;
+  border-radius:12px;
+  opacity:.88;
+  background:#2a1838bb!important;
+}
+.touch-secondary [data-action=up],
+.touch-secondary [data-action=down]{
+  height:36px;
+  font-size:14px!important;
+}
+#mobile-lock{
+  right:max(14px,env(safe-area-inset-right))!important;
+  bottom:calc(24px + 240px)!important;
+}
+@media(max-width:400px){
+  .touch-primary button{width:64px;height:50px}
+  .touch-secondary button{width:44px;height:36px}
+}
